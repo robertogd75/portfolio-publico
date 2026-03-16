@@ -4,6 +4,6 @@ services:
     container_name: portfolio-publico
     restart: unless-stopped
     ports:
-      - "8081:80"
+      - "8085:80"
     environment:
       - TZ=Europe/Madrid
