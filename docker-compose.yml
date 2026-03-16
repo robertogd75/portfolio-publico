@@ -1,9 +1,9 @@
 services:
   portfolio:
-    image: ghcr.io/rgardel/portfolio-publico:latest
+    build: .
     container_name: portfolio-publico
     restart: unless-stopped
     ports:
-      - "3000:80"        # Nginx Proxy Manager apuntará a este puerto
+      - "8081:80"
     environment:
       - TZ=Europe/Madrid
