@@ -2,6 +2,7 @@ import Navbar from './components/Navbar.jsx'
 import Hero from './components/Hero.jsx'
 import TechStack from './components/TechStack.jsx'
 import About from './components/About.jsx'
+import Experience from './components/Experience.jsx'
 import Performance from './components/Performance.jsx'
 import Achievements from './components/Achievements.jsx'
 import Contact from './components/Contact.jsx'
@@ -16,6 +17,7 @@ export default function App() {
         <Hero />
         <TechStack />
         <About />
+        <Experience />
         <Performance />
         <Achievements />
         <Contact />

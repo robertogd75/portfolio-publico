@@ -4,6 +4,7 @@ import { useTranslation } from '../i18n/I18nContext'
 const links = [
   { key: 'stack', href: '#techstack' },
   { key: 'about', href: '#about' },
+  { key: 'exp', href: '#experience' },
   { key: 'infra', href: '#performance' },
   { key: 'log', href: '#achievements' },
 ]

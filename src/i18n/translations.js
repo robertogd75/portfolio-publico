@@ -3,6 +3,7 @@ export const translations = {
     nav: {
       stack: 'Stack',
       about: 'Sobre mí',
+      exp: 'Experiencia',
       infra: 'Infraestructura',
       log: 'Trayectoria',
     },
@@ -71,6 +72,48 @@ export const translations = {
       card6_title: 'Control de Versiones & Git',
       card6_desc: 'Uso de Git para gestionar el código, crear ramas para nuevas funcionalidades, hacer commits descriptivos y resolver conflictos.',
     },
+    experience: {
+      label: '// work.experience',
+      title: 'Trayectoria Profesional',
+      desc: 'Cronología de experiencia práctica. Aporto una sólida capacidad en sistemas y desarrollo, cimentada sobre años de trabajo bajo presión extrema, resolución asíncrona de problemas y comunicación directa con el usuario.',
+      jobs: {
+        ayto: {
+          role: 'Prácticas DAW — Sistemas y Desarrollo',
+          company: 'Ayuntamiento de Marbella',
+          period: '2026',
+          desc: 'Integración en el departamento de informática municipal. Soporte técnico de Nivel 2, administración de sistemas Windows/Linux y desarrollo de scripts para automatizar flujos de trabajo administrativos.',
+          tags: ['SysAdmin', 'Soporte N2', 'Automatización', 'Redes']
+        },
+        ochoa: {
+          role: 'Prácticas DAW — Infraestructura Crítica',
+          company: 'Hospital Ochoa',
+          period: '2025',
+          desc: 'Despliegue de equipos médicos y gestión de incidencias en un entorno crítico de alta disponibilidad (24/7). Responsable de garantizar el uptime de la red hospitalaria y dispositivos de planta.',
+          tags: ['Alta Disponibilidad', 'Soporte Crítico', 'Hardware', 'Resolución Rápida']
+        },
+        hosteleria: {
+          role: 'Sector Hostelería',
+          company: 'Bar el Boquerón',
+          period: '2025',
+          desc: 'Afrontar picos de volumen impredecibles con recursos limitados. Toma de decisiones rápida, mediación en conflictos y optimización de procesos logísticos en tiempo real.',
+          tags: ['Gestión del Estrés', 'Toma de Decisiones', 'Resolución de Conflictos']
+        },
+        mercadona: {
+          role: 'Personal de Supermercado',
+          company: 'Mercadona',
+          period: '2024',
+          desc: 'Integración en equipos de alto rendimiento con procedimientos estrictos. Responsable de logística, gestión de inventario y atención directa al cliente manteniendo estándares de calidad QA.',
+          tags: ['Logística', 'Trabajo en Equipo', 'Atención al Cliente', 'Procesos Strictos']
+        },
+        alcampo: {
+          role: 'Personal de Supermercado',
+          company: 'Alcampo',
+          period: '2023',
+          desc: 'Primer contacto con el entorno profesional dinámico. Control de stock en planta, atención proactiva al usuario final y adaptabilidad entre departamentos según la demanda operativa.',
+          tags: ['Adaptabilidad', 'Atención Proactiva', 'Control de Stock']
+        }
+      }
+    },
     contact: {
       label: '// hire.me',
       title_start: '¿Buscas un desarrollador',
@@ -86,6 +129,7 @@ export const translations = {
     nav: {
       stack: 'Stack',
       about: 'About me',
+      exp: 'Experience',
       infra: 'Infrastructure',
       log: 'Milestones',
     },
@@ -154,6 +198,48 @@ export const translations = {
       card6_title: 'Version Control & Git',
       card6_desc: 'Using Git to manage codebases, branch feature development, write descriptive commits, and resolve merge conflicts.',
     },
+    experience: {
+      label: '// work.experience',
+      title: 'Professional Journey',
+      desc: 'Chronology of practical experience. I bring solid capabilities in systems and development, built upon years of working under extreme pressure, asynchronous problem-solving, and direct client communication.',
+      jobs: {
+        ayto: {
+          role: 'DAW Internship — Systems & Development',
+          company: 'Marbella City Council',
+          period: '2026',
+          desc: 'Integration into the municipal IT department. Level 2 technical support, Windows/Linux systems administration, and development of scripts to automate administrative workflows.',
+          tags: ['SysAdmin', 'L2 Support', 'Automation', 'Networking']
+        },
+        ochoa: {
+          role: 'DAW Internship — Critical Infrastructure',
+          company: 'Hospital Ochoa',
+          period: '2025',
+          desc: 'Deployment of medical equipment and incident management in a critical high-availability environment (24/7). Responsible for ensuring network uptime and ward devices.',
+          tags: ['High Availability', 'Critical Support', 'Hardware', 'Rapid Resolution']
+        },
+        hosteleria: {
+          role: 'Hospitality Sector',
+          company: 'Bar el Boquerón',
+          period: '2025',
+          desc: 'Handling unpredictable peak volumes with limited resources. Rapid decision-making, conflict mediation, and real-time optimization of logistical processes.',
+          tags: ['Stress Management', 'Decision Making', 'Conflict Resolution']
+        },
+        mercadona: {
+          role: 'Supermarket Staff',
+          company: 'Mercadona',
+          period: '2024',
+          desc: 'Integration into high-performance teams with strict procedures. Responsible for logistics, inventory management, and direct customer service while maintaining QA standards.',
+          tags: ['Logistics', 'Teamwork', 'Customer Service', 'Strict Processes']
+        },
+        alcampo: {
+          role: 'Supermarket Staff',
+          company: 'Alcampo',
+          period: '2023',
+          desc: 'First contact with a dynamic professional environment. Floor stock control, proactive end-user support, and adaptability across departments based on operational demand.',
+          tags: ['Adaptability', 'Proactive Support', 'Stock Control']
+        }
+      }
+    },
     contact: {
       label: '// hire.me',
       title_start: 'Looking for a highly motivated',
@@ -169,6 +255,7 @@ export const translations = {
     nav: {
       stack: 'Stack',
       about: 'Über mich',
+      exp: 'Erfahrung',
       infra: 'Infrastruktur',
       log: 'Meilensteine',
     },
@@ -236,6 +323,48 @@ export const translations = {
       card5_desc: 'Entwicklung von Projekten mit Laravel, Symfony (DI Container, Doctrine), Spring Boot (REST, JPA) und React mit Vite.',
       card6_title: 'Versionskontrolle & Git',
       card6_desc: 'Nutzung von Git zur Codeverwaltung, Erstellung von Branches, Schreiben aussagekräftiger Commits und Lösung von Konflikten.',
+    },
+    experience: {
+      label: '// work.experience',
+      title: 'Beruflicher Werdegang',
+      desc: 'Chronologie praktischer Erfahrung. Ich bringe solide Fähigkeiten in Systemen und Entwicklung mit, aufgebaut auf jahrelanger Arbeit unter extremem Druck, asynchroner Problemlösung und direkter Kommunikation.',
+      jobs: {
+        ayto: {
+          role: 'DAW Praktikum — Systeme & Entwicklung',
+          company: 'Stadtverwaltung Marbella',
+          period: '2026',
+          desc: 'Integration in die städtische IT-Abteilung. Level 2 technischer Support, Windows/Linux-Systemadministration und Entwicklung von Skripten zur Automatisierung administrativer Workflows.',
+          tags: ['SysAdmin', 'L2 Support', 'Automatisierung', 'Netzwerke']
+        },
+        ochoa: {
+          role: 'DAW Praktikum — Kritische Infrastruktur',
+          company: 'Hospital Ochoa',
+          period: '2025',
+          desc: 'Bereitstellung medizinischer Geräte und Vorfallmanagement in einer kritischen Hochverfügbarkeitsumgebung (24/7). Verantwortlich für die Gewährleistung der Netzwerkverfügbarkeit.',
+          tags: ['Hochverfügbarkeit', 'Kritischer Support', 'Hardware', 'Schnelle Lösung']
+        },
+        hosteleria: {
+          role: 'Gastgewerbe',
+          company: 'Bar el Boquerón',
+          period: '2025',
+          desc: 'Umgang mit unvorhersehbaren Spitzenvolumina bei begrenzten Ressourcen. Schnelle Entscheidungsfindung, Konfliktvermittlung und Echtzeit-Optimierung logistischer Prozesse.',
+          tags: ['Stressbewältigung', 'Entscheidungsfindung', 'Konfliktlösung']
+        },
+        mercadona: {
+          role: 'Supermarkt-Mitarbeiter',
+          company: 'Mercadona',
+          period: '2024',
+          desc: 'Integration in Hochleistungsteams mit strengen Verfahren. Verantwortlich für Logistik, Bestandsmanagement und direkten Kundenservice unter Einhaltung von QA-Standards.',
+          tags: ['Logistik', 'Teamarbeit', 'Kundenservice', 'Strenge Prozesse']
+        },
+        alcampo: {
+          role: 'Supermarkt-Mitarbeiter',
+          company: 'Alcampo',
+          period: '2023',
+          desc: 'Erster Kontakt mit einem dynamischen beruflichen Umfeld. Bestandskontrolle, proaktive Unterstützung der Endbenutzer und Anpassungsfähigkeit zwischen den Abteilungen je nach operativer Nachfrage.',
+          tags: ['Anpassungsfähigkeit', 'Proaktiver Support', 'Bestandskontrolle']
+        }
+      }
     },
     contact: {
       label: '// hire.me',

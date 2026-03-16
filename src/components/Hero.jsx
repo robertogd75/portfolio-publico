@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useTranslation } from '../i18n/I18nContext'
+import ConstellationBackground from './ConstellationBackground'
 
 const originalTitles = ['Full Stack Developer', 'Problem Solver', 'Systems Thinker']
 
