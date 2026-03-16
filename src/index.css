@@ -218,3 +218,16 @@ h1, h2, h3, h4 { font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; }
   border: 1px solid rgba(0,240,255,0.18);
   color: var(--neon-cyan);
 }
+
+/* ---- Responsive breakpoints ---- */
+@media (max-width: 768px) {
+  :root {
+    --section-pad: 4rem 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --section-pad: 3rem 1rem;
+  }
+}

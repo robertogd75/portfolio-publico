@@ -161,7 +161,7 @@ export default function Performance() {
           {/* Metrics grid */}
           <div style={{
             display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
             gap: '1rem',
           }}>
             {metrics.map(m => (
