@@ -1,12 +1,12 @@
-import { useState, useEffect } from 'react'
+﻿import { useState, useEffect } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import { useTranslation } from '../i18n/I18nContext'
 
 const links = [
-  { key: 'stack', href: '#techstack' },
-  { key: 'about', href: '#about' },
-  { key: 'exp', href: '#experience' },
-  { key: 'infra', href: '#performance' },
-  { key: 'log', href: '#achievements' },
+  { key: 'home',  to: '/' },
+  { key: 'stack', to: '/stack' },
+  { key: 'exp',   to: '/experience' },
+  { key: 'lab',   to: '/lab' },
 ]
 
 export default function Navbar() {
@@ -14,6 +14,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false)
   const [langMenuOpen, setLangMenuOpen] = useState(false)
   const { lang, changeLanguage, t } = useTranslation()
+  const location = useLocation()
 
   const flagIcons = {
     es: '/SVG/spain.svg',
@@ -26,6 +27,15 @@ export default function Navbar() {
     window.addEventListener('scroll', handler)
     return () => window.removeEventListener('scroll', handler)
   }, [])
+
+  useEffect(() => {
+    setOpen(false)
+  }, [location.pathname])
+
+  const isActive = (to) => {
+    if (to === '/') return location.pathname === '/'
+    return location.pathname.startsWith(to)
+  }
 
   return (
     <header style={{
@@ -48,8 +58,7 @@ export default function Navbar() {
         justifyContent: 'space-between',
         height: '68px',
       }}>
-        {/* Logo */}
-        <a href="#hero" style={{
+        <Link to="/" style={{
           fontFamily: 'var(--font-mono)',
           fontSize: '1rem',
           fontWeight: 700,
@@ -72,9 +81,8 @@ export default function Navbar() {
             color: '#000',
           }}>RG</span>
           <span style={{ color: 'var(--text-secondary)', fontWeight: 400 }}>rgardel.es</span>
-        </a>
+        </Link>
 
-        {/* Desktop links */}
         <ul style={{
           display: 'flex',
           gap: '2rem',
@@ -83,23 +91,24 @@ export default function Navbar() {
         }} className="nav-links-desktop">
           {links.map(l => (
             <li key={l.key}>
-              <a href={l.href} style={{
+              <Link to={l.to} style={{
                 fontFamily: 'var(--font-mono)',
                 fontSize: '0.8rem',
                 fontWeight: 500,
-                color: 'var(--text-secondary)',
+                color: isActive(l.to) ? 'var(--neon-cyan)' : 'var(--text-secondary)',
                 textDecoration: 'none',
                 textTransform: 'uppercase',
                 letterSpacing: '0.1em',
                 transition: 'color 0.2s',
+                borderBottom: isActive(l.to) ? '1px solid var(--neon-cyan)' : '1px solid transparent',
+                paddingBottom: '2px',
               }}
-              onMouseEnter={e => e.target.style.color = 'var(--neon-cyan)'}
-              onMouseLeave={e => e.target.style.color = 'var(--text-secondary)'}
-              >{t('nav', l.key)}</a>
+              onMouseEnter={e => e.currentTarget.style.color = 'var(--neon-cyan)'}
+              onMouseLeave={e => e.currentTarget.style.color = isActive(l.to) ? 'var(--neon-cyan)' : 'var(--text-secondary)'}
+              >{t('nav', l.key)}</Link>
             </li>
           ))}
 
-          {/* Language Switcher Desktop */}
           <li style={{ position: 'relative' }}>
             <button
               onClick={() => setLangMenuOpen(!langMenuOpen)}
@@ -196,7 +205,6 @@ export default function Navbar() {
           </li>
         </ul>
 
-        {/* Mobile hamburger */}
         <button
           onClick={() => setOpen(o => !o)}
           style={{
@@ -220,7 +228,6 @@ export default function Navbar() {
         </button>
       </nav>
 
-      {/* Mobile drawer */}
       {open && (
         <div style={{
           background: 'var(--bg-secondary)',
@@ -230,7 +237,6 @@ export default function Navbar() {
           flexDirection: 'column',
           gap: '1.25rem',
         }}>
-          {/* Mobile language selector */}
           <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem' }}>
             {['es', 'en', 'de'].map(l => (
               <button
@@ -260,22 +266,18 @@ export default function Navbar() {
           </div>
 
           {links.map(l => (
-            <a key={l.key} href={l.href} onClick={() => setOpen(false)} style={{
+            <Link key={l.key} to={l.to} style={{
               fontFamily: 'var(--font-mono)',
               fontSize: '0.9rem',
-              color: 'var(--text-secondary)',
+              color: isActive(l.to) ? 'var(--neon-cyan)' : 'var(--text-secondary)',
               textDecoration: 'none',
-            }}>{t('nav', l.key)}</a>
+            }}>{t('nav', l.key)}</Link>
           ))}
           <a href="https://github.com/robertogd75" target="_blank" rel="noopener noreferrer"
-            className="btn btn-outline"
-            style={{ alignSelf: 'flex-start' }}
-            onClick={() => setOpen(false)}
+            className="btn btn-outline" style={{ alignSelf: 'flex-start' }}
           >GitHub ↗</a>
           <a href="https://www.linkedin.com/in/roberto-garcia-delgado-626b9430a" target="_blank" rel="noopener noreferrer"
-            className="btn btn-primary"
-            style={{ alignSelf: 'flex-start' }}
-            onClick={() => setOpen(false)}
+            className="btn btn-primary" style={{ alignSelf: 'flex-start' }}
           >LinkedIn ↗</a>
         </div>
       )}

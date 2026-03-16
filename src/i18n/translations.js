@@ -1,11 +1,39 @@
 export const translations = {
   es: {
     nav: {
+      home:  'Inicio',
       stack: 'Stack',
-      about: 'Sobre mí',
-      exp: 'Experiencia',
-      infra: 'Infraestructura',
-      log: 'Trayectoria',
+      exp:   'Experiencia',
+      lab:   'Laboratorio',
+    },
+    lab: {
+      label:               '// lab.tools',
+      title_start:         'Herramientas',
+      title_neon:          'del Desarrollador.',
+      desc:                'Utilidades para el día a día. Sin publicidad, sin trackers. Todo corre directamente en tu navegador.',
+      back:                'Volver al Lab',
+      tool_open:           'Abrir herramienta',
+      tool_external:       'Abrir en nueva pestaña',
+      tool_image_title:    'Conversor de Imágenes',
+      tool_image_desc:     'Convierte entre PNG, JPG y WebP. Redimensiona y ajusta la calidad de compresión.',
+      tool_password_title: 'Generador de Contraseñas',
+      tool_password_desc:  'Contraseñas seguras y aleatorias con longitud y tipos de caracteres personalizables.',
+      tool_json_title:     'Formateador JSON',
+      tool_json_desc:      'Formatea, minifica y valida JSON al instante, sin enviar datos a ningún servidor.',
+      tool_color_title:    'Paleta de Colores',
+      tool_color_desc:     'Genera shades, complementario, análogo y triádico desde cualquier color hex. Exporta las variables CSS al instante.',
+      tool_hash_title:     'Generador de Hash',
+      tool_hash_desc:      'Calcula SHA-1, SHA-256, SHA-384 y SHA-512 de cualquier texto usando la Web Crypto API nativa.',
+      tool_css_title:      'Conversor de Unidades CSS',
+      tool_css_desc:       'Convierte entre px, rem, em, vw, vh y pt con tamaño base y viewport configurables.',
+      tool_qr_title:       'Generador de QR',
+      tool_qr_desc:        'Genera códigos QR desde cualquier texto o URL. Elige tamaño y color, y descárgalo como PNG.',
+      tool_speed_title:    'Test de Velocidad',
+      tool_speed_desc:     'Mide tu latencia y velocidad de descarga directamente en el navegador, sin instalar nada.',
+      tool_words_title:    'Contador de Palabras',
+      tool_words_desc:     'Analiza texto al instante: palabras, caracteres, frases, párrafos y tiempo de lectura.',
+      tool_html_title:     'Previsualizador HTML',
+      tool_html_desc:      'Escribe HTML en el panel izquierdo y visualiza el resultado en tiempo real en el derecho.',
     },
     hero: {
       available: 'Available for hire · Open to remote & hybrid',
@@ -75,44 +103,27 @@ export const translations = {
     experience: {
       label: '// work.experience',
       title: 'Trayectoria Profesional',
-      desc: 'Cronología de experiencia práctica. Aporto una sólida capacidad en sistemas y desarrollo, cimentada sobre años de trabajo bajo presión extrema, resolución asíncrona de problemas y comunicación directa con el usuario.',
-      jobs: {
-        ayto: {
-          role: 'Prácticas DAW — Sistemas y Desarrollo',
-          company: 'Ayuntamiento de Marbella',
-          period: '2026',
-          desc: 'Integración en el departamento de informática municipal. Soporte técnico de Nivel 2, administración de sistemas Windows/Linux y desarrollo de scripts para automatizar flujos de trabajo administrativos.',
-          tags: ['SysAdmin', 'Soporte N2', 'Automatización', 'Redes']
-        },
-        ochoa: {
-          role: 'Prácticas DAW — Infraestructura Crítica',
-          company: 'Hospital Ochoa',
-          period: '2025',
-          desc: 'Despliegue de equipos médicos y gestión de incidencias en un entorno crítico de alta disponibilidad (24/7). Responsable de garantizar el uptime de la red hospitalaria y dispositivos de planta.',
-          tags: ['Alta Disponibilidad', 'Soporte Crítico', 'Hardware', 'Resolución Rápida']
-        },
-        hosteleria: {
-          role: 'Sector Hostelería',
-          company: 'Bar el Boquerón',
-          period: '2025',
-          desc: 'Afrontar picos de volumen impredecibles con recursos limitados. Toma de decisiones rápida, mediación en conflictos y optimización de procesos logísticos en tiempo real.',
-          tags: ['Gestión del Estrés', 'Toma de Decisiones', 'Resolución de Conflictos']
-        },
-        mercadona: {
-          role: 'Personal de Supermercado',
-          company: 'Mercadona',
-          period: '2024',
-          desc: 'Integración en equipos de alto rendimiento con procedimientos estrictos. Responsable de logística, gestión de inventario y atención directa al cliente manteniendo estándares de calidad QA.',
-          tags: ['Logística', 'Trabajo en Equipo', 'Atención al Cliente', 'Procesos Strictos']
-        },
-        alcampo: {
-          role: 'Personal de Supermercado',
-          company: 'Alcampo',
-          period: '2023',
-          desc: 'Primer contacto con el entorno profesional dinámico. Control de stock en planta, atención proactiva al usuario final y adaptabilidad entre departamentos según la demanda operativa.',
-          tags: ['Adaptabilidad', 'Atención Proactiva', 'Control de Stock']
-        }
-      }
+      desc: 'Cronología de experiencia práctica. Combino formación técnica sólida en DAW con años de trabajo bajo presión, resolución de problemas reales y comunicación directa con el usuario final.',
+      ayto_role: 'Prácticas DAW · Desarrollo y Sistemas',
+      ayto_company: 'Ayuntamiento de Marbella',
+      ayto_period: '2026',
+      ayto_desc: 'Desarrollo de proyectos completos de front y backend en el departamento de informática municipal. Construí interfaces con React y Vite, APIs REST con Node.js y bases de datos relacionales para automatizar y digitalizar flujos de trabajo internos. También administración de sistemas Linux/Windows y soporte técnico.',
+      ochoa_role: 'Prácticas DAW · Infraestructura IT',
+      ochoa_company: 'Hospital Ochoa',
+      ochoa_period: '2025',
+      ochoa_desc: 'Mantenimiento de infraestructura crítica en entorno hospitalario 24/7. Configuración y despliegue de equipos en red, diagnóstico y resolución de incidencias de alto impacto. Reforzó mi mentalidad de fiabilidad y uptime, directamente aplicable al desarrollo y operación de aplicaciones web en producción.',
+      hosteleria_role: 'Hostelería · Camarero',
+      hosteleria_company: 'Bar el Boquerón',
+      hosteleria_period: '2025',
+      hosteleria_desc: 'Gestión simultánea de múltiples tareas bajo presión constante y en entornos de alta demanda. Desarrollé agilidad para resolver problemas sobre la marcha, comunicación directa con el usuario y capacidad de mantener el rendimiento en situaciones críticas; habilidades que aplico en ciclos de desarrollo y sesiones de debugging.',
+      mercadona_role: 'Operario de Supermercado',
+      mercadona_company: 'Mercadona',
+      mercadona_period: '2024',
+      mercadona_desc: 'Trabajo en equipo en entorno de procesos estrictos y estándares de calidad definidos. La cultura de Mercadona reforzó mi disciplina para seguir flujos de trabajo estructurados, mantener calidad constante y colaborar eficientemente; mentalidad que aplico al desarrollo en equipo y a las buenas prácticas de código.',
+      alcampo_role: 'Operario de Tienda',
+      alcampo_company: 'Alcampo',
+      alcampo_period: '2023',
+      alcampo_desc: 'Primer contacto con un entorno laboral profesional. Aprendí a adaptarme rápidamente a nuevas situaciones, priorizar tareas bajo demanda variable y entender las necesidades del usuario final de forma directa; perspectiva que refuerza mi enfoque de UX y orientación al cliente al diseñar interfaces web.',
     },
     contact: {
       label: '// hire.me',
@@ -127,11 +138,39 @@ export const translations = {
   
   en: {
     nav: {
+      home:  'Home',
       stack: 'Stack',
-      about: 'About me',
-      exp: 'Experience',
-      infra: 'Infrastructure',
-      log: 'Milestones',
+      exp:   'Experience',
+      lab:   'Lab',
+    },
+    lab: {
+      label:               '// lab.tools',
+      title_start:         'Developer',
+      title_neon:          'Toolbox.',
+      desc:                'Everyday utilities. No ads, no trackers. Everything runs directly in your browser.',
+      back:                'Back to Lab',
+      tool_open:           'Open tool',
+      tool_external:       'Open in new tab',
+      tool_image_title:    'Image Converter',
+      tool_image_desc:     'Convert between PNG, JPG and WebP. Resize and adjust compression quality.',
+      tool_password_title: 'Password Generator',
+      tool_password_desc:  'Secure random passwords with customizable length and character types.',
+      tool_json_title:     'JSON Formatter',
+      tool_json_desc:      'Format, minify and validate JSON instantly, without sending data anywhere.',
+      tool_color_title:    'Color Palette',
+      tool_color_desc:     'Generate shades, complementary, analogous and triadic colors from any hex value. Export CSS variables instantly.',
+      tool_hash_title:     'Hash Generator',
+      tool_hash_desc:      'Compute SHA-1, SHA-256, SHA-384 and SHA-512 from any text using the native Web Crypto API.',
+      tool_css_title:      'CSS Unit Converter',
+      tool_css_desc:       'Convert between px, rem, em, vw, vh and pt with configurable base font size and viewport.',
+      tool_qr_title:       'QR Generator',
+      tool_qr_desc:        'Generate QR codes from any text or URL. Choose size and color, then download as PNG.',
+      tool_speed_title:    'Speed Test',
+      tool_speed_desc:     'Measure your latency and download speed directly in the browser, no install required.',
+      tool_words_title:    'Word Counter',
+      tool_words_desc:     'Instantly analyze text: words, characters, sentences, paragraphs and reading time.',
+      tool_html_title:     'HTML Previewer',
+      tool_html_desc:      'Write HTML in the left panel and see the live render in the right panel in real time.',
     },
     hero: {
       available: 'Available for hire · Open to remote & hybrid',
@@ -201,44 +240,27 @@ export const translations = {
     experience: {
       label: '// work.experience',
       title: 'Professional Journey',
-      desc: 'Chronology of practical experience. I bring solid capabilities in systems and development, built upon years of working under extreme pressure, asynchronous problem-solving, and direct client communication.',
-      jobs: {
-        ayto: {
-          role: 'DAW Internship — Systems & Development',
-          company: 'Marbella City Council',
-          period: '2026',
-          desc: 'Integration into the municipal IT department. Level 2 technical support, Windows/Linux systems administration, and development of scripts to automate administrative workflows.',
-          tags: ['SysAdmin', 'L2 Support', 'Automation', 'Networking']
-        },
-        ochoa: {
-          role: 'DAW Internship — Critical Infrastructure',
-          company: 'Hospital Ochoa',
-          period: '2025',
-          desc: 'Deployment of medical equipment and incident management in a critical high-availability environment (24/7). Responsible for ensuring network uptime and ward devices.',
-          tags: ['High Availability', 'Critical Support', 'Hardware', 'Rapid Resolution']
-        },
-        hosteleria: {
-          role: 'Hospitality Sector',
-          company: 'Bar el Boquerón',
-          period: '2025',
-          desc: 'Handling unpredictable peak volumes with limited resources. Rapid decision-making, conflict mediation, and real-time optimization of logistical processes.',
-          tags: ['Stress Management', 'Decision Making', 'Conflict Resolution']
-        },
-        mercadona: {
-          role: 'Supermarket Staff',
-          company: 'Mercadona',
-          period: '2024',
-          desc: 'Integration into high-performance teams with strict procedures. Responsible for logistics, inventory management, and direct customer service while maintaining QA standards.',
-          tags: ['Logistics', 'Teamwork', 'Customer Service', 'Strict Processes']
-        },
-        alcampo: {
-          role: 'Supermarket Staff',
-          company: 'Alcampo',
-          period: '2023',
-          desc: 'First contact with a dynamic professional environment. Floor stock control, proactive end-user support, and adaptability across departments based on operational demand.',
-          tags: ['Adaptability', 'Proactive Support', 'Stock Control']
-        }
-      }
+      desc: 'Chronology of practical experience. I combine solid technical training in DAW with years of working under pressure, solving real-world problems, and direct end-user communication.',
+      ayto_role: 'DAW Internship · Development & Systems',
+      ayto_company: 'Marbella City Council',
+      ayto_period: '2026',
+      ayto_desc: 'Full-stack project development within the municipal IT department. Built frontends with React and Vite, REST APIs with Node.js, and relational databases to automate and digitize internal workflows. Also involved in Linux/Windows systems administration and technical support.',
+      ochoa_role: 'DAW Internship · IT Infrastructure',
+      ochoa_company: 'Hospital Ochoa',
+      ochoa_period: '2025',
+      ochoa_desc: 'Maintenance of critical infrastructure in a 24/7 hospital environment. Network device configuration and deployment, high-impact incident diagnosis and resolution. Reinforced a reliability and uptime mindset directly applicable to web application development and production operations.',
+      hosteleria_role: 'Hospitality · Bartender',
+      hosteleria_company: 'Bar el Boquerón',
+      hosteleria_period: '2025',
+      hosteleria_desc: 'Simultaneous management of multiple tasks under constant pressure in high-demand environments. Developed agility to solve problems on the fly, direct user communication, and the ability to maintain performance under critical conditions; skills I apply directly to development cycles and debugging sessions.',
+      mercadona_role: 'Supermarket Operative',
+      mercadona_company: 'Mercadona',
+      mercadona_period: '2024',
+      mercadona_desc: "Teamwork within a strict process-driven environment with defined quality standards. Mercadona's work culture reinforced my discipline in following structured workflows, maintaining consistent quality, and collaborating efficiently; a mindset I apply to team development and clean coding practices.",
+      alcampo_role: 'Store Operative',
+      alcampo_company: 'Alcampo',
+      alcampo_period: '2023',
+      alcampo_desc: 'First contact with a formal professional environment. Learned to adapt quickly to new situations, prioritize tasks under variable demand, and understand end-user needs directly; a perspective that strengthens my UX focus and client-oriented approach when designing web interfaces.',
     },
     contact: {
       label: '// hire.me',
@@ -253,11 +275,39 @@ export const translations = {
 
   de: {
     nav: {
+      home:  'Start',
       stack: 'Stack',
-      about: 'Über mich',
-      exp: 'Erfahrung',
-      infra: 'Infrastruktur',
-      log: 'Meilensteine',
+      exp:   'Erfahrung',
+      lab:   'Labor',
+    },
+    lab: {
+      label:               '// lab.tools',
+      title_start:         'Entwickler-',
+      title_neon:          'Werkzeugkasten.',
+      desc:                'Tools für den täglichen Gebrauch. Keine Werbung, keine Tracker. Alles läuft direkt im Browser.',
+      back:                'Zurück zum Lab',
+      tool_open:           'Tool öffnen',
+      tool_external:       'In neuem Tab öffnen',
+      tool_image_title:    'Bild-Konverter',
+      tool_image_desc:     'Konvertiere zwischen PNG, JPG und WebP. Größe ändern und Kompressionsqualität anpassen.',
+      tool_password_title: 'Passwort-Generator',
+      tool_password_desc:  'Sichere Zufallspasswörter mit anpassbarer Länge und Zeichentypen.',
+      tool_json_title:     'JSON-Formatierer',
+      tool_json_desc:      'JSON sofort formatieren, minimieren und validieren, ohne Daten zu senden.',
+      tool_color_title:    'Farbpalette',
+      tool_color_desc:     'Generiere Shades, Komplementär-, Analoge und Triadische Farben aus jedem Hex-Wert. CSS-Variablen direkt exportieren.',
+      tool_hash_title:     'Hash-Generator',
+      tool_hash_desc:      'Berechne SHA-1, SHA-256, SHA-384 und SHA-512 aus beliebigem Text mit der nativen Web Crypto API.',
+      tool_css_title:      'CSS-Einheitenkonverter',
+      tool_css_desc:       'Konvertiere zwischen px, rem, em, vw, vh und pt mit konfigurierbarer Basis und Viewport.',
+      tool_qr_title:       'QR-Generator',
+      tool_qr_desc:        'QR-Codes aus beliebigem Text oder URLs erstellen. Größe und Farbe wählen, als PNG herunterladen.',
+      tool_speed_title:    'Geschwindigkeitstest',
+      tool_speed_desc:     'Miss deine Latenz und Download-Geschwindigkeit direkt im Browser, ohne Installation.',
+      tool_words_title:    'Wörter-Zähler',
+      tool_words_desc:     'Text sofort analysieren: Wörter, Zeichen, Sätze, Absätze und Lesezeit.',
+      tool_html_title:     'HTML-Vorschau',
+      tool_html_desc:      'HTML im linken Panel schreiben und das Ergebnis in Echtzeit im rechten Panel sehen.',
     },
     hero: {
       available: 'Verfügbar · Offen für Remote & Hybrid',
@@ -327,44 +377,27 @@ export const translations = {
     experience: {
       label: '// work.experience',
       title: 'Beruflicher Werdegang',
-      desc: 'Chronologie praktischer Erfahrung. Ich bringe solide Fähigkeiten in Systemen und Entwicklung mit, aufgebaut auf jahrelanger Arbeit unter extremem Druck, asynchroner Problemlösung und direkter Kommunikation.',
-      jobs: {
-        ayto: {
-          role: 'DAW Praktikum — Systeme & Entwicklung',
-          company: 'Stadtverwaltung Marbella',
-          period: '2026',
-          desc: 'Integration in die städtische IT-Abteilung. Level 2 technischer Support, Windows/Linux-Systemadministration und Entwicklung von Skripten zur Automatisierung administrativer Workflows.',
-          tags: ['SysAdmin', 'L2 Support', 'Automatisierung', 'Netzwerke']
-        },
-        ochoa: {
-          role: 'DAW Praktikum — Kritische Infrastruktur',
-          company: 'Hospital Ochoa',
-          period: '2025',
-          desc: 'Bereitstellung medizinischer Geräte und Vorfallmanagement in einer kritischen Hochverfügbarkeitsumgebung (24/7). Verantwortlich für die Gewährleistung der Netzwerkverfügbarkeit.',
-          tags: ['Hochverfügbarkeit', 'Kritischer Support', 'Hardware', 'Schnelle Lösung']
-        },
-        hosteleria: {
-          role: 'Gastgewerbe',
-          company: 'Bar el Boquerón',
-          period: '2025',
-          desc: 'Umgang mit unvorhersehbaren Spitzenvolumina bei begrenzten Ressourcen. Schnelle Entscheidungsfindung, Konfliktvermittlung und Echtzeit-Optimierung logistischer Prozesse.',
-          tags: ['Stressbewältigung', 'Entscheidungsfindung', 'Konfliktlösung']
-        },
-        mercadona: {
-          role: 'Supermarkt-Mitarbeiter',
-          company: 'Mercadona',
-          period: '2024',
-          desc: 'Integration in Hochleistungsteams mit strengen Verfahren. Verantwortlich für Logistik, Bestandsmanagement und direkten Kundenservice unter Einhaltung von QA-Standards.',
-          tags: ['Logistik', 'Teamarbeit', 'Kundenservice', 'Strenge Prozesse']
-        },
-        alcampo: {
-          role: 'Supermarkt-Mitarbeiter',
-          company: 'Alcampo',
-          period: '2023',
-          desc: 'Erster Kontakt mit einem dynamischen beruflichen Umfeld. Bestandskontrolle, proaktive Unterstützung der Endbenutzer und Anpassungsfähigkeit zwischen den Abteilungen je nach operativer Nachfrage.',
-          tags: ['Anpassungsfähigkeit', 'Proaktiver Support', 'Bestandskontrolle']
-        }
-      }
+      desc: 'Chronologie praktischer Erfahrung. Ich kombiniere solide technische Ausbildung in DAW mit Jahren unter Druck, Lösung realer Probleme und direkter Kommunikation mit dem Endbenutzer.',
+      ayto_role: 'DAW Praktikum · Entwicklung & Systeme',
+      ayto_company: 'Stadtverwaltung Marbella',
+      ayto_period: '2026',
+      ayto_desc: 'Full-Stack-Projektentwicklung in der städtischen IT-Abteilung. Ich entwickelte Frontends mit React und Vite, REST-APIs mit Node.js und relationale Datenbanken zur Automatisierung und Digitalisierung interner Abläufe. Außerdem Linux/Windows-Systemadministration und technischer Support.',
+      ochoa_role: 'DAW Praktikum · IT-Infrastruktur',
+      ochoa_company: 'Hospital Ochoa',
+      ochoa_period: '2025',
+      ochoa_desc: 'Wartung kritischer Infrastruktur in einem 24/7-Krankenhausumfeld. Konfiguration und Bereitstellung von Netzwerkgeräten, Diagnose und Behebung von Vorfällen mit hohem Impact. Stärkte eine Zuverlässigkeits- und Uptime-Denkweise, die direkt auf Webentwicklung und Produktionsbetrieb anwendbar ist.',
+      hosteleria_role: 'Gastronomie · Barkeeper',
+      hosteleria_company: 'Bar el Boquerón',
+      hosteleria_period: '2025',
+      hosteleria_desc: 'Gleichzeitige Verwaltung mehrerer Aufgaben unter konstantem Druck in Hochlastumgebungen. Entwickelte Agilität zur schnellen Problemlösung, direkte Benutzerkommunikation und Leistungsfähigkeit unter kritischen Bedingungen; Fähigkeiten, die ich auf Entwicklungszyklen und Debugging-Sitzungen anwende.',
+      mercadona_role: 'Supermarkt-Mitarbeiter',
+      mercadona_company: 'Mercadona',
+      mercadona_period: '2024',
+      mercadona_desc: 'Teamarbeit in einem prozessorientierten Umfeld mit strengen Qualitätsstandards. Mercadonas Arbeitskultur stärkte meine Disziplin für strukturierte Arbeitsabläufe, gleichbleibende Qualität und effiziente Zusammenarbeit; eine Denkweise, die ich auf Teamentwicklung und saubere Codierungspraktiken anwende.',
+      alcampo_role: 'Ladenmitarbeiter',
+      alcampo_company: 'Alcampo',
+      alcampo_period: '2023',
+      alcampo_desc: 'Erster Kontakt mit einem formellen Berufsumfeld. Lernte, mich schnell anzupassen, Aufgaben zu priorisieren und die Bedürfnisse des Endnutzers direkt zu verstehen; eine Perspektiva, die meinen UX-Fokus und kundenorientiertes Denken beim Gestalten von Weboberflächen stärkt.',
     },
     contact: {
       label: '// hire.me',

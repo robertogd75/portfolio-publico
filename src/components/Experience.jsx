@@ -3,84 +3,76 @@ import { useTranslation } from '../i18n/I18nContext'
 export default function Experience() {
   const { t, lang } = useTranslation()
 
+  const tagsByLang = {
+    ayto:      lang === 'en' ? ['Web Development', 'Linux', 'Automation', 'Networking']
+                : lang === 'de' ? ['Webentwicklung', 'Linux', 'Automatisierung', 'Netzwerke']
+                : ['Desarrollo Web', 'Linux', 'Automatización', 'Redes'],
+    ochoa:     lang === 'en' ? ['IT Infrastructure', 'High Availability', 'Networking', 'Incident Resolution']
+                : lang === 'de' ? ['IT-Infrastruktur', 'Hochverfügbarkeit', 'Netzwerke', 'Störungsbehebung']
+                : ['Infraestructura IT', 'Alta Disponibilidad', 'Redes', 'Resolución de Incidencias'],
+    hosteleria: lang === 'en' ? ['Working Under Pressure', 'Multitasking', 'Direct Communication', 'Fast Resolution']
+                : lang === 'de' ? ['Arbeiten unter Druck', 'Multitasking', 'Direkte Kommunikation', 'Schnelle Lösung']
+                : ['Trabajo bajo Presión', 'Multitarea', 'Comunicación con el Usuario', 'Resolución Rápida'],
+    mercadona: lang === 'en' ? ['Teamwork', 'Strict Processes', 'Attention to Detail', 'QA']
+                : lang === 'de' ? ['Teamarbeit', 'Strenge Prozesse', 'Detailgenauigkeit', 'QA']
+                : ['Trabajo en Equipo', 'Procesos Rigurosos', 'Atención al Detalle', 'QA'],
+    alcampo:   lang === 'en' ? ['Adaptability', 'User Orientation', 'Prioritization', 'Teamwork']
+                : lang === 'de' ? ['Anpassungsfähigkeit', 'Benutzerorientierung', 'Priorisierung', 'Teamarbeit']
+                : ['Adaptabilidad', 'Orientación al Usuario', 'Priorización', 'Trabajo en Equipo'],
+  }
+
   // Chronological order from newest to oldest
   const jobs = [
     {
       id: 'ayto',
       icon: '💻',
       color: 'var(--neon-cyan)',
-      period: t('experience', 'jobs.ayto.period'),
-      role: t('experience', 'jobs.ayto.role'),
-      company: t('experience', 'jobs.ayto.company'),
-      desc: t('experience', 'jobs.ayto.desc'),
-      tags: (() => {
-        // Fallback or specific tags based on language (the translation file returns an array)
-        try {
-          const trans = t('experience', 'jobs.ayto.tags')
-          return Array.isArray(trans) ? trans : ['SysAdmin', 'L2 Support']
-        } catch(e) { return ['SysAdmin', 'L2 Support'] }
-      })()
+      period: t('experience', 'ayto_period'),
+      role: t('experience', 'ayto_role'),
+      company: t('experience', 'ayto_company'),
+      desc: t('experience', 'ayto_desc'),
+      tags: tagsByLang.ayto,
     },
     {
       id: 'ochoa',
       icon: '🏥',
       color: 'var(--neon-cyan)',
-      period: t('experience', 'jobs.ochoa.period'),
-      role: t('experience', 'jobs.ochoa.role'),
-      company: t('experience', 'jobs.ochoa.company'),
-      desc: t('experience', 'jobs.ochoa.desc'),
-      tags: (() => {
-        try {
-          const trans = t('experience', 'jobs.ochoa.tags')
-          return Array.isArray(trans) ? trans : ['High Availability', 'Hardware']
-        } catch(e) { return ['High Availability', 'Hardware'] }
-      })()
+      period: t('experience', 'ochoa_period'),
+      role: t('experience', 'ochoa_role'),
+      company: t('experience', 'ochoa_company'),
+      desc: t('experience', 'ochoa_desc'),
+      tags: tagsByLang.ochoa,
     },
     {
       id: 'hosteleria',
       icon: '☕',
       color: 'var(--neon-purple)',
-      period: t('experience', 'jobs.hosteleria.period'),
-      role: t('experience', 'jobs.hosteleria.role'),
-      company: t('experience', 'jobs.hosteleria.company'),
-      desc: t('experience', 'jobs.hosteleria.desc'),
-      tags: (() => {
-        try {
-          const trans = t('experience', 'jobs.hosteleria.tags')
-          return Array.isArray(trans) ? trans : ['Stress Management', 'Decision Making']
-        } catch(e) { return ['Stress Management', 'Decision Making'] }
-      })()
+      period: t('experience', 'hosteleria_period'),
+      role: t('experience', 'hosteleria_role'),
+      company: t('experience', 'hosteleria_company'),
+      desc: t('experience', 'hosteleria_desc'),
+      tags: tagsByLang.hosteleria,
     },
     {
       id: 'mercadona',
       icon: '🛒',
       color: 'var(--neon-green)',
-      period: t('experience', 'jobs.mercadona.period'),
-      role: t('experience', 'jobs.mercadona.role'),
-      company: t('experience', 'jobs.mercadona.company'),
-      desc: t('experience', 'jobs.mercadona.desc'),
-      tags: (() => {
-        try {
-          const trans = t('experience', 'jobs.mercadona.tags')
-          return Array.isArray(trans) ? trans : ['Logistics', 'Teamwork']
-        } catch(e) { return ['Logistics', 'Teamwork'] }
-      })()
+      period: t('experience', 'mercadona_period'),
+      role: t('experience', 'mercadona_role'),
+      company: t('experience', 'mercadona_company'),
+      desc: t('experience', 'mercadona_desc'),
+      tags: tagsByLang.mercadona,
     },
     {
       id: 'alcampo',
       icon: '🏷️',
       color: 'var(--neon-green)',
-      period: t('experience', 'jobs.alcampo.period'),
-      role: t('experience', 'jobs.alcampo.role'),
-      company: t('experience', 'jobs.alcampo.company'),
-      desc: t('experience', 'jobs.alcampo.desc'),
-      tags: (() => {
-        try {
-          const trans = t('experience', 'jobs.alcampo.tags')
-          return Array.isArray(trans) ? trans : ['Adaptability', 'Customer Support']
-        } catch(e) { return ['Adaptability', 'Customer Support'] }
-      })()
-    }
+      period: t('experience', 'alcampo_period'),
+      role: t('experience', 'alcampo_role'),
+      company: t('experience', 'alcampo_company'),
+      desc: t('experience', 'alcampo_desc'),
+      tags: tagsByLang.alcampo,
+    },
   ]
 
   return (
