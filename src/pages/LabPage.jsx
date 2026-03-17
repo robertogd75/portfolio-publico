@@ -13,6 +13,7 @@ import HtmlPreviewer from '../components/lab/HtmlPreviewer.jsx'
 import SvgEditor from '../components/lab/SvgEditor.jsx'
 import ColorBlindSimulator from '../components/lab/ColorBlindSimulator.jsx'
 import ApiExplorer from '../components/lab/ApiExplorer.jsx'
+import TypingTest from '../components/lab/TypingTest.jsx'
 
 const TOOLS = [
   { id: 'image',    icon: 'IMG', color: 'var(--neon-cyan)',   glow: 'rgba(0,240,255,0.15)',   component: ImageStudio },
@@ -28,6 +29,7 @@ const TOOLS = [
   { id: 'svg',      icon: 'SVG',  color: '#f59e0b',            glow: 'rgba(245,158,11,0.12)',  component: SvgEditor },
   { id: 'blind',    icon: 'A11Y', color: 'var(--neon-purple)', glow: 'rgba(168,85,247,0.15)',  component: ColorBlindSimulator },
   { id: 'api',      icon: 'API',  color: 'var(--neon-cyan)',   glow: 'rgba(0,240,255,0.15)',   component: ApiExplorer },
+  { id: 'typing',   icon: 'WPM',  color: '#4ade80',            glow: 'rgba(74,222,128,0.13)',  component: TypingTest },
 ]
 
 function ToolCard({ tool, t, onOpen }) {

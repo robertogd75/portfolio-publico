@@ -40,6 +40,8 @@ export const translations = {
       tool_blind_desc:     'Sube una imagen y comprueba cómo la ven personas con protanopia, deuteranopia, tritanopia y más.',
       tool_api_title:      'API Pública de Vehículos',
       tool_api_desc:       'API REST propia alojada en este servidor. Datos de 75 vehículos y 15 marcas en /cars y /brands. Sin auth, con CORS.',
+      tool_typing_title:   'Reto de Mecanografía',
+      tool_typing_desc:    '¿Cuántas palabras escribes por minuto? 60 segundos, textos reales, sin repetir. Puntuación guardada en tu navegador.',
     },
     hero: {
       available: 'Available for hire · Open to remote & hybrid',
@@ -183,6 +185,8 @@ export const translations = {
       tool_blind_desc:     'Upload an image and check how it looks to people with protanopia, deuteranopia, tritanopia and more.',
       tool_api_title:      'Public Vehicle API',
       tool_api_desc:       'Own REST API hosted on this server. Data on 75 vehicles and 15 brands at /cars and /brands. No auth, CORS enabled.',
+      tool_typing_title:   'Typing Challenge',
+      tool_typing_desc:    'How many words per minute can you type? 60 seconds, real texts, no repeats. Score saved in your browser.',
     },
     hero: {
       available: 'Available for hire · Open to remote & hybrid',
@@ -326,6 +330,8 @@ export const translations = {
       tool_blind_desc:     'Bild hochladen und prüfen, wie es Personen mit Protanopie, Deuteranopie, Tritanopie usw. sehen.',
       tool_api_title:      'Öffentliche Fahrzeug-API',
       tool_api_desc:       'Eigene REST-API auf diesem Server. Daten zu 75 Fahrzeugen und 15 Marken unter /cars und /brands. Kein Auth, CORS aktiviert.',
+      tool_typing_title:   'Tipp-Challenge',
+      tool_typing_desc:    'Wie viele Wörter pro Minute tippst du? 60 Sekunden, echte Texte, keine Wiederholungen. Punktestand im Browser gespeichert.',
     },
     hero: {
       available: 'Verfügbar · Offen für Remote & Hybrid',
