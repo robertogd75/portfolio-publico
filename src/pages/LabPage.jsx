@@ -10,6 +10,9 @@ import QrGenerator from '../components/lab/QrGenerator.jsx'
 import SpeedTest from '../components/lab/SpeedTest.jsx'
 import WordCounter from '../components/lab/WordCounter.jsx'
 import HtmlPreviewer from '../components/lab/HtmlPreviewer.jsx'
+import SvgEditor from '../components/lab/SvgEditor.jsx'
+import ColorBlindSimulator from '../components/lab/ColorBlindSimulator.jsx'
+import ApiExplorer from '../components/lab/ApiExplorer.jsx'
 
 const TOOLS = [
   { id: 'image',    icon: 'IMG', color: 'var(--neon-cyan)',   glow: 'rgba(0,240,255,0.15)',   component: ImageStudio },
@@ -21,7 +24,10 @@ const TOOLS = [
   { id: 'qr',       icon: 'QR',  color: 'var(--neon-purple)', glow: 'rgba(168,85,247,0.15)',  component: QrGenerator },
   { id: 'speed',    icon: '↑↓',  color: '#f59e0b',            glow: 'rgba(245,158,11,0.12)',  component: SpeedTest },
   { id: 'words',    icon: 'TXT', color: 'var(--neon-cyan)',   glow: 'rgba(0,240,255,0.15)',   component: WordCounter },
-  { id: 'html',     icon: 'HTML',color: '#f97316',            glow: 'rgba(249,115,22,0.12)',  component: HtmlPreviewer },
+  { id: 'html',     icon: 'HTML', color: '#f97316',            glow: 'rgba(249,115,22,0.12)',  component: HtmlPreviewer },
+  { id: 'svg',      icon: 'SVG',  color: '#f59e0b',            glow: 'rgba(245,158,11,0.12)',  component: SvgEditor },
+  { id: 'blind',    icon: 'A11Y', color: 'var(--neon-purple)', glow: 'rgba(168,85,247,0.15)',  component: ColorBlindSimulator },
+  { id: 'api',      icon: 'API',  color: 'var(--neon-cyan)',   glow: 'rgba(0,240,255,0.15)',   component: ApiExplorer },
 ]
 
 function ToolCard({ tool, t, onOpen }) {

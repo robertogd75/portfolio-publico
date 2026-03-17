@@ -1,0 +1,98 @@
+{
+  "version": "1.0.0",
+  "author": "rgardel.es",
+  "license": "open",
+  "updated": "2026-01-01",
+  "count": 75,
+  "data": [
+    { "id": 1,  "make_id": 1,  "make": "Toyota",        "model": "Corolla",     "year_start": 1966, "year_end": null, "type": "sedan",     "segment": "C", "origin": "Japan",       "fuel": ["gasoline", "hybrid"] },
+    { "id": 2,  "make_id": 1,  "make": "Toyota",        "model": "Camry",       "year_start": 1982, "year_end": null, "type": "sedan",     "segment": "D", "origin": "Japan",       "fuel": ["gasoline", "hybrid"] },
+    { "id": 3,  "make_id": 1,  "make": "Toyota",        "model": "RAV4",        "year_start": 1994, "year_end": null, "type": "suv",       "segment": "J", "origin": "Japan",       "fuel": ["gasoline", "hybrid"] },
+    { "id": 4,  "make_id": 1,  "make": "Toyota",        "model": "Prius",       "year_start": 1997, "year_end": null, "type": "hatchback", "segment": "C", "origin": "Japan",       "fuel": ["hybrid"] },
+    { "id": 5,  "make_id": 1,  "make": "Toyota",        "model": "Yaris",       "year_start": 1999, "year_end": null, "type": "hatchback", "segment": "B", "origin": "Japan",       "fuel": ["gasoline", "hybrid"] },
+    { "id": 6,  "make_id": 1,  "make": "Toyota",        "model": "Land Cruiser","year_start": 1951, "year_end": null, "type": "suv",       "segment": "J", "origin": "Japan",       "fuel": ["gasoline", "diesel"] },
+
+    { "id": 7,  "make_id": 2,  "make": "Volkswagen",    "model": "Golf",        "year_start": 1974, "year_end": null, "type": "hatchback", "segment": "C", "origin": "Germany",     "fuel": ["gasoline", "diesel", "electric"] },
+    { "id": 8,  "make_id": 2,  "make": "Volkswagen",    "model": "Polo",        "year_start": 1975, "year_end": null, "type": "hatchback", "segment": "B", "origin": "Germany",     "fuel": ["gasoline", "diesel"] },
+    { "id": 9,  "make_id": 2,  "make": "Volkswagen",    "model": "Passat",      "year_start": 1973, "year_end": null, "type": "sedan",     "segment": "D", "origin": "Germany",     "fuel": ["gasoline", "diesel"] },
+    { "id": 10, "make_id": 2,  "make": "Volkswagen",    "model": "Tiguan",      "year_start": 2007, "year_end": null, "type": "suv",       "segment": "J", "origin": "Germany",     "fuel": ["gasoline", "diesel"] },
+    { "id": 11, "make_id": 2,  "make": "Volkswagen",    "model": "Touareg",     "year_start": 2002, "year_end": null, "type": "suv",       "segment": "J", "origin": "Germany",     "fuel": ["gasoline", "diesel", "hybrid"] },
+
+    { "id": 12, "make_id": 3,  "make": "BMW",           "model": "Serie 1",     "year_start": 2004, "year_end": null, "type": "hatchback", "segment": "C", "origin": "Germany",     "fuel": ["gasoline", "diesel"] },
+    { "id": 13, "make_id": 3,  "make": "BMW",           "model": "Serie 3",     "year_start": 1975, "year_end": null, "type": "sedan",     "segment": "D", "origin": "Germany",     "fuel": ["gasoline", "diesel", "hybrid"] },
+    { "id": 14, "make_id": 3,  "make": "BMW",           "model": "Serie 5",     "year_start": 1972, "year_end": null, "type": "sedan",     "segment": "E", "origin": "Germany",     "fuel": ["gasoline", "diesel", "hybrid"] },
+    { "id": 15, "make_id": 3,  "make": "BMW",           "model": "X3",          "year_start": 2003, "year_end": null, "type": "suv",       "segment": "J", "origin": "Germany",     "fuel": ["gasoline", "diesel", "hybrid"] },
+    { "id": 16, "make_id": 3,  "make": "BMW",           "model": "X5",          "year_start": 1999, "year_end": null, "type": "suv",       "segment": "J", "origin": "Germany",     "fuel": ["gasoline", "diesel", "hybrid"] },
+
+    { "id": 17, "make_id": 4,  "make": "Mercedes-Benz", "model": "Clase A",     "year_start": 1997, "year_end": null, "type": "hatchback", "segment": "C", "origin": "Germany",     "fuel": ["gasoline", "diesel"] },
+    { "id": 18, "make_id": 4,  "make": "Mercedes-Benz", "model": "Clase C",     "year_start": 1993, "year_end": null, "type": "sedan",     "segment": "D", "origin": "Germany",     "fuel": ["gasoline", "diesel", "hybrid"] },
+    { "id": 19, "make_id": 4,  "make": "Mercedes-Benz", "model": "Clase E",     "year_start": 1984, "year_end": null, "type": "sedan",     "segment": "E", "origin": "Germany",     "fuel": ["gasoline", "diesel", "hybrid"] },
+    { "id": 20, "make_id": 4,  "make": "Mercedes-Benz", "model": "GLC",         "year_start": 2015, "year_end": null, "type": "suv",       "segment": "J", "origin": "Germany",     "fuel": ["gasoline", "diesel", "hybrid"] },
+    { "id": 21, "make_id": 4,  "make": "Mercedes-Benz", "model": "Clase S",     "year_start": 1954, "year_end": null, "type": "sedan",     "segment": "F", "origin": "Germany",     "fuel": ["gasoline", "hybrid"] },
+
+    { "id": 22, "make_id": 5,  "make": "Ford",          "model": "Fiesta",      "year_start": 1976, "year_end": 2023, "type": "hatchback", "segment": "B", "origin": "USA",         "fuel": ["gasoline"] },
+    { "id": 23, "make_id": 5,  "make": "Ford",          "model": "Focus",       "year_start": 1998, "year_end": null, "type": "hatchback", "segment": "C", "origin": "USA",         "fuel": ["gasoline", "diesel"] },
+    { "id": 24, "make_id": 5,  "make": "Ford",          "model": "Mustang",     "year_start": 1964, "year_end": null, "type": "coupe",     "segment": "S", "origin": "USA",         "fuel": ["gasoline"] },
+    { "id": 25, "make_id": 5,  "make": "Ford",          "model": "Puma",        "year_start": 2019, "year_end": null, "type": "suv",       "segment": "B", "origin": "USA",         "fuel": ["gasoline", "hybrid"] },
+    { "id": 26, "make_id": 5,  "make": "Ford",          "model": "Explorer",    "year_start": 1990, "year_end": null, "type": "suv",       "segment": "J", "origin": "USA",         "fuel": ["gasoline", "hybrid"] },
+
+    { "id": 27, "make_id": 6,  "make": "Seat",          "model": "Ibiza",       "year_start": 1984, "year_end": null, "type": "hatchback", "segment": "B", "origin": "Spain",       "fuel": ["gasoline", "diesel"] },
+    { "id": 28, "make_id": 6,  "make": "Seat",          "model": "Leon",        "year_start": 1999, "year_end": null, "type": "hatchback", "segment": "C", "origin": "Spain",       "fuel": ["gasoline", "diesel", "electric"] },
+    { "id": 29, "make_id": 6,  "make": "Seat",          "model": "Arona",       "year_start": 2017, "year_end": null, "type": "suv",       "segment": "B", "origin": "Spain",       "fuel": ["gasoline"] },
+    { "id": 30, "make_id": 6,  "make": "Seat",          "model": "Ateca",       "year_start": 2016, "year_end": null, "type": "suv",       "segment": "J", "origin": "Spain",       "fuel": ["gasoline", "diesel"] },
+    { "id": 31, "make_id": 6,  "make": "Seat",          "model": "Tarraco",     "year_start": 2018, "year_end": null, "type": "suv",       "segment": "J", "origin": "Spain",       "fuel": ["gasoline", "diesel"] },
+
+    { "id": 32, "make_id": 7,  "make": "Renault",       "model": "Clio",        "year_start": 1990, "year_end": null, "type": "hatchback", "segment": "B", "origin": "France",      "fuel": ["gasoline", "diesel", "hybrid"] },
+    { "id": 33, "make_id": 7,  "make": "Renault",       "model": "Megane",      "year_start": 1995, "year_end": null, "type": "hatchback", "segment": "C", "origin": "France",      "fuel": ["gasoline", "diesel", "electric"] },
+    { "id": 34, "make_id": 7,  "make": "Renault",       "model": "Captur",      "year_start": 2013, "year_end": null, "type": "suv",       "segment": "B", "origin": "France",      "fuel": ["gasoline", "diesel", "hybrid"] },
+    { "id": 35, "make_id": 7,  "make": "Renault",       "model": "Zoe",         "year_start": 2012, "year_end": null, "type": "hatchback", "segment": "B", "origin": "France",      "fuel": ["electric"] },
+    { "id": 36, "make_id": 7,  "make": "Renault",       "model": "Arkana",      "year_start": 2019, "year_end": null, "type": "suv",       "segment": "C", "origin": "France",      "fuel": ["gasoline", "hybrid"] },
+
+    { "id": 37, "make_id": 8,  "make": "Peugeot",       "model": "208",         "year_start": 2012, "year_end": null, "type": "hatchback", "segment": "B", "origin": "France",      "fuel": ["gasoline", "diesel", "electric"] },
+    { "id": 38, "make_id": 8,  "make": "Peugeot",       "model": "308",         "year_start": 2007, "year_end": null, "type": "hatchback", "segment": "C", "origin": "France",      "fuel": ["gasoline", "diesel", "hybrid"] },
+    { "id": 39, "make_id": 8,  "make": "Peugeot",       "model": "508",         "year_start": 2011, "year_end": null, "type": "sedan",     "segment": "D", "origin": "France",      "fuel": ["gasoline", "diesel", "hybrid"] },
+    { "id": 40, "make_id": 8,  "make": "Peugeot",       "model": "3008",        "year_start": 2008, "year_end": null, "type": "suv",       "segment": "J", "origin": "France",      "fuel": ["gasoline", "diesel", "hybrid"] },
+    { "id": 41, "make_id": 8,  "make": "Peugeot",       "model": "5008",        "year_start": 2007, "year_end": null, "type": "suv",       "segment": "J", "origin": "France",      "fuel": ["gasoline", "diesel"] },
+
+    { "id": 42, "make_id": 9,  "make": "Audi",          "model": "A3",          "year_start": 1996, "year_end": null, "type": "hatchback", "segment": "C", "origin": "Germany",     "fuel": ["gasoline", "diesel", "electric"] },
+    { "id": 43, "make_id": 9,  "make": "Audi",          "model": "A4",          "year_start": 1994, "year_end": null, "type": "sedan",     "segment": "D", "origin": "Germany",     "fuel": ["gasoline", "diesel"] },
+    { "id": 44, "make_id": 9,  "make": "Audi",          "model": "A6",          "year_start": 1994, "year_end": null, "type": "sedan",     "segment": "E", "origin": "Germany",     "fuel": ["gasoline", "diesel", "hybrid"] },
+    { "id": 45, "make_id": 9,  "make": "Audi",          "model": "Q3",          "year_start": 2011, "year_end": null, "type": "suv",       "segment": "J", "origin": "Germany",     "fuel": ["gasoline", "diesel"] },
+    { "id": 46, "make_id": 9,  "make": "Audi",          "model": "Q5",          "year_start": 2008, "year_end": null, "type": "suv",       "segment": "J", "origin": "Germany",     "fuel": ["gasoline", "diesel", "hybrid"] },
+
+    { "id": 47, "make_id": 10, "make": "Honda",         "model": "Civic",       "year_start": 1972, "year_end": null, "type": "sedan",     "segment": "C", "origin": "Japan",       "fuel": ["gasoline", "hybrid"] },
+    { "id": 48, "make_id": 10, "make": "Honda",         "model": "Accord",      "year_start": 1976, "year_end": null, "type": "sedan",     "segment": "D", "origin": "Japan",       "fuel": ["gasoline", "hybrid"] },
+    { "id": 49, "make_id": 10, "make": "Honda",         "model": "CR-V",        "year_start": 1995, "year_end": null, "type": "suv",       "segment": "J", "origin": "Japan",       "fuel": ["gasoline", "hybrid"] },
+    { "id": 50, "make_id": 10, "make": "Honda",         "model": "HR-V",        "year_start": 2015, "year_end": null, "type": "suv",       "segment": "B", "origin": "Japan",       "fuel": ["gasoline", "hybrid"] },
+    { "id": 51, "make_id": 10, "make": "Honda",         "model": "Jazz",        "year_start": 2001, "year_end": null, "type": "hatchback", "segment": "B", "origin": "Japan",       "fuel": ["gasoline", "hybrid"] },
+
+    { "id": 52, "make_id": 11, "make": "Hyundai",       "model": "i20",         "year_start": 2008, "year_end": null, "type": "hatchback", "segment": "B", "origin": "South Korea", "fuel": ["gasoline", "diesel"] },
+    { "id": 53, "make_id": 11, "make": "Hyundai",       "model": "i30",         "year_start": 2007, "year_end": null, "type": "hatchback", "segment": "C", "origin": "South Korea", "fuel": ["gasoline", "diesel", "hybrid"] },
+    { "id": 54, "make_id": 11, "make": "Hyundai",       "model": "Tucson",      "year_start": 2004, "year_end": null, "type": "suv",       "segment": "J", "origin": "South Korea", "fuel": ["gasoline", "diesel", "hybrid"] },
+    { "id": 55, "make_id": 11, "make": "Hyundai",       "model": "Santa Fe",    "year_start": 2000, "year_end": null, "type": "suv",       "segment": "J", "origin": "South Korea", "fuel": ["gasoline", "diesel", "hybrid"] },
+    { "id": 56, "make_id": 11, "make": "Hyundai",       "model": "Ioniq 5",     "year_start": 2021, "year_end": null, "type": "suv",       "segment": "J", "origin": "South Korea", "fuel": ["electric"] },
+
+    { "id": 57, "make_id": 12, "make": "Kia",           "model": "Ceed",        "year_start": 2006, "year_end": null, "type": "hatchback", "segment": "C", "origin": "South Korea", "fuel": ["gasoline", "diesel", "hybrid"] },
+    { "id": 58, "make_id": 12, "make": "Kia",           "model": "Sportage",    "year_start": 1993, "year_end": null, "type": "suv",       "segment": "J", "origin": "South Korea", "fuel": ["gasoline", "diesel", "hybrid"] },
+    { "id": 59, "make_id": 12, "make": "Kia",           "model": "Niro",        "year_start": 2016, "year_end": null, "type": "hatchback", "segment": "C", "origin": "South Korea", "fuel": ["gasoline", "hybrid", "electric"] },
+    { "id": 60, "make_id": 12, "make": "Kia",           "model": "Stinger",     "year_start": 2017, "year_end": null, "type": "sedan",     "segment": "D", "origin": "South Korea", "fuel": ["gasoline"] },
+    { "id": 61, "make_id": 12, "make": "Kia",           "model": "EV6",         "year_start": 2021, "year_end": null, "type": "suv",       "segment": "J", "origin": "South Korea", "fuel": ["electric"] },
+
+    { "id": 62, "make_id": 13, "make": "Nissan",        "model": "Micra",       "year_start": 1982, "year_end": null, "type": "hatchback", "segment": "A", "origin": "Japan",       "fuel": ["gasoline"] },
+    { "id": 63, "make_id": 13, "make": "Nissan",        "model": "Juke",        "year_start": 2010, "year_end": null, "type": "suv",       "segment": "B", "origin": "Japan",       "fuel": ["gasoline", "diesel", "hybrid"] },
+    { "id": 64, "make_id": 13, "make": "Nissan",        "model": "Qashqai",     "year_start": 2006, "year_end": null, "type": "suv",       "segment": "J", "origin": "Japan",       "fuel": ["gasoline", "diesel", "hybrid"] },
+    { "id": 65, "make_id": 13, "make": "Nissan",        "model": "X-Trail",     "year_start": 2000, "year_end": null, "type": "suv",       "segment": "J", "origin": "Japan",       "fuel": ["gasoline", "diesel", "hybrid"] },
+    { "id": 66, "make_id": 13, "make": "Nissan",        "model": "Leaf",        "year_start": 2010, "year_end": null, "type": "hatchback", "segment": "C", "origin": "Japan",       "fuel": ["electric"] },
+
+    { "id": 67, "make_id": 14, "make": "Mazda",         "model": "Mazda3",      "year_start": 2003, "year_end": null, "type": "hatchback", "segment": "C", "origin": "Japan",       "fuel": ["gasoline", "diesel"] },
+    { "id": 68, "make_id": 14, "make": "Mazda",         "model": "Mazda6",      "year_start": 2002, "year_end": 2023, "type": "sedan",     "segment": "D", "origin": "Japan",       "fuel": ["gasoline", "diesel"] },
+    { "id": 69, "make_id": 14, "make": "Mazda",         "model": "MX-5",        "year_start": 1989, "year_end": null, "type": "roadster",  "segment": "S", "origin": "Japan",       "fuel": ["gasoline"] },
+    { "id": 70, "make_id": 14, "make": "Mazda",         "model": "CX-5",        "year_start": 2012, "year_end": null, "type": "suv",       "segment": "J", "origin": "Japan",       "fuel": ["gasoline", "diesel"] },
+    { "id": 71, "make_id": 14, "make": "Mazda",         "model": "CX-30",       "year_start": 2019, "year_end": null, "type": "suv",       "segment": "J", "origin": "Japan",       "fuel": ["gasoline", "diesel", "hybrid"] },
+
+    { "id": 72, "make_id": 15, "make": "Tesla",         "model": "Model S",     "year_start": 2012, "year_end": null, "type": "sedan",     "segment": "E", "origin": "USA",         "fuel": ["electric"] },
+    { "id": 73, "make_id": 15, "make": "Tesla",         "model": "Model X",     "year_start": 2015, "year_end": null, "type": "suv",       "segment": "J", "origin": "USA",         "fuel": ["electric"] },
+    { "id": 74, "make_id": 15, "make": "Tesla",         "model": "Model 3",     "year_start": 2016, "year_end": null, "type": "sedan",     "segment": "D", "origin": "USA",         "fuel": ["electric"] },
+    { "id": 75, "make_id": 15, "make": "Tesla",         "model": "Model Y",     "year_start": 2020, "year_end": null, "type": "suv",       "segment": "J", "origin": "USA",         "fuel": ["electric"] }
+  ]
+}

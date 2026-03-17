@@ -1,0 +1,24 @@
+{
+  "version": "1.0.0",
+  "author": "rgardel.es",
+  "license": "open",
+  "updated": "2026-01-01",
+  "count": 15,
+  "data": [
+    { "id": 1,  "name": "Toyota",        "country": "Japan",       "country_code": "JP", "founded": 1937 },
+    { "id": 2,  "name": "Volkswagen",    "country": "Germany",     "country_code": "DE", "founded": 1937 },
+    { "id": 3,  "name": "BMW",           "country": "Germany",     "country_code": "DE", "founded": 1916 },
+    { "id": 4,  "name": "Mercedes-Benz", "country": "Germany",     "country_code": "DE", "founded": 1926 },
+    { "id": 5,  "name": "Ford",          "country": "USA",         "country_code": "US", "founded": 1903 },
+    { "id": 6,  "name": "Seat",          "country": "Spain",       "country_code": "ES", "founded": 1950 },
+    { "id": 7,  "name": "Renault",       "country": "France",      "country_code": "FR", "founded": 1899 },
+    { "id": 8,  "name": "Peugeot",       "country": "France",      "country_code": "FR", "founded": 1882 },
+    { "id": 9,  "name": "Audi",          "country": "Germany",     "country_code": "DE", "founded": 1909 },
+    { "id": 10, "name": "Honda",         "country": "Japan",       "country_code": "JP", "founded": 1948 },
+    { "id": 11, "name": "Hyundai",       "country": "South Korea", "country_code": "KR", "founded": 1967 },
+    { "id": 12, "name": "Kia",           "country": "South Korea", "country_code": "KR", "founded": 1944 },
+    { "id": 13, "name": "Nissan",        "country": "Japan",       "country_code": "JP", "founded": 1933 },
+    { "id": 14, "name": "Mazda",         "country": "Japan",       "country_code": "JP", "founded": 1920 },
+    { "id": 15, "name": "Tesla",         "country": "USA",         "country_code": "US", "founded": 2003 }
+  ]
+}
