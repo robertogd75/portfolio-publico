@@ -1,4 +1,29 @@
 import { useState } from 'react'
+import { useTranslation } from '../../i18n/I18nContext.jsx'
+
+const UI = {
+  es: {
+    label: 'Texto de entrada',
+    placeholder: 'Escribe o pega el texto a hashear... (Ctrl+Enter para calcular)',
+    computing: 'Calculando...',
+    generate: '→ Generar Hashes',
+    copy: 'Copiar',
+  },
+  en: {
+    label: 'Input text',
+    placeholder: 'Type or paste text to hash... (Ctrl+Enter to calculate)',
+    computing: 'Computing...',
+    generate: '→ Generate Hashes',
+    copy: 'Copy',
+  },
+  de: {
+    label: 'Eingabetext',
+    placeholder: 'Text zum Hashen eingeben oder einfügen... (Strg+Enter berechnen)',
+    computing: 'Berechne...',
+    generate: '→ Hashes generieren',
+    copy: 'Kopieren',
+  },
+}
 
 const ALGORITHMS = ['SHA-1', 'SHA-256', 'SHA-384', 'SHA-512']
 
@@ -11,6 +36,8 @@ async function hashText(text, algo) {
 }
 
 export default function HashGenerator() {
+  const { lang } = useTranslation()
+  const ui = UI[lang] ?? UI.es
   const [input, setInput] = useState('')
   const [hashes, setHashes] = useState({})
   const [loading, setLoading] = useState(false)
@@ -42,13 +69,13 @@ export default function HashGenerator() {
           display: 'block', color: 'var(--text-secondary)', fontSize: '0.8rem',
           fontFamily: 'var(--font-mono)', marginBottom: '0.5rem',
         }}>
-          Texto de entrada
+          {ui.label}
         </label>
         <textarea
           value={input}
           onChange={e => setInput(e.target.value)}
           onKeyDown={e => { if (e.ctrlKey && e.key === 'Enter') compute() }}
-          placeholder="Escribe o pega el texto a hashear... (Ctrl+Enter para calcular)"
+          placeholder={ui.placeholder}
           style={{
             width: '100%', background: 'rgba(255,255,255,0.04)', border: '1px solid var(--border)',
             borderRadius: 10, padding: '1rem', color: 'var(--text-primary)',
@@ -72,7 +99,7 @@ export default function HashGenerator() {
           alignSelf: 'flex-start', transition: 'all 0.2s',
         }}
       >
-        {loading ? 'Calculando...' : '→ Generar Hashes'}
+        {loading ? ui.computing : ui.generate}
       </button>
 
       {/* ── Results ── */}
@@ -103,7 +130,7 @@ export default function HashGenerator() {
                     cursor: 'pointer', fontFamily: 'var(--font-mono)', fontSize: '0.78rem', transition: 'all 0.2s',
                   }}
                 >
-                  {copied === algo ? '✓' : 'Copiar'}
+                  {copied === algo ? '✓' : ui.copy}
                 </button>
               </div>
               <div style={{

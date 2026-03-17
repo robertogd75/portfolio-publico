@@ -1,4 +1,11 @@
 import { useState, useRef } from 'react'
+import { useTranslation } from '../../i18n/I18nContext.jsx'
+
+const UI = {
+  es: { copy: 'Copiar', copied: '✓ Copiado' },
+  en: { copy: 'Copy',   copied: '✓ Copied'  },
+  de: { copy: 'Kopieren', copied: '✓ Kopiert' },
+}
 
 const DEFAULT_HTML = `<!DOCTYPE html>
 <html lang="es">
@@ -35,6 +42,8 @@ const DEFAULT_HTML = `<!DOCTYPE html>
 </html>`
 
 export default function HtmlPreviewer() {
+  const { lang } = useTranslation()
+  const ui = UI[lang] ?? UI.es
   const [html, setHtml] = useState(DEFAULT_HTML)
   const [copied, setCopied] = useState(false)
 
@@ -101,7 +110,7 @@ export default function HtmlPreviewer() {
                 fontSize: '0.78rem', transition: 'all 0.2s',
               }}
             >
-              {copied ? '✓ Copiado' : 'Copiar'}
+              {copied ? ui.copied : ui.copy}
             </button>
           </div>
           <textarea

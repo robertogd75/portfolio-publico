@@ -1,4 +1,59 @@
 import { useState, useRef } from 'react'
+import { useTranslation } from '../../i18n/I18nContext.jsx'
+
+const UI = {
+  es: {
+    pingLabel: 'Ping',
+    dlLabel: 'Descarga',
+    phasePing: 'Midiendo latencia...',
+    phaseDownload: (pct) => `Descargando 10 MB... ${pct}%`,
+    pingExcellent: 'Excelente',
+    pingGood: 'Bueno',
+    pingHigh: 'Alto',
+    dlFast: 'Muy rápida',
+    dlGood: 'Buena',
+    dlSlow: 'Lenta',
+    error: 'No se pudo conectar con el servidor de pruebas. Comprueba tu conexión a internet.',
+    start: '▶ Iniciar test',
+    repeat: '↺ Repetir test',
+    cancel: '✕ Cancelar',
+    note: 'Prueba de descarga vía Cloudflare Speed Test (speed.cloudflare.com). Los datos no salen de tu navegador.',
+  },
+  en: {
+    pingLabel: 'Ping',
+    dlLabel: 'Download',
+    phasePing: 'Measuring latency...',
+    phaseDownload: (pct) => `Downloading 10 MB... ${pct}%`,
+    pingExcellent: 'Excellent',
+    pingGood: 'Good',
+    pingHigh: 'High',
+    dlFast: 'Very fast',
+    dlGood: 'Good',
+    dlSlow: 'Slow',
+    error: 'Could not connect to the test server. Check your internet connection.',
+    start: '▶ Start test',
+    repeat: '↺ Repeat test',
+    cancel: '✕ Cancel',
+    note: 'Download test via Cloudflare Speed Test (speed.cloudflare.com). Data never leaves your browser.',
+  },
+  de: {
+    pingLabel: 'Ping',
+    dlLabel: 'Download',
+    phasePing: 'Latenz messen...',
+    phaseDownload: (pct) => `Herunterladen 10 MB... ${pct}%`,
+    pingExcellent: 'Ausgezeichnet',
+    pingGood: 'Gut',
+    pingHigh: 'Hoch',
+    dlFast: 'Sehr schnell',
+    dlGood: 'Gut',
+    dlSlow: 'Langsam',
+    error: 'Verbindung zum Testserver nicht möglich. Bitte Internetverbindung prüfen.',
+    start: '▶ Test starten',
+    repeat: '↺ Test wiederholen',
+    cancel: '✕ Abbrechen',
+    note: 'Download-Test über Cloudflare Speed Test (speed.cloudflare.com). Daten verlassen nie Ihren Browser.',
+  },
+}
 
 // Downloads chunks from Cloudflare's public speed endpoint to measure throughput
 const DOWNLOAD_URL = 'https://speed.cloudflare.com/__down?bytes='
@@ -58,6 +113,8 @@ const Gauge = ({ label, value, unit, color, sublabel }) => (
 const STATES = { idle: 'idle', running: 'running', done: 'done', error: 'error' }
 
 export default function SpeedTest() {
+  const { lang } = useTranslation()
+  const ui = UI[lang] ?? UI.es
   const [state, setState]    = useState(STATES.idle)
   const [phase, setPhase]    = useState('')         // 'ping' | 'download'
   const [ping, setPing]      = useState(null)
@@ -87,7 +144,7 @@ export default function SpeedTest() {
       setState(STATES.done)
     } catch (e) {
       if (!abortRef.current) {
-        setError('No se pudo conectar con el servidor de pruebas. Comprueba tu conexión a internet.')
+        setError(ui.error)
         setState(STATES.error)
       }
     }
@@ -102,8 +159,8 @@ export default function SpeedTest() {
   const isRunning = state === STATES.running
 
   const phaseLabel =
-    phase === 'ping'     ? 'Midiendo latencia...' :
-    phase === 'download' ? `Descargando 10 MB... ${Math.round(dlPct * 100)}%` : ''
+    phase === 'ping'     ? ui.phasePing :
+    phase === 'download' ? ui.phaseDownload(Math.round(dlPct * 100)) : ''
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem', maxWidth: 680 }}>
@@ -111,18 +168,18 @@ export default function SpeedTest() {
       {/* ── Gauges ── */}
       <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
         <Gauge
-          label="Ping"
+          label={ui.pingLabel}
           value={ping}
           unit="ms"
           color={ping == null ? 'var(--text-muted)' : ping < 30 ? 'var(--neon-green)' : ping < 80 ? '#f59e0b' : 'var(--neon-pink)'}
-          sublabel={ping != null ? (ping < 30 ? 'Excelente' : ping < 80 ? 'Bueno' : 'Alto') : null}
+          sublabel={ping != null ? (ping < 30 ? ui.pingExcellent : ping < 80 ? ui.pingGood : ui.pingHigh) : null}
         />
         <Gauge
-          label="Descarga"
+          label={ui.dlLabel}
           value={download}
           unit="Mbps"
           color={download == null ? 'var(--text-muted)' : download >= 100 ? 'var(--neon-cyan)' : download >= 25 ? 'var(--neon-green)' : '#f59e0b'}
-          sublabel={download != null ? (download >= 100 ? 'Muy rápida' : download >= 25 ? 'Buena' : 'Lenta') : null}
+          sublabel={download != null ? (download >= 100 ? ui.dlFast : download >= 25 ? ui.dlGood : ui.dlSlow) : null}
         />
       </div>
 
@@ -168,7 +225,7 @@ export default function SpeedTest() {
               border: 'none', cursor: 'pointer',
             }}
           >
-            {state === STATES.done ? '↺ Repetir test' : '▶ Iniciar test'}
+            {state === STATES.done ? ui.repeat : ui.start}
           </button>
         ) : (
           <button
@@ -180,13 +237,13 @@ export default function SpeedTest() {
               cursor: 'pointer',
             }}
           >
-            ✕ Cancelar
+            {ui.cancel}
           </button>
         )}
       </div>
 
       <p style={{ color: 'var(--text-muted)', fontSize: '0.72rem', fontFamily: 'var(--font-mono)', margin: 0 }}>
-        Prueba de descarga vía Cloudflare Speed Test (speed.cloudflare.com). Los datos no salen de tu navegador.
+        {ui.note}
       </p>
     </div>
   )

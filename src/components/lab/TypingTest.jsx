@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef } from 'react'
+import { useTranslation } from '../../i18n/I18nContext.jsx'
 
 const DURATION = 60
 const LS_KEY   = 'lab_typing_scores'
 const MAX_KEEP = 10
 
-const TEXTS = [
+const TEXTS_ES = [
   'El desarrollo web moderno requiere conocer tanto el frontend como el backend para construir aplicaciones robustas y escalables.',
   'Docker permite empaquetar aplicaciones en contenedores que se ejecutan de forma consistente en cualquier entorno de produccion.',
   'React utiliza un DOM virtual para actualizar la interfaz de usuario de forma eficiente ante los cambios de estado del componente.',
@@ -30,6 +31,63 @@ const TEXTS = [
   'El protocolo HTTPS cifra la comunicacion entre el navegador y el servidor para proteger los datos del usuario durante la transmision.',
   'Webpack y Vite son herramientas modernas de empaquetado que optimizan y agrupan los recursos de una aplicacion web para produccion.',
 ]
+
+const TEXTS_EN = [
+  'Modern web development requires knowledge of both frontend and backend to build robust and scalable applications.',
+  'Docker allows packaging applications into containers that run consistently in any production environment.',
+  'React uses a virtual DOM to efficiently update the user interface in response to component state changes.',
+  'REST APIs enable communication between systems via HTTP using methods like GET, POST, PUT, and DELETE.',
+  'Git is a distributed version control system that allows teams to collaborate on software projects in an organized way.',
+  'Nginx can act as a web server, reverse proxy, and load balancer to manage traffic in modern applications.',
+  'JavaScript is an interpreted programming language that runs in the browser and enables dynamic interactive interfaces.',
+  'Relational databases organize information in tables with rows and columns linked by primary and foreign keys.',
+  'Spring Boot simplifies Java application development by providing automatic configuration and an embedded server.',
+  'Laravel offers tools like Eloquent ORM and Artisan for building PHP web applications quickly and elegantly.',
+  'Microservices architecture divides an application into independent services that communicate with each other over the network.',
+  'CSS Grid and Flexbox are modern layout systems that allow creating complex responsive designs with minimal code.',
+  'TypeScript adds static typing to JavaScript to catch errors at compile time and improve the development experience.',
+  'Continuous deployment automates software delivery through automatic testing and publishing with each new change.',
+  'React hooks allow using state and side effects in functional components in a simple and completely reusable way.',
+  'PostgreSQL is a relational database management system that supports complex queries and advanced data types.',
+  'Responsive design adapts the interface to different screen sizes using media queries and relative measurement units.',
+  'Object-oriented programming organizes code into classes and objects that encapsulate related data and behavior.',
+  'The MVC pattern separates business logic, presentation, and control flow into three well-defined independent layers.',
+  'Portainer provides a graphical interface for managing Docker containers and facilitates monitoring of production services.',
+  'Web security includes protection against SQL injection, cross-site scripting, and cross-site request forgery attacks.',
+  'Version control systems allow tracking code changes, collaborating as a team, and reverting errors easily.',
+  'The HTTPS protocol encrypts communication between the browser and server to protect user data during transmission.',
+  'Webpack and Vite are modern bundling tools that optimize and group web application resources for production.',
+]
+
+const TEXTS_DE = [
+  'Moderne Webentwicklung erfordert Kenntnisse im Frontend und Backend um robuste und skalierbare Anwendungen zu erstellen.',
+  'Docker ermoeglicht das Verpacken von Anwendungen in Container die konsistent in jeder Produktionsumgebung laufen.',
+  'React verwendet ein virtuelles DOM um die Benutzeroberflaeche bei Komponentenzustandsaenderungen effizient zu aktualisieren.',
+  'REST-APIs ermoeglichen die Kommunikation zwischen Systemen ueber HTTP mit Methoden wie GET, POST, PUT und DELETE.',
+  'Git ist ein verteiltes Versionskontrollsystem das Teams ermoeglicht geordnet an Softwareprojekten zusammenzuarbeiten.',
+  'Nginx kann als Webserver, Reverse-Proxy und Load-Balancer dienen um den Datenverkehr moderner Anwendungen zu verwalten.',
+  'JavaScript ist eine interpretierte Programmiersprache die im Browser laeuft und dynamische Schnittstellen ermoeglicht.',
+  'Relationale Datenbanken organisieren Informationen in Tabellen mit Zeilen und Spalten die durch Schluessel verknuepft sind.',
+  'Spring Boot vereinfacht die Java-Entwicklung durch automatische Konfiguration und einen eingebetteten Server.',
+  'Laravel bietet Werkzeuge wie Eloquent ORM und Artisan fuer die schnelle und elegante PHP-Webentwicklung.',
+  'Microservices-Architektur teilt eine Anwendung in unabhaengige Dienste auf die ueber das Netzwerk kommunizieren.',
+  'CSS Grid und Flexbox sind moderne Layoutsysteme die komplexe responsive Designs mit minimalem Code ermoeglichen.',
+  'TypeScript fuegt JavaScript statische Typisierung hinzu um Fehler bei der Kompilierung zu erkennen und die Entwicklung zu verbessern.',
+  'Kontinuierliche Bereitstellung automatisiert die Softwareauslieferung durch automatische Tests und Veroeffentlichungen.',
+  'React-Hooks ermoeglichen die Verwendung von Zustand und Nebenwirkungen in funktionalen Komponenten auf einfache Weise.',
+  'PostgreSQL ist ein relationales Datenbankverwaltungssystem das komplexe Abfragen und erweiterte Datentypen unterstuetzt.',
+  'Responsives Design passt die Schnittstelle mithilfe von Media-Queries und relativen Masseinheiten an verschiedene Bildschirmgroessen an.',
+  'Objektorientierte Programmierung organisiert Code in Klassen und Objekten die verwandte Daten und Verhalten kapseln.',
+  'Das MVC-Muster trennt Geschaeftslogik, Praesentationsschicht und Steuerungsfluss in drei klar definierte unabhaengige Schichten.',
+  'Portainer bietet eine grafische Oberflaeche zur Verwaltung von Docker-Containern und erleichtert die Ueberwachung in der Produktion.',
+  'Web-Sicherheit umfasst den Schutz vor SQL-Injection, Cross-Site-Scripting und Cross-Site-Request-Forgery-Angriffen.',
+  'Versionskontrollsysteme ermoeglichen das Verfolgen von Codeaenderungen, die Teamzusammenarbeit und das einfache Rueckgaengigmachen.',
+  'Das HTTPS-Protokoll verschluesselt die Kommunikation zwischen Browser und Server um Benutzerdaten zu schuetzen.',
+  'Webpack und Vite sind moderne Buendelungswerkzeuge die Web-Anwendungsressourcen fuer die Produktion optimieren.',
+]
+
+const TEXTS_BY_LANG = { es: TEXTS_ES, en: TEXTS_EN, de: TEXTS_DE }
+const LOCALE_MAP    = { es: 'es-ES', en: 'en-US', de: 'de-DE' }
 
 // ── localStorage helpers ─────────────────────────────────────────────────────
 const loadScores = () => {
@@ -59,16 +117,71 @@ const calcStats = (typedStr, targetStr, elapsedSec) => {
 }
 
 // ── score tier label ─────────────────────────────────────────────────────────
-const tier = (score) => {
-  if (score >= 900) return { label: 'Leyenda',      color: '#f59e0b' }
-  if (score >= 700) return { label: 'Experto',      color: 'var(--neon-cyan)' }
-  if (score >= 500) return { label: 'Avanzado',     color: '#a78bfa' }
-  if (score >= 300) return { label: 'Intermedio',   color: '#4ade80' }
-  return                    { label: 'Principiante', color: 'var(--text-muted)' }
+const TIER_LABELS = {
+  es: ['Principiante', 'Intermedio', 'Avanzado', 'Experto', 'Leyenda'],
+  en: ['Beginner', 'Intermediate', 'Advanced', 'Expert', 'Legend'],
+  de: ['Anfaenger', 'Mittelstufe', 'Fortgeschritten', 'Experte', 'Legende'],
+}
+
+const UI = {
+  es: {
+    titleLine1: 'Reto de', titleLine2: 'Mecanografía',
+    introPrefix: 'Tienes ', introDuration: '60 segundos',
+    introMiddle: ' para escribir el texto lo más rápido y preciso posible. Los textos no se repiten. Puntuación = ',
+    introFormula: 'WPM × precisión × 10',
+    play: '▶ JUGAR', go: '¡YA!', getReady: 'Prepárate para escribir…',
+    wpm: 'WPM', precision: 'Precisión', progress: 'Progreso', speed: 'Velocidad',
+    hint: 'Haz clic en el texto si pierdes el foco · Pegar está bloqueado',
+    newRecord: '★ ¡Nuevo récord personal! ★', points: 'puntos',
+    playAgain: '↺ Otra vez', viewScores: 'Ver puntuaciones',
+    scoresHeader: 'Tus mejores puntuaciones (guardadas en este navegador)',
+    clearHistory: 'Borrar historial',
+    tiers: [['< 300','Principiante','#94a3b8'],['300+','Intermedio','#4ade80'],['500+','Avanzado','#a78bfa'],['700+','Experto','var(--neon-cyan)'],['900+','Leyenda','#f59e0b']],
+  },
+  en: {
+    titleLine1: 'Typing', titleLine2: 'Challenge',
+    introPrefix: 'You have ', introDuration: '60 seconds',
+    introMiddle: ' to type the text as fast and accurately as possible. Texts do not repeat. Score = ',
+    introFormula: 'WPM × accuracy × 10',
+    play: '▶ PLAY', go: 'GO!', getReady: 'Get ready to type…',
+    wpm: 'WPM', precision: 'Accuracy', progress: 'Progress', speed: 'Speed',
+    hint: 'Click the text if you lose focus · Pasting is disabled',
+    newRecord: '★ New personal record! ★', points: 'points',
+    playAgain: '↺ Play again', viewScores: 'View scores',
+    scoresHeader: 'Your best scores (saved in this browser)',
+    clearHistory: 'Clear history',
+    tiers: [['< 300','Beginner','#94a3b8'],['300+','Intermediate','#4ade80'],['500+','Advanced','#a78bfa'],['700+','Expert','var(--neon-cyan)'],['900+','Legend','#f59e0b']],
+  },
+  de: {
+    titleLine1: 'Tipp-', titleLine2: 'Herausforderung',
+    introPrefix: 'Du hast ', introDuration: '60 Sekunden',
+    introMiddle: ', um den Text so schnell und genau wie moeglich zu tippen. Texte wiederholen sich nicht. Punktzahl = ',
+    introFormula: 'WPM × Genauigkeit × 10',
+    play: '▶ SPIELEN', go: 'LOS!', getReady: 'Mach dich bereit zum Tippen…',
+    wpm: 'WPM', precision: 'Genauigkeit', progress: 'Fortschritt', speed: 'Geschwindigkeit',
+    hint: 'Text anklicken falls Fokus verloren · Einfügen ist gesperrt',
+    newRecord: '★ Neuer persoenlicher Rekord! ★', points: 'Punkte',
+    playAgain: '↺ Nochmal', viewScores: 'Punkte anzeigen',
+    scoresHeader: 'Deine Bestwerte (in diesem Browser gespeichert)',
+    clearHistory: 'Verlauf loeschen',
+    tiers: [['< 300','Anfaenger','#94a3b8'],['300+','Mittelstufe','#4ade80'],['500+','Fortgeschritten','#a78bfa'],['700+','Experte','var(--neon-cyan)'],['900+','Legende','#f59e0b']],
+  },
+}
+
+const tier = (score, lang = 'es') => {
+  const labels = TIER_LABELS[lang] ?? TIER_LABELS.es
+  if (score >= 900) return { label: labels[4], color: '#f59e0b' }
+  if (score >= 700) return { label: labels[3], color: 'var(--neon-cyan)' }
+  if (score >= 500) return { label: labels[2], color: '#a78bfa' }
+  if (score >= 300) return { label: labels[1], color: '#4ade80' }
+  return                    { label: labels[0], color: 'var(--text-muted)' }
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
 export default function TypingTest() {
+  const { lang } = useTranslation()
+  const ui = UI[lang] ?? UI.es
+
   const [phase,     setPhase]    = useState('idle')   // idle|countdown|playing|results
   const [countdown, setCountdown]= useState(3)
   const [text,      setText]     = useState('')
@@ -89,15 +202,17 @@ export default function TypingTest() {
   const usedRef    = useRef(new Set())
   const doneRef    = useRef(false)
   const inputRef   = useRef(null)
+  const langRef    = useRef(lang)
 
   // ── helpers ─────────────────────────────────────────────────────────────────
   const pickText = () => {
-    if (usedRef.current.size >= TEXTS.length) usedRef.current.clear()
+    const texts = TEXTS_BY_LANG[langRef.current] ?? TEXTS_ES
+    if (usedRef.current.size >= texts.length) usedRef.current.clear()
     let i
-    do { i = Math.floor(Math.random() * TEXTS.length) }
+    do { i = Math.floor(Math.random() * texts.length) }
     while (usedRef.current.has(i))
     usedRef.current.add(i)
-    return TEXTS[i]
+    return texts[i]
   }
 
   const finalize = (typedStr, targetStr, elapsedSec) => {
@@ -106,7 +221,7 @@ export default function TypingTest() {
     clearInterval(timerRef.current)
     const { wpm, accuracy, score } = calcStats(typedStr, targetStr, elapsedSec)
     const prevBest = loadScores()[0]?.score ?? 0
-    const entry = { score, wpm, accuracy, date: new Date().toLocaleDateString('es-ES') }
+    const entry = { score, wpm, accuracy, date: new Date().toLocaleDateString(LOCALE_MAP[langRef.current] ?? 'en-US') }
     setIsRecord(score > prevBest && score > 0)
     setResult(entry)
     persistScore(entry)
@@ -156,6 +271,14 @@ export default function TypingTest() {
     return () => clearInterval(timerRef.current)
   }, [phase])
 
+  // ── lang change ──────────────────────────────────────────────────────────
+  useEffect(() => {
+    if (langRef.current !== lang) {
+      langRef.current = lang
+      usedRef.current.clear()
+    }
+  }, [lang])
+
   // ── input handler ─────────────────────────────────────────────────────────
   const handleChange = (e) => {
     if (phase !== 'playing') return
@@ -204,16 +327,15 @@ export default function TypingTest() {
       <div style={{ textAlign: 'center', padding: '1.5rem 1rem' }}>
         <div style={{ fontSize: '3rem', marginBottom: '0.5rem' }}>⌨️</div>
         <h2 style={{ fontSize: '1.75rem', margin: '0 0 0.5rem' }}>
-          Reto de <span style={{ color: 'var(--neon-cyan)' }}>Mecanografía</span>
+          {ui.titleLine1} <span style={{ color: 'var(--neon-cyan)' }}>{ui.titleLine2}</span>
         </h2>
         <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, maxWidth: 460, margin: '0 auto 0.75rem' }}>
-          Tienes <strong style={{ color: 'var(--text-primary)' }}>60 segundos</strong> para
-          escribir el texto lo más rápido y preciso posible. Los textos no se repiten.
-          Puntuación = <code style={{ color: 'var(--neon-cyan)', fontSize: '0.9em' }}>WPM × precisión × 10</code>
+          {ui.introPrefix}<strong style={{ color: 'var(--text-primary)' }}>{ui.introDuration}</strong>{ui.introMiddle}
+          <code style={{ color: 'var(--neon-cyan)', fontSize: '0.9em' }}>{ui.introFormula}</code>
         </p>
         {/* Tiers */}
         <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '1.5rem' }}>
-          {[['< 300', 'Principiante', '#94a3b8'], ['300+', 'Intermedio', '#4ade80'], ['500+', 'Avanzado', '#a78bfa'], ['700+', 'Experto', 'var(--neon-cyan)'], ['900+', 'Leyenda', '#f59e0b']].map(([pts, label, col]) => (
+          {ui.tiers.map(([pts, label, col]) => (
             <span key={label} style={{
               fontFamily: 'var(--font-mono)', fontSize: '0.72rem',
               padding: '0.2rem 0.65rem', borderRadius: 20,
@@ -232,18 +354,18 @@ export default function TypingTest() {
           fontSize: '1.05rem', fontWeight: 800,
           cursor: 'pointer', letterSpacing: '0.06em',
         }}>
-          ▶ JUGAR
+          {ui.play}
         </button>
       </div>
 
       {scores.length > 0 && (
         <div>
           <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '0.6rem' }}>
-            Tus mejores puntuaciones (guardadas en este navegador)
+            {ui.scoresHeader}
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
             {scores.map((s, i) => {
-              const t = tier(s.score)
+              const t = tier(s.score, lang)
               return (
                 <div key={i} style={{
                   display: 'flex', alignItems: 'center', gap: '0.75rem',
@@ -255,7 +377,7 @@ export default function TypingTest() {
                   <span style={{ width: 26, textAlign: 'center', color: i === 0 ? '#f59e0b' : 'var(--text-muted)', fontWeight: 700 }}>
                     {i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `#${i + 1}`}
                   </span>
-                  <span style={{ color: 'var(--neon-cyan)', fontWeight: 700, minWidth: 68 }}>{s.score} pts</span>
+                  <span style={{ color: 'var(--neon-cyan)', fontWeight: 700, minWidth: 68 }}>{s.score} {ui.points}</span>
                   <span style={{ color: 'var(--text-secondary)', minWidth: 68 }}>{s.wpm} WPM</span>
                   <span style={{ color: 'var(--text-secondary)', minWidth: 44 }}>{s.accuracy}%</span>
                   <span style={{ color: t.color, fontSize: '0.72rem', fontWeight: 700 }}>{t.label}</span>
@@ -268,7 +390,7 @@ export default function TypingTest() {
             onClick={() => { localStorage.removeItem(LS_KEY); setScores([]) }}
             style={{ marginTop: '0.6rem', background: 'none', border: 'none', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', fontSize: '0.75rem', cursor: 'pointer', textDecoration: 'underline' }}
           >
-            Borrar historial
+            {ui.clearHistory}
           </button>
         </div>
       )}

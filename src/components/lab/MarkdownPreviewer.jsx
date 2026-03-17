@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useTranslation } from '../../i18n/I18nContext.jsx'
 
 // ── Security helper ────────────────────────────────────────────────
 function sanitizeUrl(url) {
@@ -105,7 +106,8 @@ function parseMarkdown(md) {
 }
 
 // ── Default content ────────────────────────────────────────────────
-const DEFAULT_MD = `# Markdown Previewer
+const DEFAULT_MD_BY_LANG = {
+  es: `# Markdown Previewer
 
 Escribe en el panel izquierdo y el resultado aparece aquí.
 
@@ -130,7 +132,60 @@ console.log(greet('World'))
 1. Lista ordenada
 2. Segundo elemento
 3. Tercero
-`
+`,
+  en: `# Markdown Previewer
+
+Write in the left panel and the result appears here.
+
+## Supported syntax
+
+- **Bold** — \`**text**\`
+- *Italic* — \`*text*\`
+- \`Inline code\` — backticks
+- [Link](https://example.com) — \`[text](url)\`
+
+## Code block
+
+\`\`\`js
+const greet = name => \`Hello, \${name}!\`
+console.log(greet('World'))
+\`\`\`
+
+> Blockquote example.
+
+---
+
+1. Ordered list
+2. Second item
+3. Third
+`,
+  de: `# Markdown Previewer
+
+Schreibe im linken Panel und das Ergebnis erscheint hier.
+
+## Unterstützte Syntax
+
+- **Fett** — \`**text**\`
+- *Kursiv* — \`*text*\`
+- \`Inline-Code\` — Backticks
+- [Link](https://example.com) — \`[text](url)\`
+
+## Codeblock
+
+\`\`\`js
+const greet = name => \`Hello, \${name}!\`
+console.log(greet('World'))
+\`\`\`
+
+> Blockquote-Beispiel.
+
+---
+
+1. Geordnete Liste
+2. Zweites Element
+3. Drittes
+`,
+}
 
 // ── Styles injected once ───────────────────────────────────────────
 const PREVIEW_CSS = `
@@ -152,7 +207,8 @@ const PREVIEW_CSS = `
 
 // ── Component ──────────────────────────────────────────────────────
 export default function MarkdownPreviewer() {
-  const [md, setMd] = useState(DEFAULT_MD)
+  const { lang } = useTranslation()
+  const [md, setMd] = useState(() => DEFAULT_MD_BY_LANG[lang] ?? DEFAULT_MD_BY_LANG.en)
 
   const panelStyle = {
     flex: '1 1 300px', background: 'rgba(255,255,255,0.02)',

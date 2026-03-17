@@ -1,4 +1,41 @@
 import { useState } from 'react'
+import { useTranslation } from '../../i18n/I18nContext.jsx'
+
+const UI = {
+  es: {
+    inputLabel: 'JSON de entrada',
+    placeholder: '{\n  "ejemplo": "pega tu JSON aqu\u00ed"\n}',
+    format: 'Formatear',
+    minify: 'Minificar',
+    validate: 'Validar',
+    result: 'Resultado',
+    copy: 'Copiar',
+    copied: '✓ Copiado',
+    valid: '✓ JSON válido',
+  },
+  en: {
+    inputLabel: 'Input JSON',
+    placeholder: '{\n  "example": "paste your JSON here"\n}',
+    format: 'Format',
+    minify: 'Minify',
+    validate: 'Validate',
+    result: 'Result',
+    copy: 'Copy',
+    copied: '✓ Copied',
+    valid: '✓ Valid JSON',
+  },
+  de: {
+    inputLabel: 'JSON-Eingabe',
+    placeholder: '{\n  "beispiel": "JSON hier einfügen"\n}',
+    format: 'Formatieren',
+    minify: 'Minimieren',
+    validate: 'Validieren',
+    result: 'Ergebnis',
+    copy: 'Kopieren',
+    copied: '✓ Kopiert',
+    valid: '✓ Gültiges JSON',
+  },
+}
 
 const taStyle = {
   width: '100%',
@@ -16,6 +53,8 @@ const taStyle = {
 }
 
 export default function JsonFormatter() {
+  const { lang } = useTranslation()
+  const ui = UI[lang] ?? UI.es
   const [input, setInput] = useState('')
   const [output, setOutput] = useState('')
   const [error, setError] = useState(null)
@@ -38,7 +77,7 @@ export default function JsonFormatter() {
     setCopied(false)
     try {
       JSON.parse(input)
-      setOutput('✓ JSON válido')
+      setOutput(ui.valid)
     } catch (e) {
       setError(e.message)
       setOutput('')
@@ -55,21 +94,21 @@ export default function JsonFormatter() {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
       <div>
         <label style={{ display: 'block', color: 'var(--text-secondary)', fontSize: '0.8rem', fontFamily: 'var(--font-mono)', marginBottom: '0.5rem' }}>
-          JSON de entrada
+          {ui.inputLabel}
         </label>
         <textarea
           value={input}
           onChange={e => setInput(e.target.value)}
-          placeholder={'{\n  "ejemplo": "pega tu JSON aquí"\n}'}
+          placeholder={ui.placeholder}
           style={taStyle}
         />
       </div>
 
       <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
         {[
-          { label: 'Formatear', fn: () => run(p => JSON.stringify(p, null, 2)), color: 'var(--neon-cyan)' },
-          { label: 'Minificar', fn: () => run(p => JSON.stringify(p)), color: 'var(--neon-purple)' },
-          { label: 'Validar', fn: validate, color: 'var(--neon-green)' },
+          { label: ui.format,   fn: () => run(p => JSON.stringify(p, null, 2)), color: 'var(--neon-cyan)' },
+          { label: ui.minify,   fn: () => run(p => JSON.stringify(p)), color: 'var(--neon-purple)' },
+          { label: ui.validate, fn: validate, color: 'var(--neon-green)' },
         ].map(({ label, fn, color }) => (
           <button key={label} onClick={fn} style={{
             padding: '0.6rem 1.4rem', borderRadius: 8,
@@ -96,14 +135,14 @@ export default function JsonFormatter() {
       {output && (
         <div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-            <label style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', fontFamily: 'var(--font-mono)' }}>Resultado</label>
+            <label style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', fontFamily: 'var(--font-mono)' }}>{ui.result}</label>
             <button onClick={copy} style={{
               background: copied ? 'rgba(57,255,20,0.15)' : 'transparent',
               border: `1px solid ${copied ? 'var(--neon-green)' : 'var(--border)'}`,
               borderRadius: 6, padding: '0.3rem 0.75rem',
               color: copied ? 'var(--neon-green)' : 'var(--text-secondary)',
               cursor: 'pointer', fontFamily: 'var(--font-mono)', fontSize: '0.8rem', transition: 'all 0.2s',
-            }}>{copied ? '✓ Copiado' : 'Copiar'}</button>
+            }}>{copied ? ui.copied : ui.copy}</button>
           </div>
           <textarea readOnly value={output} style={{ ...taStyle, minHeight: 200 }} />
         </div>

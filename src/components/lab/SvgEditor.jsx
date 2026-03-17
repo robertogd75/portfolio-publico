@@ -1,4 +1,53 @@
 import { useState } from 'react'
+import { useTranslation } from '../../i18n/I18nContext.jsx'
+
+const UI = {
+  es: {
+    format: 'Formatear',
+    minify: 'Minificar',
+    copy: 'Copiar',
+    copied: '✓ Copiado',
+    download: 'Descargar .svg',
+    bgLabel: 'Fondo:',
+    bgWhite: 'Blanco',
+    bgBlack: 'Negro',
+    bgTrans: 'Trans',
+    editorLabel: 'Editor SVG',
+    previewLabel: 'Vista previa en vivo',
+    chars: (n) => `${n.toLocaleString('es-ES')} caracteres`,
+    placeholder: 'Pega o escribe tu código SVG aquí...',
+  },
+  en: {
+    format: 'Format',
+    minify: 'Minify',
+    copy: 'Copy',
+    copied: '✓ Copied',
+    download: 'Download .svg',
+    bgLabel: 'Background:',
+    bgWhite: 'White',
+    bgBlack: 'Black',
+    bgTrans: 'Trans',
+    editorLabel: 'SVG Editor',
+    previewLabel: 'Live preview',
+    chars: (n) => `${n.toLocaleString('en-US')} characters`,
+    placeholder: 'Paste or write your SVG code here...',
+  },
+  de: {
+    format: 'Formatieren',
+    minify: 'Minifizieren',
+    copy: 'Kopieren',
+    copied: '✓ Kopiert',
+    download: '.svg herunterladen',
+    bgLabel: 'Hintergrund:',
+    bgWhite: 'Weiß',
+    bgBlack: 'Schwarz',
+    bgTrans: 'Trans',
+    editorLabel: 'SVG-Editor',
+    previewLabel: 'Live-Vorschau',
+    chars: (n) => `${n.toLocaleString('de-DE')} Zeichen`,
+    placeholder: 'SVG-Code hier einfügen oder schreiben...',
+  },
+}
 
 const DEFAULT_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
   <defs>
@@ -52,6 +101,8 @@ const BG_OPTIONS = [
 ]
 
 export default function SvgEditor() {
+  const { lang } = useTranslation()
+  const ui = UI[lang] ?? UI.es
   const [code, setCode]       = useState(DEFAULT_SVG)
   const [copied, setCopied]   = useState(false)
   const [bg, setBg]           = useState('white')
@@ -130,22 +181,22 @@ export default function SvgEditor() {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
       {/* Toolbar */}
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', alignItems: 'center' }}>
-        <button style={btn()} onClick={() => setCode(formatXml(code))}>Formatear</button>
-        <button style={btn()} onClick={() => setCode(minifyXml(code))}>Minificar</button>
+        <button style={btn()} onClick={() => setCode(formatXml(code))}>{ui.format}</button>
+        <button style={btn()} onClick={() => setCode(minifyXml(code))}>{ui.minify}</button>
         <button style={btn('var(--neon-purple)')} onClick={copy}>
-          {copied ? '✓ Copiado' : 'Copiar'}
+          {copied ? ui.copied : ui.copy}
         </button>
         <button style={btn('var(--neon-purple)')} onClick={download}>
-          Descargar .svg
+          {ui.download}
         </button>
         <div style={{ marginLeft: 'auto', display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
           <span style={{ color: 'var(--text-muted)', fontSize: '0.8rem', fontFamily: 'var(--font-mono)' }}>
-            Fondo:
+            {ui.bgLabel}
           </span>
-          {BG_OPTIONS.map(({ v, bg: bgs, label }) => (
+          {BG_OPTIONS.map(({ v, bg: bgs }, bgi) => (
             <button
               key={v}
-              title={label}
+              title={[ui.bgWhite, ui.bgBlack, ui.bgTrans][bgi]}
               onClick={() => setBg(v)}
               style={{
                 width: 24,
@@ -164,21 +215,21 @@ export default function SvgEditor() {
       {/* Editor + Preview */}
       <div style={{ display: 'flex', gap: '1.25rem', flexWrap: 'wrap' }}>
         <div style={{ flex: '1 1 300px', minWidth: 0 }}>
-          <div style={labelStyle}>Editor SVG</div>
+          <div style={labelStyle}>{ui.editorLabel}</div>
           <textarea
             style={taStyle}
             value={code}
             onChange={e => setCode(e.target.value)}
             onKeyDown={handleKeyDown}
             spellCheck={false}
-            placeholder="Pega o escribe tu código SVG aquí..."
+            placeholder={ui.placeholder}
           />
           <div style={{ ...labelStyle, marginTop: '0.4rem', marginBottom: 0 }}>
-            {code.length.toLocaleString('es-ES')} caracteres
+            {ui.chars(code.length)}
           </div>
         </div>
         <div style={{ flex: '1 1 300px', minWidth: 0 }}>
-          <div style={labelStyle}>Vista previa en vivo</div>
+          <div style={labelStyle}>{ui.previewLabel}</div>
           <iframe
             sandbox=""
             srcDoc={srcDoc}

@@ -1,4 +1,49 @@
 import { useState } from 'react'
+import { useTranslation } from '../../i18n/I18nContext.jsx'
+
+const LOCALE_MAP = { es: 'es-ES', en: 'en-US', de: 'de-DE' }
+
+const UI = {
+  es: {
+    placeholder: 'Pega o escribe el texto aquí...',
+    words: 'Palabras',
+    chars: 'Caracteres',
+    noSpace: 'Sin espacios',
+    lines: 'Líneas',
+    sentences: 'Frases',
+    paragraphs: 'Párrafos',
+    readTime: 'Tiempo de lectura',
+    readTimeNote: (min) => `Tiempo de lectura estimado: ${min} min a 200 palabras/min`,
+    topWords: 'Palabras más frecuentes',
+    clear: '✕ Limpiar',
+  },
+  en: {
+    placeholder: 'Paste or type text here...',
+    words: 'Words',
+    chars: 'Characters',
+    noSpace: 'No spaces',
+    lines: 'Lines',
+    sentences: 'Sentences',
+    paragraphs: 'Paragraphs',
+    readTime: 'Reading time',
+    readTimeNote: (min) => `Estimated reading time: ${min} min at 200 words/min`,
+    topWords: 'Most frequent words',
+    clear: '✕ Clear',
+  },
+  de: {
+    placeholder: 'Text hier einfügen oder eingeben...',
+    words: 'Wörter',
+    chars: 'Zeichen',
+    noSpace: 'Ohne Leerzeichen',
+    lines: 'Zeilen',
+    sentences: 'Sätze',
+    paragraphs: 'Absätze',
+    readTime: 'Lesezeit',
+    readTimeNote: (min) => `Geschätzte Lesezeit: ${min} min bei 200 Wörtern/min`,
+    topWords: 'Häufigste Wörter',
+    clear: '✕ Löschen',
+  },
+}
 
 function analyze(text) {
   const chars        = text.length
@@ -17,7 +62,7 @@ function analyze(text) {
   return { chars, charsNoSpace, words, lines, sentences, paragraphs, readingMin, topWords }
 }
 
-const Stat = ({ label, value, color = 'var(--neon-cyan)', wide = false }) => (
+const Stat = ({ label, value, color = 'var(--neon-cyan)', wide = false, locale = 'en-US' }) => (
   <div style={{
     background: 'rgba(255,255,255,0.03)', border: '1px solid var(--border)',
     borderRadius: 10, padding: '0.85rem 1rem',
@@ -27,12 +72,15 @@ const Stat = ({ label, value, color = 'var(--neon-cyan)', wide = false }) => (
       {label}
     </div>
     <div style={{ color, fontFamily: 'var(--font-mono)', fontWeight: 800, fontSize: '1.5rem', lineHeight: 1 }}>
-      {value.toLocaleString('es-ES')}
+      {value.toLocaleString(locale)}
     </div>
   </div>
 )
 
 export default function WordCounter() {
+  const { lang } = useTranslation()
+  const ui = UI[lang] ?? UI.es
+  const locale = LOCALE_MAP[lang] || 'en-US'
   const [text, setText] = useState('')
   const s = analyze(text)
 
@@ -43,7 +91,7 @@ export default function WordCounter() {
       <textarea
         value={text}
         onChange={e => setText(e.target.value)}
-        placeholder="Pega o escribe el texto aquí..."
+        placeholder={ui.placeholder}
         style={{
           width: '100%', background: 'rgba(255,255,255,0.04)',
           border: '1px solid var(--border)', borderRadius: 10,
@@ -55,19 +103,19 @@ export default function WordCounter() {
 
       {/* ── Stats grid ── */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: '0.65rem' }}>
-        <Stat label="Palabras"          value={s.words}        color="var(--neon-cyan)" />
-        <Stat label="Caracteres"        value={s.chars}        color="var(--neon-purple)" />
-        <Stat label="Sin espacios"      value={s.charsNoSpace} color="var(--neon-purple)" />
-        <Stat label="Líneas"            value={s.lines}        color="#f59e0b" />
-        <Stat label="Frases"            value={s.sentences}    color="var(--neon-green)" />
-        <Stat label="Párrafos"          value={s.paragraphs}   color="var(--neon-green)" />
-        <Stat label="Tiempo de lectura" value={s.readingMin}   color="var(--text-secondary)" />
+        <Stat label={ui.words}     value={s.words}        color="var(--neon-cyan)"       locale={locale} />
+        <Stat label={ui.chars}     value={s.chars}        color="var(--neon-purple)"    locale={locale} />
+        <Stat label={ui.noSpace}   value={s.charsNoSpace} color="var(--neon-purple)"    locale={locale} />
+        <Stat label={ui.lines}     value={s.lines}        color="#f59e0b"               locale={locale} />
+        <Stat label={ui.sentences} value={s.sentences}    color="var(--neon-green)"     locale={locale} />
+        <Stat label={ui.paragraphs} value={s.paragraphs}  color="var(--neon-green)"    locale={locale} />
+        <Stat label={ui.readTime}  value={s.readingMin}   color="var(--text-secondary)" locale={locale} />
       </div>
 
       {/* ── Reading time note ── */}
       {s.words > 0 && (
         <p style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', fontSize: '0.75rem', margin: 0 }}>
-          Tiempo de lectura estimado: <span style={{ color: 'var(--text-secondary)' }}>{s.readingMin} min</span> a 200 palabras/min
+          {ui.readTimeNote(s.readingMin)}
         </p>
       )}
 
@@ -78,7 +126,7 @@ export default function WordCounter() {
             color: 'var(--text-muted)', fontFamily: 'var(--font-mono)',
             fontSize: '0.72rem', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '0.6rem',
           }}>
-            Palabras más frecuentes
+            {ui.topWords}
           </div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
             {s.topWords.map(([word, count]) => (
@@ -109,7 +157,7 @@ export default function WordCounter() {
           onMouseEnter={e => { e.currentTarget.style.borderColor = '#ff6b9d'; e.currentTarget.style.color = '#ff6b9d' }}
           onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = 'var(--text-secondary)' }}
         >
-          ✕ Limpiar
+          {ui.clear}
         </button>
       )}
     </div>

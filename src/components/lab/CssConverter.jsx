@@ -1,4 +1,11 @@
 import { useState } from 'react'
+import { useTranslation } from '../../i18n/I18nContext.jsx'
+
+const UI = {
+  es: { value: 'Valor', unit: 'Unidad', click: 'clic copiar', copied: '✓ copiado' },
+  en: { value: 'Value', unit: 'Unit',   click: 'click copy',  copied: '✓ copied'  },
+  de: { value: 'Wert',  unit: 'Einheit', click: 'klick kopieren', copied: '✓ kopiert' },
+}
 
 const UNITS = ['px', 'rem', 'em', '%', 'vw', 'vh', 'pt']
 
@@ -35,6 +42,8 @@ function fmt(n) {
 }
 
 export default function CssConverter() {
+  const { lang } = useTranslation()
+  const ui = UI[lang] ?? UI.es
   const [value, setValue] = useState('16')
   const [fromUnit, setFromUnit] = useState('px')
   const [base, setBase]       = useState(16)
@@ -70,7 +79,7 @@ export default function CssConverter() {
       {/* ── Input row ── */}
       <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-end', flexWrap: 'wrap' }}>
         <div style={{ minWidth: 110 }}>
-          <label style={{ ...labelStyle, color: 'var(--text-secondary)' }}>Valor</label>
+          <label style={{ ...labelStyle, color: 'var(--text-secondary)' }}>{ui.value}</label>
           <input
             type="number"
             value={value}
@@ -79,7 +88,7 @@ export default function CssConverter() {
           />
         </div>
         <div style={{ minWidth: 90 }}>
-          <label style={{ ...labelStyle, color: 'var(--text-secondary)' }}>Unidad</label>
+          <label style={{ ...labelStyle, color: 'var(--text-secondary)' }}>{ui.unit}</label>
           <select
             value={fromUnit}
             onChange={e => setFromUnit(e.target.value)}
@@ -154,7 +163,7 @@ export default function CssConverter() {
                 color: copied === u ? 'var(--neon-cyan)' : 'var(--text-muted)',
                 width: 58, textAlign: 'right', flexShrink: 0,
               }}>
-                {copied === u ? '✓ copiado' : 'clic copiar'}
+                {copied === u ? ui.copied : ui.click}
               </span>
             </div>
           )

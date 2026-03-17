@@ -1,4 +1,53 @@
 import { useState } from 'react'
+import { useTranslation } from '../../i18n/I18nContext.jsx'
+
+const UI = {
+  es: {
+    encodeBtn: 'Texto → Base64',
+    decodeBtn: 'Base64 → Texto',
+    encodeLabel: 'Texto a codificar',
+    decodeLabel: 'Base64 a decodificar',
+    encodePlaceholder: 'Escribe o pega texto aquí...',
+    decodePlaceholder: 'Pega tu cadena Base64 aquí...',
+    encodeAction: '→ Codificar',
+    decodeAction: '→ Decodificar',
+    result: 'Resultado',
+    copy: 'Copiar',
+    copied: '✓ Copiado',
+    errorDecode: 'Entrada Base64 inválida. Verifica que sea un string Base64 correcto.',
+    errorEncode: 'Error al codificar.',
+  },
+  en: {
+    encodeBtn: 'Text → Base64',
+    decodeBtn: 'Base64 → Text',
+    encodeLabel: 'Text to encode',
+    decodeLabel: 'Base64 to decode',
+    encodePlaceholder: 'Type or paste text here...',
+    decodePlaceholder: 'Paste your Base64 string here...',
+    encodeAction: '→ Encode',
+    decodeAction: '→ Decode',
+    result: 'Result',
+    copy: 'Copy',
+    copied: '✓ Copied',
+    errorDecode: 'Invalid Base64 input. Make sure it is a valid Base64 string.',
+    errorEncode: 'Encoding error.',
+  },
+  de: {
+    encodeBtn: 'Text → Base64',
+    decodeBtn: 'Base64 → Text',
+    encodeLabel: 'Zu kodierender Text',
+    decodeLabel: 'Zu dekodierender Base64',
+    encodePlaceholder: 'Text hier eingeben oder einfügen...',
+    decodePlaceholder: 'Base64-Zeichenkette hier einfügen...',
+    encodeAction: '→ Kodieren',
+    decodeAction: '→ Dekodieren',
+    result: 'Ergebnis',
+    copy: 'Kopieren',
+    copied: '✓ Kopiert',
+    errorDecode: 'Ungültige Base64-Eingabe. Bitte gültige Base64-Zeichenkette angeben.',
+    errorEncode: 'Kodierungsfehler.',
+  },
+}
 
 const taStyle = {
   width: '100%',
@@ -28,6 +77,8 @@ const b64decode = (str) => {
 }
 
 export default function Base64Tool() {
+  const { lang } = useTranslation()
+  const ui = UI[lang] ?? UI.es
   const [mode, setMode] = useState('encode')
   const [input, setInput] = useState('')
   const [output, setOutput] = useState('')
@@ -48,7 +99,7 @@ export default function Base64Tool() {
     try {
       setOutput(mode === 'encode' ? b64encode(input) : b64decode(input))
     } catch {
-      setError(mode === 'decode' ? 'Entrada Base64 inválida. Verifica que sea un string Base64 correcto.' : 'Error al codificar.')
+      setError(mode === 'decode' ? ui.errorDecode : ui.errorEncode)
       setOutput('')
     }
   }
@@ -64,8 +115,8 @@ export default function Base64Tool() {
       {/* Mode toggle */}
       <div style={{ display: 'flex', gap: '0.5rem' }}>
         {[
-          { val: 'encode', label: 'Texto → Base64' },
-          { val: 'decode', label: 'Base64 → Texto' },
+          { val: 'encode', label: ui.encodeBtn },
+          { val: 'decode', label: ui.decodeBtn },
         ].map(m => (
           <button key={m.val} onClick={() => switchMode(m.val)} style={{
             padding: '0.55rem 1.2rem', borderRadius: 8,
@@ -81,12 +132,12 @@ export default function Base64Tool() {
       {/* Input */}
       <div>
         <label style={{ display: 'block', color: 'var(--text-secondary)', fontSize: '0.8rem', fontFamily: 'var(--font-mono)', marginBottom: '0.5rem' }}>
-          {mode === 'encode' ? 'Texto a codificar' : 'Base64 a decodificar'}
+          {mode === 'encode' ? ui.encodeLabel : ui.decodeLabel}
         </label>
         <textarea
           value={input}
           onChange={e => setInput(e.target.value)}
-          placeholder={mode === 'encode' ? 'Escribe o pega texto aquí...' : 'Pega tu cadena Base64 aquí...'}
+          placeholder={mode === 'encode' ? ui.encodePlaceholder : ui.decodePlaceholder}
           style={taStyle}
         />
       </div>
@@ -97,7 +148,7 @@ export default function Base64Tool() {
         color: '#000', fontWeight: 700, fontSize: '0.95rem',
         border: 'none', cursor: 'pointer', alignSelf: 'flex-start',
       }}>
-        {mode === 'encode' ? '→ Codificar' : '→ Decodificar'}
+        {mode === 'encode' ? ui.encodeAction : ui.decodeAction}
       </button>
 
       {error && (
@@ -111,14 +162,14 @@ export default function Base64Tool() {
       {output && (
         <div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-            <label style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', fontFamily: 'var(--font-mono)' }}>Resultado</label>
+            <label style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', fontFamily: 'var(--font-mono)' }}>{ui.result}</label>
             <button onClick={copy} style={{
               background: copied ? 'rgba(57,255,20,0.15)' : 'transparent',
               border: `1px solid ${copied ? 'var(--neon-green)' : 'var(--border)'}`,
               borderRadius: 6, padding: '0.3rem 0.75rem',
               color: copied ? 'var(--neon-green)' : 'var(--text-secondary)',
               cursor: 'pointer', fontFamily: 'var(--font-mono)', fontSize: '0.8rem', transition: 'all 0.2s',
-            }}>{copied ? '✓ Copiado' : 'Copiar'}</button>
+            }}>{copied ? ui.copied : ui.copy}</button>
           </div>
           <textarea readOnly value={output} style={{ ...taStyle, minHeight: 140 }} />
         </div>

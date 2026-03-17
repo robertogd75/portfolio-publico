@@ -1,4 +1,38 @@
 import { useState } from 'react'
+import { useTranslation } from '../../i18n/I18nContext.jsx'
+
+const UI = {
+  es: {
+    harmony: 'Armonía de Color',
+    complementary: 'Complementario',
+    analogMinus: 'Análogo −30°',
+    analogPlus: 'Análogo +30°',
+    triadicMinus: 'Triádico −120°',
+    triadicPlus: 'Triádico +120°',
+    copy: 'Copiar',
+    copied: '✓ Copiado',
+  },
+  en: {
+    harmony: 'Color Harmony',
+    complementary: 'Complementary',
+    analogMinus: 'Analogous −30°',
+    analogPlus: 'Analogous +30°',
+    triadicMinus: 'Triadic −120°',
+    triadicPlus: 'Triadic +120°',
+    copy: 'Copy',
+    copied: '✓ Copied',
+  },
+  de: {
+    harmony: 'Farbharmonie',
+    complementary: 'Komplementär',
+    analogMinus: 'Analog −30°',
+    analogPlus: 'Analog +30°',
+    triadicMinus: 'Triadisch −120°',
+    triadicPlus: 'Triadisch +120°',
+    copy: 'Kopieren',
+    copied: '✓ Kopiert',
+  },
+}
 
 // ── Color math helpers ────────────────────────────────────────────
 function hexToRgb(hex) {
@@ -48,6 +82,8 @@ function normalizeHex(hex) {
 
 // ── Component ─────────────────────────────────────────────────────
 export default function ColorPalette() {
+  const { lang } = useTranslation()
+  const ui = UI[lang] ?? UI.es
   const [inputColor, setInputColor] = useState('#a855f7')
   const [copied, setCopied] = useState(null)
 
@@ -63,11 +99,11 @@ export default function ColorPalette() {
 
   const harmony = hsl
     ? [
-        { label: 'Complementario', hex: hslToHex((hsl[0] + 180) % 360, hsl[1], hsl[2]) },
-        { label: 'Análogo −30°',   hex: hslToHex((hsl[0] + 330) % 360, hsl[1], hsl[2]) },
-        { label: 'Análogo +30°',   hex: hslToHex((hsl[0] + 30)  % 360, hsl[1], hsl[2]) },
-        { label: 'Triádico −120°', hex: hslToHex((hsl[0] + 240) % 360, hsl[1], hsl[2]) },
-        { label: 'Triádico +120°', hex: hslToHex((hsl[0] + 120) % 360, hsl[1], hsl[2]) },
+        { label: ui.complementary, hex: hslToHex((hsl[0] + 180) % 360, hsl[1], hsl[2]) },
+        { label: ui.analogMinus,   hex: hslToHex((hsl[0] + 330) % 360, hsl[1], hsl[2]) },
+        { label: ui.analogPlus,    hex: hslToHex((hsl[0] + 30)  % 360, hsl[1], hsl[2]) },
+        { label: ui.triadicMinus,  hex: hslToHex((hsl[0] + 240) % 360, hsl[1], hsl[2]) },
+        { label: ui.triadicPlus,   hex: hslToHex((hsl[0] + 120) % 360, hsl[1], hsl[2]) },
       ]
     : []
 
@@ -159,7 +195,7 @@ export default function ColorPalette() {
 
           {/* ── Harmony ── */}
           <div>
-            <div style={labelStyle}>Armonía de Color</div>
+            <div style={labelStyle}>{ui.harmony}</div>
             <div style={{ display: 'flex', gap: '0.65rem', flexWrap: 'wrap' }}>
               {harmony.map(hc => (
                 <div
@@ -199,7 +235,7 @@ export default function ColorPalette() {
                   cursor: 'pointer', fontFamily: 'var(--font-mono)', fontSize: '0.8rem', transition: 'all 0.2s',
                 }}
               >
-                {copied === 'css' ? '✓ Copiado' : 'Copiar'}
+                {copied === 'css' ? ui.copied : ui.copy}
               </button>
             </div>
             <textarea readOnly value={cssBlock} style={taStyle} />

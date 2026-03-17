@@ -1,4 +1,68 @@
 import { useState, useRef } from 'react'
+import { useTranslation } from '../../i18n/I18nContext.jsx'
+
+const TYPES_DESCS = {
+  es: {
+    normal:        'Visión estándar trichromática',
+    protanopia:    'Sin conos L (rojo) · ~1% hombres',
+    deuteranopia:  'Sin conos M (verde) · ~1% hombres',
+    tritanopia:    'Sin conos S (azul) · ~0.003%',
+    protanomaly:   'Conos L debilitados · ~1% hombres',
+    deuteranomaly: 'Conos M debilitados · ~5% hombres (más común)',
+    tritanomaly:   'Conos S debilitados · ~0.01%',
+    achromato:     'Sin percepción del color (escala de grises)',
+  },
+  en: {
+    normal:        'Standard trichromatic vision',
+    protanopia:    'Missing L cones (red) · ~1% of men',
+    deuteranopia:  'Missing M cones (green) · ~1% of men',
+    tritanopia:    'Missing S cones (blue) · ~0.003%',
+    protanomaly:   'Weakened L cones · ~1% of men',
+    deuteranomaly: 'Weakened M cones · ~5% of men (most common)',
+    tritanomaly:   'Weakened S cones · ~0.01%',
+    achromato:     'No color perception (grayscale)',
+  },
+  de: {
+    normal:        'Normales trichromatisches Sehen',
+    protanopia:    'Fehlende L-Zapfen (rot) · ~1% der Männer',
+    deuteranopia:  'Fehlende M-Zapfen (grün) · ~1% der Männer',
+    tritanopia:    'Fehlende S-Zapfen (blau) · ~0.003%',
+    protanomaly:   'Geschwächte L-Zapfen · ~1% der Männer',
+    deuteranomaly: 'Geschwächte M-Zapfen · ~5% der Männer (häufigste Form)',
+    tritanomaly:   'Geschwächte S-Zapfen · ~0.01%',
+    achromato:     'Keine Farbwahrnehmung (Graustufen)',
+  },
+}
+
+const UI = {
+  es: {
+    dropMain: 'Arrastra una imagen o haz clic para subir',
+    dropSub:  'PNG · JPG · WebP — se procesa 100% en tu navegador, nunca sale de tu dispositivo',
+    changeImage:   '← Cambiar imagen',
+    processing:    'Procesando 8 simulaciones...',
+    clickToExpand: 'Haz clic en una tarjeta para ampliar',
+    processingCard: 'Procesando...',
+    expandedView:  'Vista ampliada',
+  },
+  en: {
+    dropMain: 'Drag an image or click to upload',
+    dropSub:  'PNG · JPG · WebP — processed 100% in your browser, never leaves your device',
+    changeImage:   '← Change image',
+    processing:    'Processing 8 simulations...',
+    clickToExpand: 'Click a card to expand',
+    processingCard: 'Processing...',
+    expandedView:  'Expanded view',
+  },
+  de: {
+    dropMain: 'Bild hierher ziehen oder klicken zum Hochladen',
+    dropSub:  'PNG · JPG · WebP — wird 100% in Ihrem Browser verarbeitet, verlässt nie Ihr Gerät',
+    changeImage:   '← Bild ändern',
+    processing:    '8 Simulationen werden verarbeitet...',
+    clickToExpand: 'Karte anklicken zum Vergrößern',
+    processingCard: 'Wird verarbeitet...',
+    expandedView:  'Vergrößerte Ansicht',
+  },
+}
 
 // ── Dalton/Viénot matrices (operate on gamma-decoded linear sRGB) ──────────
 const blend = (mat, t) =>
@@ -46,6 +110,9 @@ function buildSimulation(origData, mat) {
 }
 
 export default function ColorBlindSimulator() {
+  const { lang } = useTranslation()
+  const ui = UI[lang] ?? UI.es
+  const descs = TYPES_DESCS[lang] ?? TYPES_DESCS.en
   const [imageSrc, setImageSrc]   = useState(null)
   const [results, setResults]     = useState({})
   const [processing, setProcessing] = useState(false)
@@ -119,10 +186,10 @@ export default function ColorBlindSimulator() {
         >
           <div style={{ fontSize: '2.5rem', marginBottom: '0.75rem' }}>🖼️</div>
           <div style={{ color: 'var(--text-primary)', fontWeight: 600, marginBottom: '0.4rem' }}>
-            Arrastra una imagen o haz clic para subir
+            {ui.dropMain}
           </div>
           <div style={{ color: 'var(--text-secondary)', fontSize: '0.875rem' }}>
-            PNG · JPG · WebP — se procesa 100% en tu navegador, nunca sale de tu dispositivo
+            {ui.dropSub}
           </div>
           <input
             ref={inputRef}
@@ -146,7 +213,7 @@ export default function ColorBlindSimulator() {
                 {t.label}
               </div>
               <div style={{ color: 'var(--text-secondary)', fontSize: '0.78rem', marginTop: '0.25rem', lineHeight: 1.5 }}>
-                {t.desc}
+                {descs[t.id]}
               </div>
             </div>
           ))}
@@ -172,16 +239,16 @@ export default function ColorBlindSimulator() {
             fontSize: '0.8rem',
           }}
         >
-          ← Cambiar imagen
+          {ui.changeImage}
         </button>
         {processing && (
           <span style={{ color: 'var(--neon-cyan)', fontFamily: 'var(--font-mono)', fontSize: '0.8rem' }}>
-            Procesando 8 simulaciones...
+            {ui.processing}
           </span>
         )}
         {!processing && Object.keys(results).length > 0 && (
           <span style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', fontSize: '0.8rem' }}>
-            Haz clic en una tarjeta para ampliar
+            {ui.clickToExpand}
           </span>
         )}
       </div>
@@ -213,7 +280,7 @@ export default function ColorBlindSimulator() {
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', fontSize: '0.8rem',
               }}>
-                {processing ? 'Procesando...' : '—'}
+                {processing ? ui.processingCard : '—'}
               </div>
             )}
             <div style={{ padding: '0.75rem 1rem' }}>
@@ -221,7 +288,7 @@ export default function ColorBlindSimulator() {
                 {type.label}
               </div>
               <div style={{ color: 'var(--text-secondary)', fontSize: '0.78rem', marginTop: '0.2rem', lineHeight: 1.5 }}>
-                {type.desc}
+                {descs[type.id]}
               </div>
             </div>
           </div>
@@ -246,7 +313,7 @@ export default function ColorBlindSimulator() {
               alignItems: 'center',
             }}>
               <span style={{ fontWeight: 700, color: t.color, fontFamily: 'var(--font-mono)' }}>
-                {t.label} — Vista ampliada
+                {t.label} — {ui.expandedView}
               </span>
               <button
                 onClick={() => setSelected(null)}

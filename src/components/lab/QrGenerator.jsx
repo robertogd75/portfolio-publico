@@ -1,4 +1,11 @@
 import { useState, useRef, useEffect } from 'react'
+import { useTranslation } from '../../i18n/I18nContext.jsx'
+
+const UI = {
+  es: { label: 'Texto o URL', size: 'Tamaño', download: '↓ Descargar PNG', errorQr: 'No se pudo generar el QR.' },
+  en: { label: 'Text or URL', size: 'Size',    download: '↓ Download PNG',  errorQr: 'Could not generate the QR code.' },
+  de: { label: 'Text oder URL', size: 'Größe', download: '↓ PNG herunterladen', errorQr: 'QR-Code konnte nicht generiert werden.' },
+}
 import QRCode from 'qrcode'
 
 const SIZES = [128, 256, 512]
@@ -7,10 +14,12 @@ const COLORS = [
   { fg: '#a855f7', bg: '#0a0a0f', label: 'Purple' },
   { fg: '#39ff14', bg: '#0a0a0f', label: 'Green' },
   { fg: '#ffffff', bg: '#000000', label: 'B&W' },
-  { fg: '#000000', bg: '#ffffff', label: 'Clásico' },
+  { fg: '#000000', bg: '#ffffff', label: 'Classic' },
 ]
 
 export default function QrGenerator() {
+  const { lang } = useTranslation()
+  const ui = UI[lang] ?? UI.es
   const [text, setText]         = useState('https://rgardel.es')
   const [size, setSize]         = useState(256)
   const [colorIdx, setColorIdx] = useState(0)
@@ -27,7 +36,7 @@ export default function QrGenerator() {
       errorCorrectionLevel: 'M',
     })
       .then(url => { setDataUrl(url); setError(null) })
-      .catch(() => setError('No se pudo generar el QR.'))
+      .catch(() => setError(ui.errorQr))
   }, [text, size, colorIdx])
 
   const download = () => {
@@ -47,7 +56,7 @@ export default function QrGenerator() {
           display: 'block', color: 'var(--text-secondary)', fontSize: '0.8rem',
           fontFamily: 'var(--font-mono)', marginBottom: '0.5rem',
         }}>
-          Texto o URL
+          {ui.label}
         </label>
         <input
           type="text"
@@ -71,7 +80,7 @@ export default function QrGenerator() {
             fontFamily: 'var(--font-mono)', marginBottom: '0.5rem',
             letterSpacing: '0.08em', textTransform: 'uppercase',
           }}>
-            Tamaño
+            {ui.size}
           </div>
           <div style={{ display: 'flex', gap: '0.4rem' }}>
             {SIZES.map(s => (
@@ -145,7 +154,7 @@ export default function QrGenerator() {
               border: 'none', cursor: 'pointer',
             }}
           >
-            ↓ Descargar PNG
+            {ui.download}
           </button>
         </div>
       )}

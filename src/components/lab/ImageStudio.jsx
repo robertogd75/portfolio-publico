@@ -1,4 +1,41 @@
 import { useState, useRef } from 'react'
+import { useTranslation } from '../../i18n/I18nContext.jsx'
+
+const UI = {
+  es: {
+    dropHint: 'Arrastra una imagen aquí o haz clic para seleccionar',
+    changeHint: 'Haz clic para cambiar imagen',
+    format: 'Formato:',
+    widthLabel: 'Ancho (px)',
+    heightLabel: 'Alto (px)',
+    lockAspect: 'Mantener proporción',
+    restore: 'Restaurar original',
+    quality: 'Calidad',
+    convert: '↓ Convertir y Descargar',
+  },
+  en: {
+    dropHint: 'Drag an image here or click to select',
+    changeHint: 'Click to change image',
+    format: 'Format:',
+    widthLabel: 'Width (px)',
+    heightLabel: 'Height (px)',
+    lockAspect: 'Keep aspect ratio',
+    restore: 'Restore original',
+    quality: 'Quality',
+    convert: '↓ Convert & Download',
+  },
+  de: {
+    dropHint: 'Bild hierher ziehen oder klicken zum Auswählen',
+    changeHint: 'Klicken zum Ändern des Bildes',
+    format: 'Format:',
+    widthLabel: 'Breite (px)',
+    heightLabel: 'Höhe (px)',
+    lockAspect: 'Seitenverhältnis behalten',
+    restore: 'Original wiederherstellen',
+    quality: 'Qualität',
+    convert: '↓ Konvertieren & Herunterladen',
+  },
+}
 
 const inputStyle = {
   background: 'rgba(255,255,255,0.04)',
@@ -19,6 +56,8 @@ const formatBytes = (bytes) => {
 }
 
 export default function ImageStudio() {
+  const { lang } = useTranslation()
+  const ui = UI[lang] ?? UI.es
   const [preview, setPreview] = useState(null)
   const [originalDims, setOriginalDims] = useState({ w: 0, h: 0 })
   const [width, setWidth] = useState(0)
@@ -121,12 +160,12 @@ export default function ImageStudio() {
             <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', fontFamily: 'var(--font-mono)' }}>
               {originalDims.w} × {originalDims.h} px · {formatBytes(originalSize)}
             </p>
-            <p style={{ color: 'var(--neon-cyan)', fontSize: '0.8rem', marginTop: '0.3rem', fontFamily: 'var(--font-mono)' }}>Haz clic para cambiar imagen</p>
+            <p style={{ color: 'var(--neon-cyan)', fontSize: '0.8rem', marginTop: '0.3rem', fontFamily: 'var(--font-mono)' }}>{ui.changeHint}</p>
           </div>
         ) : (
           <div>
             <div style={{ fontSize: '2.5rem', marginBottom: '0.75rem' }}>🖼️</div>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>Arrastra una imagen aquí o haz clic para seleccionar</p>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>{ui.dropHint}</p>
             <p style={{ color: 'var(--text-muted)', fontSize: '0.8rem', marginTop: '0.5rem', fontFamily: 'var(--font-mono)' }}>PNG, JPG, WebP, GIF...</p>
           </div>
         )}
@@ -136,7 +175,7 @@ export default function ImageStudio() {
         <>
           {/* Format selector */}
           <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', flexWrap: 'wrap' }}>
-            <span style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', fontFamily: 'var(--font-mono)' }}>Formato:</span>
+            <span style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', fontFamily: 'var(--font-mono)' }}>{ui.format}</span>
             {[{ val: 'jpeg', label: 'JPG' }, { val: 'png', label: 'PNG' }, { val: 'webp', label: 'WebP' }].map(f => (
               <button
                 key={f.val}
@@ -160,11 +199,11 @@ export default function ImageStudio() {
           {/* Dimensions */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
             <div>
-              <label style={{ display: 'block', color: 'var(--text-secondary)', fontSize: '0.8rem', fontFamily: 'var(--font-mono)', marginBottom: '0.4rem' }}>Ancho (px)</label>
+              <label style={{ display: 'block', color: 'var(--text-secondary)', fontSize: '0.8rem', fontFamily: 'var(--font-mono)', marginBottom: '0.4rem' }}>{ui.widthLabel}</label>
               <input type="number" value={width} onChange={e => handleWidthChange(e.target.value)} style={inputStyle} />
             </div>
             <div>
-              <label style={{ display: 'block', color: 'var(--text-secondary)', fontSize: '0.8rem', fontFamily: 'var(--font-mono)', marginBottom: '0.4rem' }}>Alto (px)</label>
+              <label style={{ display: 'block', color: 'var(--text-secondary)', fontSize: '0.8rem', fontFamily: 'var(--font-mono)', marginBottom: '0.4rem' }}>{ui.heightLabel}</label>
               <input type="number" value={height} onChange={e => handleHeightChange(e.target.value)} style={inputStyle} />
             </div>
           </div>
@@ -173,7 +212,7 @@ export default function ImageStudio() {
           <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}>
             <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
               <input type="checkbox" checked={lockAspect} onChange={e => setLockAspect(e.target.checked)} style={{ accentColor: 'var(--neon-cyan)' }} />
-              <span style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', fontFamily: 'var(--font-mono)' }}>Mantener proporción</span>
+              <span style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', fontFamily: 'var(--font-mono)' }}>{ui.lockAspect}</span>
             </label>
             <button
               onClick={() => { setWidth(originalDims.w); setHeight(originalDims.h) }}
@@ -182,14 +221,14 @@ export default function ImageStudio() {
                 padding: '0.35rem 0.75rem', color: 'var(--text-muted)', cursor: 'pointer',
                 fontFamily: 'var(--font-mono)', fontSize: '0.8rem',
               }}
-            >Restaurar original</button>
+            >{ui.restore}</button>
           </div>
 
           {/* Quality slider */}
           {(format === 'jpeg' || format === 'webp') && (
             <div>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.4rem' }}>
-                <label style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', fontFamily: 'var(--font-mono)' }}>Calidad</label>
+                <label style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', fontFamily: 'var(--font-mono)' }}>{ui.quality}</label>
                 <span style={{ color: 'var(--neon-cyan)', fontFamily: 'var(--font-mono)', fontSize: '0.85rem', fontWeight: 700 }}>{quality}%</span>
               </div>
               <input type="range" min={10} max={100} value={quality} onChange={e => setQuality(Number(e.target.value))} style={{ width: '100%', accentColor: 'var(--neon-cyan)' }} />
@@ -206,7 +245,7 @@ export default function ImageStudio() {
               border: 'none', cursor: 'pointer', alignSelf: 'flex-start',
             }}
           >
-            ↓ Convertir y Descargar
+            {ui.convert}
           </button>
         </>
       )}
