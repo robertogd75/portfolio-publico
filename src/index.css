@@ -151,6 +151,22 @@
   color: var(--text-primary) !important;
 }
 
+/* Mobile: chat widget panel goes full-width at screen bottom */
+@media (max-width: 480px) {
+  .chat-panel--widget {
+    bottom: 0 !important;
+    right: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 75vh !important;
+    border-radius: 18px 18px 0 0 !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom: none !important;
+  }
+}
+
 /* Light mode: .card subtle shadow */
 [data-theme="light"] .card {
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);

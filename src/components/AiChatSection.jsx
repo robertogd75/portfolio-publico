@@ -98,6 +98,7 @@ export default function AiChatSection() {
   const inputRef                = useRef(null)
 
   useEffect(() => {
+    if (messages.length === 0 && !loading) return
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages, loading])
 

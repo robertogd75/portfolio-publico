@@ -233,7 +233,7 @@ export default function ChatWidget() {
       {/* ── Chat panel ── */}
       {open && (
         <div
-          className="chat-panel"
+          className="chat-panel chat-panel--widget"
           style={{
             position: 'fixed', bottom: 88, right: 24, zIndex: 9997,
             width: 'min(360px, calc(100vw - 32px))',
