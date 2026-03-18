@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useTranslation } from '../i18n/I18nContext.jsx'
+import AiChatSection from '../components/AiChatSection.jsx'
 
 // Recipient is only used inside encodeURIComponent for a mailto: href.
 // No data ever reaches a third-party server — the message is composed
@@ -455,6 +456,9 @@ export default function ContactPage() {
             </div>
           </div>
         </div>
+
+        {/* AI Assistant */}
+        <AiChatSection />
       </div>
     </main>
   )
