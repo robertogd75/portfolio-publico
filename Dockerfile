@@ -10,5 +10,7 @@ RUN npm run build
 FROM nginx:stable-alpine
 # Copiamos solo el resultado del build (la carpeta dist)
 COPY --from=build-stage /app/dist /usr/share/nginx/html
+# Configuracion de Nginx (SPA fallback + proxy al mailer)
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]

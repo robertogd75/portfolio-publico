@@ -407,10 +407,10 @@ export default function TypingTest() {
         textShadow: '0 0 80px rgba(0,240,255,0.6)',
         transition: 'all 0.3s',
       }}>
-        {countdown === 0 ? '¡YA!' : countdown}
+        {countdown === 0 ? ui.go : countdown}
       </div>
       <div style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', fontSize: '0.85rem' }}>
-        Prepárate para escribir…
+        {ui.getReady}
       </div>
     </div>
   )
@@ -433,9 +433,9 @@ export default function TypingTest() {
         {/* Stats */}
         <div style={{ display: 'flex', gap: '2rem' }}>
           {[
-            ['WPM',       liveWpm,       'var(--text-primary)'],
-            ['Precisión', `${liveAcc}%`, liveAcc >= 90 ? '#4ade80' : liveAcc >= 70 ? '#f59e0b' : '#f87171'],
-            ['Progreso',  `${completed}%`, 'var(--text-secondary)'],
+            [ui.wpm,       liveWpm,           'var(--text-primary)'],
+            [ui.precision, `${liveAcc}%`,     liveAcc >= 90 ? '#4ade80' : liveAcc >= 70 ? '#f59e0b' : '#f87171'],
+            [ui.progress,  `${completed}%`,   'var(--text-secondary)'],
           ].map(([label, val, col]) => (
             <div key={label}>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.62rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>{label}</div>
@@ -486,14 +486,14 @@ export default function TypingTest() {
       </div>
 
       <p style={{ color: 'var(--text-muted)', fontSize: '0.78rem', textAlign: 'center', fontFamily: 'var(--font-mono)', margin: 0 }}>
-        Haz clic en el texto si pierdes el foco · Pegar está bloqueado
+        {ui.hint}
       </p>
     </div>
   )
 
   // ══ RESULTS ══════════════════════════════════════════════════════════════════
   if (phase === 'results') {
-    const t = tier(result?.score ?? 0)
+    const t = tier(result?.score ?? 0, lang)
     return (
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.75rem', padding: '1rem 0' }}>
         {isRecord && (
@@ -502,7 +502,7 @@ export default function TypingTest() {
             textTransform: 'uppercase', color: '#f59e0b',
             textShadow: '0 0 18px rgba(245,158,11,0.65)',
           }}>
-            ★ ¡Nuevo récord personal! ★
+            {ui.newRecord}
           </div>
         )}
 
@@ -517,7 +517,7 @@ export default function TypingTest() {
             {result?.score ?? 0}
           </div>
           <div style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', fontSize: '0.82rem', marginTop: '0.2rem' }}>
-            puntos
+            {ui.points}
           </div>
           <div style={{
             marginTop: '0.5rem', fontFamily: 'var(--font-mono)', fontSize: '0.9rem',
@@ -530,8 +530,8 @@ export default function TypingTest() {
         {/* Stats cards */}
         <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center' }}>
           {[
-            { label: 'Velocidad',  value: `${result?.wpm ?? 0}`,       unit: 'WPM', color: 'var(--neon-cyan)' },
-            { label: 'Precisión',  value: `${result?.accuracy ?? 0}`,   unit: '%',   color: (result?.accuracy ?? 0) >= 90 ? '#4ade80' : (result?.accuracy ?? 0) >= 70 ? '#f59e0b' : '#f87171' },
+            { label: ui.speed,     value: `${result?.wpm ?? 0}`,       unit: 'WPM', color: 'var(--neon-cyan)' },
+            { label: ui.precision, value: `${result?.accuracy ?? 0}`,   unit: '%',   color: (result?.accuracy ?? 0) >= 90 ? '#4ade80' : (result?.accuracy ?? 0) >= 70 ? '#f59e0b' : '#f87171' },
           ].map(({ label, value, unit, color }) => (
             <div key={label} style={{
               padding: '1.25rem 2.25rem', textAlign: 'center',
@@ -555,14 +555,14 @@ export default function TypingTest() {
             color: '#0a0a0f', fontFamily: 'var(--font-mono)', fontSize: '1rem', fontWeight: 800,
             cursor: 'pointer', letterSpacing: '0.05em',
           }}>
-            ↺ Otra vez
+            {ui.playAgain}
           </button>
           <button onClick={() => setPhase('idle')} style={{
             background: 'transparent', border: '1px solid var(--border)', borderRadius: 10,
             padding: '0.85rem 2rem', color: 'var(--text-secondary)',
             fontFamily: 'var(--font-mono)', fontSize: '0.9rem', cursor: 'pointer',
           }}>
-            Ver puntuaciones
+            {ui.viewScores}
           </button>
         </div>
       </div>

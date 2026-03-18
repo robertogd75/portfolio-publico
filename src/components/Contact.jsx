@@ -124,6 +124,42 @@ export default function Contact() {
               <path d="M7 17L17 7M17 7H7M17 7v10"/>
             </svg>
           </a>
+
+          <a
+            href="/cv.pdf"
+            download="CV_Roberto_Garcia_Delgado.pdf"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.75rem',
+              padding: '1rem 2.5rem',
+              borderRadius: 14,
+              border: '1px solid var(--border)',
+              background: 'var(--bg-input)',
+              color: 'var(--text-primary)',
+              fontWeight: 700,
+              fontSize: '1.05rem',
+              textDecoration: 'none',
+              transition: 'all 0.25s ease',
+            }}
+            onMouseEnter={e => {
+              e.currentTarget.style.borderColor = 'var(--neon-purple)'
+              e.currentTarget.style.boxShadow = '0 0 30px rgba(168,85,247,0.15)'
+              e.currentTarget.style.transform = 'translateY(-3px)'
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.borderColor = 'var(--border)'
+              e.currentTarget.style.boxShadow = 'none'
+              e.currentTarget.style.transform = 'translateY(0)'
+            }}
+          >
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            {t('contact', 'btn_cv')}
+          </a>
         </div>
 
         {/* Secondary info */}

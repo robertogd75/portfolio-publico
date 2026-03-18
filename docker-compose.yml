@@ -7,3 +7,15 @@ services:
       - "8085:80"
     environment:
       - TZ=Europe/Madrid
+    depends_on:
+      - mailer
+
+  mailer:
+    build: ./mailer
+    container_name: portfolio-mailer
+    restart: unless-stopped
+    env_file: .env
+    # Port 3001 is only reachable inside the Docker network (via Nginx proxy).
+    # It is intentionally NOT mapped to the host.
+    expose:
+      - "3001"

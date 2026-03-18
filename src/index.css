@@ -45,6 +45,94 @@
   --trans-fast:    0.15s ease;
   --trans-base:    0.25s ease;
   --trans-slow:    0.45s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Navbar */
+  --navbar-scrolled-bg: rgba(10, 10, 15, 0.85);
+
+  /* Theme-adaptive backgrounds */
+  --bg-input:       rgba(255, 255, 255, 0.04);
+  --bg-subtle:      rgba(255, 255, 255, 0.03);
+  --bg-card-opaque: rgba(18, 18, 31, 0.98);
+  --bg-card-icon:   rgba(18, 18, 31, 0.4);
+  --bg-terminal:    #08080f;
+}
+
+/* ============================================
+   LIGHT MODE
+   ============================================ */
+[data-theme="light"] {
+  --bg-primary:    #f5f5fa;
+  --bg-secondary:  #ebebf2;
+  --bg-card:       #ffffff;
+  --bg-glass:      rgba(255, 255, 255, 0.85);
+  --border:        rgba(0, 0, 0, 0.09);
+  --border-hover:  rgba(0, 150, 180, 0.45);
+
+  --neon-cyan:     #0097a7;
+  --neon-purple:   #7c3aed;
+  --neon-green:    #1a8c00;
+  --neon-pink:     #d01060;
+
+  --text-primary:  #0d0d14;
+  --text-secondary:#505068;
+  --text-muted:    #9090a8;
+
+  --grad-hero:     radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0,160,200,0.1) 0%, transparent 70%);
+  --grad-card:     linear-gradient(135deg, rgba(0,150,180,0.04) 0%, rgba(124,58,237,0.04) 100%);
+
+  --navbar-scrolled-bg: rgba(245, 245, 250, 0.92);
+  --bg-input:        rgba(0, 0, 0, 0.06);
+  --bg-subtle:       rgba(0, 0, 0, 0.04);
+  --bg-card-opaque:  rgba(238, 238, 248, 0.98);
+  --bg-card-icon:    rgba(215, 215, 235, 0.8);
+  --bg-terminal:     var(--bg-secondary);
+}
+
+/* Soften the constellation on light backgrounds */
+[data-theme="light"] #hero-canvas {
+  opacity: 0.35;
+}
+
+/* Scrollbar in light mode */
+[data-theme="light"] ::-webkit-scrollbar-track { background: var(--bg-primary); }
+[data-theme="light"] ::selection {
+  background: rgba(0, 150, 180, 0.2);
+  color: var(--text-primary);
+}
+
+/* Light mode: form controls */
+[data-theme="light"] input:not([type="color"]),
+[data-theme="light"] textarea,
+[data-theme="light"] select {
+  background: var(--bg-input) !important;
+  color: var(--text-primary) !important;
+}
+[data-theme="light"] input::placeholder,
+[data-theme="light"] textarea::placeholder {
+  color: var(--text-muted) !important;
+}
+
+/* Light mode: .tag badge */
+[data-theme="light"] .tag {
+  background: rgba(0, 150, 180, 0.14);
+  border-color: rgba(0, 150, 180, 0.35);
+  color: var(--neon-cyan);
+}
+
+/* Light mode: button borders more visible */
+[data-theme="light"] .btn-outline {
+  border-color: rgba(0, 0, 0, 0.2);
+}
+[data-theme="light"] .btn-outline:hover {
+  background: rgba(0, 150, 180, 0.06);
+}
+
+/* Light mode: .card subtle shadow */
+[data-theme="light"] .card {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+[data-theme="light"] .card:hover {
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
 }
 
 html {

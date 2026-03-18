@@ -1,4 +1,4 @@
-﻿import { useState } from 'react'
+﻿import { useState, useEffect, useRef } from 'react'
 import { useTranslation } from '../i18n/I18nContext.jsx'
 import ImageStudio from '../components/lab/ImageStudio.jsx'
 import PasswordGen from '../components/lab/PasswordGen.jsx'
@@ -36,7 +36,7 @@ function ToolCard({ tool, t, onOpen }) {
   const [hovered, setHovered] = useState(false)
 
   const cardStyle = {
-    background: hovered ? `linear-gradient(145deg, ${tool.glow}, rgba(18,18,31,0.98))` : 'var(--bg-card)',
+    background: hovered ? `linear-gradient(145deg, ${tool.glow}, var(--bg-card-opaque))` : 'var(--bg-card)',
     border: `1px solid ${hovered ? tool.color + '55' : 'var(--border)'}`,
     borderRadius: 16,
     padding: '1.75rem',
@@ -52,7 +52,7 @@ function ToolCard({ tool, t, onOpen }) {
     <>
       <div style={{
         width: 52, height: 52, borderRadius: 12,
-        background: `linear-gradient(135deg, ${tool.glow}, rgba(18,18,31,0.4))`,
+        background: `linear-gradient(135deg, ${tool.glow}, var(--bg-card-icon))`,
         border: `1px solid ${tool.color}33`,
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         fontSize: '0.95rem', fontFamily: 'var(--font-mono)', fontWeight: 700,
@@ -98,6 +98,29 @@ function ToolCard({ tool, t, onOpen }) {
 export default function LabPage() {
   const { t } = useTranslation()
   const [activeTool, setActiveTool] = useState(null)
+  const ignorePopRef = useRef(false)
+
+  // When browser back button (or mouse back) is pressed, close the tool
+  useEffect(() => {
+    const onPopState = () => {
+      if (ignorePopRef.current) { ignorePopRef.current = false; return }
+      setActiveTool(null)
+    }
+    window.addEventListener('popstate', onPopState)
+    return () => window.removeEventListener('popstate', onPopState)
+  }, [])
+
+  const openTool = (id) => {
+    history.pushState({ labTool: id }, '')
+    setActiveTool(id)
+  }
+
+  const closeTool = () => {
+    ignorePopRef.current = true
+    setActiveTool(null)
+    history.back()
+  }
+
   const active = TOOLS.find(tool => tool.id === activeTool)
   const ToolComponent = active?.component
 
@@ -138,7 +161,7 @@ export default function LabPage() {
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1.5rem' }}>
               {TOOLS.map(tool => (
-                <ToolCard key={tool.id} tool={tool} t={t} onOpen={() => setActiveTool(tool.id)} />
+                <ToolCard key={tool.id} tool={tool} t={t} onOpen={() => openTool(tool.id)} />
               ))}
             </div>
           </>
@@ -146,7 +169,7 @@ export default function LabPage() {
           <>
             <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', marginBottom: '2.5rem', flexWrap: 'wrap' }}>
               <button
-                onClick={() => setActiveTool(null)}
+                onClick={closeTool}
                 style={{
                   background: 'transparent', border: '1px solid var(--border)', borderRadius: 8,
                   padding: '0.5rem 1rem', color: 'var(--text-secondary)', cursor: 'pointer',
@@ -161,7 +184,7 @@ export default function LabPage() {
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
                 <span style={{
                   width: 44, height: 44, borderRadius: 10, flexShrink: 0,
-                  background: `linear-gradient(135deg, ${active.glow}, rgba(18,18,31,0.5))`,
+                  background: `linear-gradient(135deg, ${active.glow}, var(--bg-card-opaque))`,
                   border: `1px solid ${active.color}33`,
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   fontSize: '0.95rem', fontFamily: 'var(--font-mono)', fontWeight: 700, color: active.color,

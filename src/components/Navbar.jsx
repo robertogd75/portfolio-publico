@@ -2,19 +2,46 @@
 import { Link, useLocation } from 'react-router-dom'
 import { useTranslation } from '../i18n/I18nContext'
 
+const SunIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="5"/>
+    <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+    <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+  </svg>
+)
+const MoonIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+  </svg>
+)
+
 const links = [
-  { key: 'home',  to: '/' },
-  { key: 'stack', to: '/stack' },
-  { key: 'exp',   to: '/experience' },
-  { key: 'lab',   to: '/lab' },
+  { key: 'home',     to: '/' },
+  { key: 'stack',    to: '/stack' },
+  { key: 'exp',      to: '/experience' },
+  { key: 'projects', to: '/projects' },
+  { key: 'lab',      to: '/lab' },
+  { key: 'contact',  to: '/contact' },
 ]
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const [langMenuOpen, setLangMenuOpen] = useState(false)
+  const [theme, setTheme] = useState(
+    () => document.documentElement.getAttribute('data-theme') || 'dark'
+  )
   const { lang, changeLanguage, t } = useTranslation()
   const location = useLocation()
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme)
+    localStorage.setItem('theme', theme)
+  }, [theme])
+
+  const toggleTheme = () => setTheme(t => t === 'dark' ? 'light' : 'dark')
 
   const flagIcons = {
     es: '/SVG/spain.svg',
@@ -46,9 +73,9 @@ export default function Navbar() {
       zIndex: 100,
       padding: '0 1.5rem',
       transition: 'all 0.3s ease',
-      background: scrolled ? 'rgba(10,10,15,0.85)' : 'transparent',
+      background: scrolled ? 'var(--navbar-scrolled-bg)' : 'transparent',
       backdropFilter: scrolled ? 'blur(20px)' : 'none',
-      borderBottom: scrolled ? '1px solid rgba(255,255,255,0.06)' : '1px solid transparent',
+      borderBottom: scrolled ? '1px solid var(--border)' : '1px solid transparent',
     }}>
       <nav style={{
         maxWidth: '1200px',
@@ -114,7 +141,7 @@ export default function Navbar() {
               onClick={() => setLangMenuOpen(!langMenuOpen)}
               onBlur={() => setTimeout(() => setLangMenuOpen(false), 200)}
               style={{
-                background: 'rgba(255,255,255,0.05)',
+                background: 'var(--bg-input)',
                 border: '1px solid var(--border)',
                 borderRadius: 6,
                 padding: '0.4rem 0.6rem',
@@ -203,6 +230,28 @@ export default function Navbar() {
               LinkedIn
             </a>
           </li>
+          <li>
+            <button
+              onClick={toggleTheme}
+              aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+              style={{
+                background: 'rgba(128,128,200,0.08)',
+                border: '1px solid var(--border)',
+                borderRadius: 8,
+                padding: '0.45rem 0.5rem',
+                color: 'var(--text-secondary)',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'all 0.2s ease',
+              }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--neon-cyan)'; e.currentTarget.style.color = 'var(--neon-cyan)' }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = 'var(--text-secondary)' }}
+            >
+              {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
+            </button>
+          </li>
         </ul>
 
         <button
@@ -273,12 +322,34 @@ export default function Navbar() {
               textDecoration: 'none',
             }}>{t('nav', l.key)}</Link>
           ))}
-          <a href="https://github.com/robertogd75" target="_blank" rel="noopener noreferrer"
-            className="btn btn-outline" style={{ alignSelf: 'flex-start' }}
-          >GitHub ↗</a>
-          <a href="https://www.linkedin.com/in/roberto-garcia-delgado-626b9430a" target="_blank" rel="noopener noreferrer"
-            className="btn btn-primary" style={{ alignSelf: 'flex-start' }}
-          >LinkedIn ↗</a>
+          <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', flexWrap: 'wrap' }}>
+            <a href="https://github.com/robertogd75" target="_blank" rel="noopener noreferrer"
+              className="btn btn-outline"
+            >GitHub ↗</a>
+            <a href="https://www.linkedin.com/in/roberto-garcia-delgado-626b9430a" target="_blank" rel="noopener noreferrer"
+              className="btn btn-primary"
+            >LinkedIn ↗</a>
+            <button
+              onClick={toggleTheme}
+              aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+              style={{
+                background: 'rgba(128,128,200,0.08)',
+                border: '1px solid var(--border)',
+                borderRadius: 8,
+                padding: '0.5rem 0.75rem',
+                color: 'var(--text-secondary)',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.4rem',
+                fontSize: '0.8rem',
+                fontFamily: 'var(--font-mono)',
+              }}
+            >
+              {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
+              {theme === 'dark' ? 'Light' : 'Dark'}
+            </button>
+          </div>
         </div>
       )}
 

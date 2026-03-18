@@ -95,7 +95,7 @@ function TechCard({ tItem, color, glow }) {
       onMouseLeave={() => setHovered(false)}
       style={{
         background: hovered
-          ? `linear-gradient(135deg, ${glow}, rgba(18,18,31,0.95))`
+          ? `linear-gradient(135deg, ${glow}, var(--bg-card-opaque))`
           : 'var(--bg-card)',
         border: `1px solid ${hovered ? color + '55' : 'var(--border)'}`,
         borderRadius: 12,

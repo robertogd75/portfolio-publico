@@ -4,7 +4,9 @@ export const translations = {
       home:  'Inicio',
       stack: 'Stack',
       exp:   'Experiencia',
-      lab:   'Laboratorio',
+      lab:      'Laboratorio',
+      projects: 'Proyectos',
+      contact:  'Contacto',
     },
     lab: {
       label:               '// lab.tools',
@@ -50,6 +52,7 @@ export const translations = {
       tagline_end: '. Construyo backends robustos y frontends dinámicos con React, Laravel, Spring Boot y Docker; preparados para salir a producción.',
       btn_linkedin: 'Ver LinkedIn',
       btn_github: 'Ver GitHub',
+      btn_cv: 'Descargar CV',
       btn_stack: 'Explorar Stack ↓',
       stat_tech: 'Tecnologías dominadas',
       stat_english: 'Cambridge English',
@@ -140,16 +143,19 @@ export const translations = {
       desc: 'Combino mi formación sólida en Desarrollo de Aplicaciones Web con mi experiencia previa trabajando en equipo bajo presión. Construyo, despliego y sigo aprendiendo todos los días. Si tu equipo busca compromiso y resultados, hablemos.',
       location: 'Málaga · Remoto OK',
       english_cert: 'B2 Cambridge English',
+      btn_cv: 'Descargar CV',
       built: '© 2026 Roberto García Delgado · Built with React + Vite · Deployed on Docker',
     }
   },
   
   en: {
     nav: {
-      home:  'Home',
-      stack: 'Stack',
-      exp:   'Experience',
-      lab:   'Lab',
+      home:     'Home',
+      stack:    'Stack',
+      exp:      'Experience',
+      projects: 'Projects',
+      lab:      'Lab',
+      contact:  'Contact',
     },
     lab: {
       label:               '// lab.tools',
@@ -195,6 +201,7 @@ export const translations = {
       tagline_end: '. I build robust backends and dynamic frontends with React, Laravel, Spring Boot, and Docker; ready for production.',
       btn_linkedin: 'View LinkedIn',
       btn_github: 'View GitHub',
+      btn_cv: 'Download CV',
       btn_stack: 'Explore Stack ↓',
       stat_tech: 'Mastered Technologies',
       stat_english: 'Cambridge English',
@@ -285,16 +292,19 @@ export const translations = {
       desc: 'I combine my solid academic foundation in Web Application Development with my previous experience working under pressure. I build, deploy, and keep learning every day. If your team values commitment and results, let\'s talk.',
       location: 'Málaga · Remote OK',
       english_cert: 'B2 Cambridge English',
+      btn_cv: 'Download CV',
       built: '© 2026 Roberto García Delgado · Built with React + Vite · Deployed on Docker',
     }
   },
 
   de: {
     nav: {
-      home:  'Start',
-      stack: 'Stack',
-      exp:   'Erfahrung',
-      lab:   'Labor',
+      home:     'Start',
+      stack:    'Stack',
+      exp:      'Erfahrung',
+      projects: 'Projekte',
+      lab:      'Labor',
+      contact:  'Kontakt',
     },
     lab: {
       label:               '// lab.tools',
@@ -340,6 +350,7 @@ export const translations = {
       tagline_end: '. Ich baue robuste Backends und dynamische Frontends mit React, Laravel, Spring Boot und Docker; bereit für die Produktion.',
       btn_linkedin: 'LinkedIn ansehen',
       btn_github: 'GitHub ansehen',
+      btn_cv: 'Lebenslauf herunterladen',
       btn_stack: 'Stack entdecken ↓',
       stat_tech: 'Beherrschte Technologien',
       stat_english: 'Cambridge Englisch',
@@ -430,6 +441,7 @@ export const translations = {
       desc: 'Ich kombiniere meine solide Ausbildung in der Webentwicklung mit meiner Erfahrung, unter Druck zu arbeiten. Ich baue, deploye und lerne jeden Tag weiter. Wenn Ihr Team Engagement und Ergebnisse schätzt, lassen Sie uns reden.',
       location: 'Málaga · Remote-Arbeit möglich',
       english_cert: 'B2 Cambridge English',
+      btn_cv: 'Lebenslauf herunterladen',
       built: '© 2026 Roberto García Delgado · Built with React + Vite · Deployed on Docker',
     }
   }

@@ -105,7 +105,7 @@ export default function Performance() {
         }}>
           {/* Terminal block */}
           <div style={{
-            background: '#08080f',
+            background: 'var(--bg-terminal)',
             border: '1px solid rgba(0,240,255,0.15)',
             borderRadius: 14,
             overflow: 'hidden',
@@ -118,8 +118,8 @@ export default function Performance() {
               alignItems: 'center',
               gap: '0.5rem',
               padding: '0.75rem 1rem',
-              background: 'rgba(255,255,255,0.04)',
-              borderBottom: '1px solid rgba(255,255,255,0.06)',
+              background: 'var(--bg-input)',
+              borderBottom: '1px solid var(--border)',
             }}>
               <div style={{ display: 'flex', gap: '0.4rem' }}>
                 {['#ff5f57','#febc2e','#28c840'].map(c => (
