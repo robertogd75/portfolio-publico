@@ -1,4 +1,4 @@
-﻿import { useState, useRef, useEffect } from 'react'
+﻿﻿import { useState, useRef, useEffect } from 'react'
 import { useTranslation } from '../i18n/I18nContext.jsx'
 import { useChat } from './ChatContext.jsx'
 
@@ -72,7 +72,7 @@ function ChatMessage({ role, content, isLoading }) {
           background: 'linear-gradient(135deg, var(--neon-cyan), var(--neon-purple))',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           fontSize: '0.75rem', marginRight: '0.45rem', marginTop: 2,
-        }}>âœ¦</div>
+        }}>✦</div>
       )}
       <div
         className={isUser ? undefined : 'chat-msg-assistant'}
@@ -209,7 +209,7 @@ export default function ChatWidget() {
               width: 36, height: 36, borderRadius: '50%', flexShrink: 0,
               background: 'linear-gradient(135deg, var(--neon-cyan), #7c3aed)',
               display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1rem',
-            }}>âœ¦</div>
+            }}>✦</div>
             <div>
               <div style={{ fontWeight: 700, fontSize: '0.9rem', color: 'var(--text-primary)' }}>{ui.title}</div>
               <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>{ui.subtitle}</div>

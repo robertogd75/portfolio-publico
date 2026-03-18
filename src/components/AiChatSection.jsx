@@ -1,4 +1,4 @@
-﻿import { useState, useRef, useEffect } from 'react'
+﻿﻿import { useState, useRef, useEffect } from 'react'
 import { useTranslation } from '../i18n/I18nContext.jsx'
 import { useChat } from './ChatContext.jsx'
 
@@ -63,7 +63,7 @@ function Bubble({ role, content, isLoading }) {
           background: 'linear-gradient(135deg, var(--neon-cyan), var(--neon-purple))',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           fontSize: '0.7rem', marginRight: '0.4rem', marginTop: 2,
-        }}>âœ¦</div>
+        }}>✦</div>
       )}
       <div
         className={isUser ? undefined : 'chat-msg-assistant'}
@@ -147,7 +147,7 @@ export default function AiChatSection() {
               width: 32, height: 32, borderRadius: '50%',
               background: 'linear-gradient(135deg, var(--neon-cyan), #7c3aed)',
               display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.85rem',
-            }}>âœ¦</div>
+            }}>✦</div>
             <div>
               <div style={{ fontWeight: 700, fontSize: '0.88rem', color: 'var(--text-primary)' }}>Roberto AI</div>
               <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>{ui.desc}</div>
