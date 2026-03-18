@@ -5,14 +5,14 @@ import { useChat } from './ChatContext.jsx'
 const UI = {
   es: {
     label:       '// asistente.ia',
-    title:       'Â¿Tienes alguna pregunta',
-    titleNeon:   'sobre mÃ­?',
-    desc:        'El asistente solo conoce informaciÃ³n de este portfolio.',
+    title:       '¿Tienes alguna pregunta',
+    titleNeon:   'sobre mí?',
+    desc:        'El asistente solo conoce información de este portfolio.',
     placeholder: 'Escribe tu pregunta...',
-    welcome:     'Â¡Hola! PregÃºntame lo que quieras sobre el perfil, proyectos o experiencia de Roberto.',
-    error:       'Algo saliÃ³ mal. IntÃ©ntalo de nuevo.',
-    rateLimit:   'Demasiadas preguntas. IntÃ©ntalo mÃ¡s tarde.',
-    suggestions: ['Â¿QuÃ© proyectos tienes?', 'Â¿QuÃ© tecnologÃ­as dominas?', 'Â¿EstÃ¡s disponible para trabajar?'],
+    welcome:     '¡Hola! Pregúntame lo que quieras sobre el perfil, proyectos o experiencia de Roberto.',
+    error:       'Algo salió mal. Inténtalo de nuevo.',
+    rateLimit:   'Demasiadas preguntas. Inténtalo más tarde.',
+    suggestions: ['¿Qué proyectos tienes?', '¿Qué tecnologías dominas?', '¿Estás disponible para trabajar?'],
   },
   en: {
     label:       '// ai.assistant',
@@ -28,13 +28,13 @@ const UI = {
   de: {
     label:       '// ki.assistent',
     title:       'Hast du Fragen',
-    titleNeon:   'Ã¼ber mich?',
+    titleNeon:   'über mich?',
     desc:        'Der Assistent kennt nur Informationen aus diesem Portfolio.',
     placeholder: 'Frage eingeben...',
-    welcome:     'Hallo! Frag mich alles Ã¼ber Robertos Profil, Projekte oder Erfahrungen.',
+    welcome:     'Hallo! Frag mich alles über Robertos Profil, Projekte oder Erfahrungen.',
     error:       'Etwas ist schiefgelaufen. Bitte erneut versuchen.',
-    rateLimit:   'Zu viele Anfragen. Bitte spÃ¤ter erneut versuchen.',
-    suggestions: ['Was sind deine Projekte?', 'Welche Technologien beherrschst du?', 'Bist du verfÃ¼gbar?'],
+    rateLimit:   'Zu viele Anfragen. Bitte später erneut versuchen.',
+    suggestions: ['Was sind deine Projekte?', 'Welche Technologien beherrschst du?', 'Bist du verfügbar?'],
   },
 }
 

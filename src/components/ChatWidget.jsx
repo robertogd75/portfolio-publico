@@ -5,16 +5,16 @@ import { useChat } from './ChatContext.jsx'
 const UI = {
   es: {
     title:       'Roberto AI',
-    subtitle:    'PregÃºntame sobre el portfolio',
+    subtitle:    'Pregúntame sobre el portfolio',
     placeholder: 'Escribe una pregunta...',
-    welcome:     'Â¡Hola! Soy el asistente virtual de Roberto. Puedo responderte preguntas sobre su perfil, proyectos, stack tecnolÃ³gico y experiencia. Â¿En quÃ© puedo ayudarte?',
-    error:       'Algo saliÃ³ mal. IntÃ©ntalo de nuevo.',
-    rateLimit:   'Demasiadas preguntas. IntÃ©ntalo mÃ¡s tarde.',
+    welcome:     '¡Hola! Soy el asistente virtual de Roberto. Puedo responderte preguntas sobre su perfil, proyectos, stack tecnológico y experiencia. ¿En qué puedo ayudarte?',
+    error:       'Algo salió mal. Inténtalo de nuevo.',
+    rateLimit:   'Demasiadas preguntas. Inténtalo más tarde.',
     suggestions: [
-      'Â¿CuÃ¡les son tus proyectos?',
-      'Â¿QuÃ© tecnologÃ­as dominas?',
-      'Â¿Tienes experiencia laboral?',
-      'Â¿CÃ³mo puedo contactarte?',
+      '¿Cuáles son tus proyectos?',
+      '¿Qué tecnologías dominas?',
+      '¿Tienes experiencia laboral?',
+      '¿Cómo puedo contactarte?',
     ],
   },
   en: {
@@ -37,7 +37,7 @@ const UI = {
     placeholder: 'Frage eingeben...',
     welcome:     'Hallo! Ich bin Robertos virtueller Assistent. Ich kann Fragen zu seinem Profil, Projekten, Tech-Stack und Erfahrungen beantworten. Wie kann ich helfen?',
     error:       'Etwas ist schiefgelaufen. Bitte erneut versuchen.',
-    rateLimit:   'Zu viele Anfragen. Bitte spÃ¤ter erneut versuchen.',
+    rateLimit:   'Zu viele Anfragen. Bitte später erneut versuchen.',
     suggestions: [
       'Was sind deine Projekte?',
       'Welche Technologien beherrschst du?',
