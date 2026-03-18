@@ -8,10 +8,12 @@ import LabPage from './pages/LabPage.jsx'
 import ContactPage from './pages/ContactPage.jsx'
 import ProjectsPage from './pages/ProjectsPage.jsx'
 import { I18nProvider } from './i18n/I18nContext.jsx'
+import { ChatProvider } from './components/ChatContext.jsx'
 
 export default function App() {
   return (
     <I18nProvider>
+      <ChatProvider>
       <BrowserRouter>
         <div style={{ position: 'relative', minHeight: '100vh' }}>
           <Navbar />
@@ -26,6 +28,7 @@ export default function App() {
           <ChatWidget />
         </div>
       </BrowserRouter>
+      </ChatProvider>
     </I18nProvider>
   )
 }
