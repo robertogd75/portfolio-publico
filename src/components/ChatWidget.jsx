@@ -1,4 +1,4 @@
-﻿﻿import { useState, useRef, useEffect } from 'react'
+﻿import { useState, useRef, useEffect } from 'react'
 import { useTranslation } from '../i18n/I18nContext.jsx'
 import { useChat } from './ChatContext.jsx'
 
@@ -7,6 +7,7 @@ const UI = {
     title:       'Roberto AI',
     subtitle:    'Pregúntame sobre el portfolio',
     placeholder: 'Escribe una pregunta...',
+    newChat:     'Nuevo chat',
     welcome:     '¡Hola! Soy el asistente virtual de Roberto. Puedo responderte preguntas sobre su perfil, proyectos, stack tecnológico y experiencia. ¿En qué puedo ayudarte?',
     error:       'Algo salió mal. Inténtalo de nuevo.',
     rateLimit:   'Demasiadas preguntas. Inténtalo más tarde.',
@@ -21,6 +22,7 @@ const UI = {
     title:       'Roberto AI',
     subtitle:    'Ask me about the portfolio',
     placeholder: 'Type a question...',
+    newChat:     'New chat',
     welcome:     "Hi! I'm Roberto's virtual assistant. I can answer questions about his profile, projects, tech stack and experience. How can I help you?",
     error:       'Something went wrong. Please try again.',
     rateLimit:   'Too many questions. Please try again later.',
@@ -35,6 +37,7 @@ const UI = {
     title:       'Roberto AI',
     subtitle:    'Fragen zum Portfolio',
     placeholder: 'Frage eingeben...',
+    newChat:     'Neuer Chat',
     welcome:     'Hallo! Ich bin Robertos virtueller Assistent. Ich kann Fragen zu seinem Profil, Projekten, Tech-Stack und Erfahrungen beantworten. Wie kann ich helfen?',
     error:       'Etwas ist schiefgelaufen. Bitte erneut versuchen.',
     rateLimit:   'Zu viele Anfragen. Bitte später erneut versuchen.',
@@ -97,7 +100,7 @@ function ChatMessage({ role, content, isLoading }) {
 export default function ChatWidget() {
   const { lang }                  = useTranslation()
   const ui                        = UI[lang] ?? UI.es
-  const { messages, loading, sendMessage } = useChat()
+  const { messages, loading, sendMessage, resetChat } = useChat()
 
   const [open, setOpen]           = useState(false)
   const [hasOpened, setHasOpened] = useState(false)
@@ -214,7 +217,29 @@ export default function ChatWidget() {
               <div style={{ fontWeight: 700, fontSize: '0.9rem', color: 'var(--text-primary)' }}>{ui.title}</div>
               <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>{ui.subtitle}</div>
             </div>
-            <div style={{ marginLeft: 'auto' }}>
+            <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              {messages.length > 0 && (
+                <button
+                  onClick={resetChat}
+                  title={ui.newChat}
+                  style={{
+                    background: 'none', border: '1px solid rgba(0,240,255,0.2)',
+                    borderRadius: 7, padding: '0.25rem 0.5rem',
+                    color: 'var(--neon-cyan)', cursor: 'pointer',
+                    fontSize: '0.65rem', fontFamily: 'var(--font-mono)',
+                    display: 'flex', alignItems: 'center', gap: '0.3rem',
+                    transition: 'all 0.15s',
+                  }}
+                  onMouseEnter={e => { e.currentTarget.style.background = 'rgba(0,240,255,0.1)'; e.currentTarget.style.borderColor = 'rgba(0,240,255,0.5)' }}
+                  onMouseLeave={e => { e.currentTarget.style.background = 'none'; e.currentTarget.style.borderColor = 'rgba(0,240,255,0.2)' }}
+                >
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <path d="M12 5H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5"/>
+                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                  </svg>
+                  {ui.newChat}
+                </button>
+              )}
               <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#4ade80', boxShadow: '0 0 6px #4ade80', display: 'block' }} />
             </div>
           </div>

@@ -1,4 +1,4 @@
-﻿﻿import { useState, useRef, useEffect } from 'react'
+﻿import { useState, useRef, useEffect } from 'react'
 import { useTranslation } from '../i18n/I18nContext.jsx'
 import { useChat } from './ChatContext.jsx'
 
@@ -9,6 +9,7 @@ const UI = {
     titleNeon:   'sobre mí?',
     desc:        'El asistente solo conoce información de este portfolio.',
     placeholder: 'Escribe tu pregunta...',
+    newChat:     'Nuevo chat',
     welcome:     '¡Hola! Pregúntame lo que quieras sobre el perfil, proyectos o experiencia de Roberto.',
     error:       'Algo salió mal. Inténtalo de nuevo.',
     rateLimit:   'Demasiadas preguntas. Inténtalo más tarde.',
@@ -20,6 +21,7 @@ const UI = {
     titleNeon:   'about me?',
     desc:        'The assistant only knows information from this portfolio.',
     placeholder: 'Type your question...',
+    newChat:     'New chat',
     welcome:     "Hi! Ask me anything about Roberto's profile, projects or experience.",
     error:       'Something went wrong. Please try again.',
     rateLimit:   'Too many questions. Please try again later.',
@@ -31,6 +33,7 @@ const UI = {
     titleNeon:   'über mich?',
     desc:        'Der Assistent kennt nur Informationen aus diesem Portfolio.',
     placeholder: 'Frage eingeben...',
+    newChat:     'Neuer Chat',
     welcome:     'Hallo! Frag mich alles über Robertos Profil, Projekte oder Erfahrungen.',
     error:       'Etwas ist schiefgelaufen. Bitte erneut versuchen.',
     rateLimit:   'Zu viele Anfragen. Bitte später erneut versuchen.',
@@ -88,7 +91,7 @@ function Bubble({ role, content, isLoading }) {
 export default function AiChatSection() {
   const { lang } = useTranslation()
   const ui = UI[lang] ?? UI.es
-  const { messages, loading, sendMessage } = useChat()
+  const { messages, loading, sendMessage, resetChat } = useChat()
 
   const [input, setInput]   = useState('')
   const scrollRef           = useRef(null)
@@ -152,7 +155,31 @@ export default function AiChatSection() {
               <div style={{ fontWeight: 700, fontSize: '0.88rem', color: 'var(--text-primary)' }}>Roberto AI</div>
               <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>{ui.desc}</div>
             </div>
-            <span style={{ marginLeft: 'auto', width: 7, height: 7, borderRadius: '50%', background: '#4ade80', boxShadow: '0 0 6px #4ade80', display: 'block' }} />
+            <span style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              {messages.length > 0 && (
+                <button
+                  onClick={resetChat}
+                  title={ui.newChat}
+                  style={{
+                    background: 'none', border: '1px solid rgba(0,240,255,0.2)',
+                    borderRadius: 7, padding: '0.25rem 0.5rem',
+                    color: 'var(--neon-cyan)', cursor: 'pointer',
+                    fontSize: '0.65rem', fontFamily: 'var(--font-mono)',
+                    display: 'flex', alignItems: 'center', gap: '0.3rem',
+                    transition: 'all 0.15s',
+                  }}
+                  onMouseEnter={e => { e.currentTarget.style.background = 'rgba(0,240,255,0.1)'; e.currentTarget.style.borderColor = 'rgba(0,240,255,0.5)' }}
+                  onMouseLeave={e => { e.currentTarget.style.background = 'none'; e.currentTarget.style.borderColor = 'rgba(0,240,255,0.2)' }}
+                >
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <path d="M12 5H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5"/>
+                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                  </svg>
+                  {ui.newChat}
+                </button>
+              )}
+              <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#4ade80', boxShadow: '0 0 6px #4ade80', display: 'block' }} />
+            </span>
           </div>
 
           {/* Messages */}

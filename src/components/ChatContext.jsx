@@ -37,6 +37,11 @@ export function ChatProvider({ children }) {
   const messagesRef = useRef(messages)
   useEffect(() => { messagesRef.current = messages }, [messages])
 
+  const resetChat = useCallback(() => {
+    localStorage.removeItem(STORAGE_KEY)
+    setMessages([])
+  }, [])
+
   const sendMessage = useCallback(async (text, { errorText, rateLimitText }) => {
     const trimmed = text.trim().slice(0, 500)
     if (!trimmed || loading) return
@@ -68,7 +73,7 @@ export function ChatProvider({ children }) {
   }, [loading])
 
   return (
-    <ChatCtx.Provider value={{ messages, loading, sendMessage }}>
+    <ChatCtx.Provider value={{ messages, loading, sendMessage, resetChat }}>
       {children}
     </ChatCtx.Provider>
   )
