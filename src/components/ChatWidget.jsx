@@ -84,7 +84,9 @@ function ChatMessage({ role, content, isLoading }) {
           ✦
         </div>
       )}
-      <div style={{
+      <div
+        className={isUser ? undefined : 'chat-msg-assistant'}
+        style={{
         maxWidth: '78%',
         background: isUser
           ? 'linear-gradient(135deg, rgba(0,240,255,0.18), rgba(0,240,255,0.1))'
@@ -231,6 +233,7 @@ export default function ChatWidget() {
       {/* ── Chat panel ── */}
       {open && (
         <div
+          className="chat-panel"
           style={{
             position: 'fixed', bottom: 88, right: 24, zIndex: 9997,
             width: 'min(360px, calc(100vw - 32px))',
@@ -246,7 +249,7 @@ export default function ChatWidget() {
           }}
         >
           {/* Header */}
-          <div style={{
+          <div className="chat-header" style={{
             padding: '0.9rem 1rem',
             background: 'linear-gradient(135deg, rgba(0,240,255,0.08), rgba(124,58,237,0.08))',
             borderBottom: '1px solid rgba(255,255,255,0.07)',
@@ -328,7 +331,7 @@ export default function ChatWidget() {
           </div>
 
           {/* Input */}
-          <div style={{
+          <div className="chat-input-wrap" style={{
             padding: '0.7rem 0.75rem',
             borderTop: '1px solid rgba(255,255,255,0.07)',
             display: 'flex', gap: '0.5rem', alignItems: 'flex-end', flexShrink: 0,
@@ -336,6 +339,7 @@ export default function ChatWidget() {
             <textarea
               ref={inputRef}
               rows={1}
+              className="chat-textarea"
               value={input}
               onChange={e => setInput(e.target.value)}
               onKeyDown={handleKeyDown}

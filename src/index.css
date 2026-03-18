@@ -127,6 +127,30 @@
   background: rgba(0, 150, 180, 0.06);
 }
 
+/* Light mode: ChatWidget */
+[data-theme="light"] .chat-panel {
+  background: rgba(255, 255, 255, 0.97) !important;
+  border-color: rgba(0, 151, 167, 0.25) !important;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,151,167,0.08) !important;
+}
+[data-theme="light"] .chat-header {
+  background: linear-gradient(135deg, rgba(0,151,167,0.07), rgba(124,58,237,0.07)) !important;
+  border-bottom-color: rgba(0,0,0,0.07) !important;
+}
+[data-theme="light"] .chat-msg-assistant {
+  background: rgba(0,0,0,0.04) !important;
+  border-color: rgba(0,0,0,0.08) !important;
+  color: var(--text-primary) !important;
+}
+[data-theme="light"] .chat-input-wrap {
+  border-top-color: rgba(0,0,0,0.07) !important;
+}
+[data-theme="light"] .chat-textarea {
+  background: rgba(0,0,0,0.05) !important;
+  border-color: rgba(0,151,167,0.3) !important;
+  color: var(--text-primary) !important;
+}
+
 /* Light mode: .card subtle shadow */
 [data-theme="light"] .card {
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
