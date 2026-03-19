@@ -35,13 +35,13 @@ const categories = [
     color: '#61DAFB',
     glow: 'rgba(97,218,251,0.15)',
     techs: [
-      { key: 'React', name: 'React', desc: 'UIs reactivas y SPAs de alta interactividad' },
-      { key: 'NextJS', name: 'Next.js', desc: 'SSR, SSG y rutas de API en producción' },
-      { key: 'InertiaJS', name: 'Inertia.js', desc: 'Monolitos modernos con Laravel + React' },
-      { key: 'JavaScript', name: 'JavaScript ES6+', desc: 'Lógica de negocio, async/await, módulos' },
-      { key: 'HTML5', name: 'HTML5', desc: 'Markup semántico, Web APIs nativas' },
-      { key: 'CSS3', name: 'CSS3', desc: 'Layouts avanzados, animaciones, variables' },
-      { key: 'Bootstrap', name: 'Bootstrap', desc: 'Sistemas de grid y UIs preparadas' },
+      { key: 'React', name: 'React' },
+      { key: 'NextJS', name: 'Next.js' },
+      { key: 'InertiaJS', name: 'Inertia.js' },
+      { key: 'JavaScript', name: 'JavaScript ES6+' },
+      { key: 'HTML5', name: 'HTML5' },
+      { key: 'CSS3', name: 'CSS3' },
+      { key: 'Bootstrap', name: 'Bootstrap' },
     ],
   },
   {
@@ -49,11 +49,11 @@ const categories = [
     color: '#F9322C',
     glow: 'rgba(249,50,44,0.12)',
     techs: [
-      { key: 'Java', name: 'Java', desc: 'Aplicaciones robustas y orientadas a objetos' },
-      { key: 'PHP', name: 'PHP', desc: 'APIs REST y lógica de servidor eficiente' },
-      { key: 'SpringBoot', name: 'Spring Boot', desc: 'Microservicios empresariales y APIs REST' },
-      { key: 'Laravel', name: 'Laravel', desc: 'Backends MVC, autenticación, colas, ORM' },
-      { key: 'Symfony', name: 'Symfony', desc: 'Arquitectura modular y componentes reutilizables' },
+      { key: 'Java', name: 'Java' },
+      { key: 'PHP', name: 'PHP' },
+      { key: 'SpringBoot', name: 'Spring Boot' },
+      { key: 'Laravel', name: 'Laravel' },
+      { key: 'Symfony', name: 'Symfony' },
     ],
   },
   {
@@ -61,10 +61,10 @@ const categories = [
     color: '#00758F',
     glow: 'rgba(0,117,143,0.15)',
     techs: [
-      { key: 'SQL', name: 'SQL', desc: 'Consultas optimizadas, joins, índices, vistas' },
-      { key: 'MariaDB', name: 'MariaDB', desc: 'Gestión y administración concurrente' },
-      { key: 'PostgreSQL', name: 'PostgreSQL', desc: 'Modelado relacional y objetos orientados' },
-      { key: 'WordPress', name: 'WordPress', desc: 'CMS con themes custom y desarrollo de plugins' },
+      { key: 'SQL', name: 'SQL' },
+      { key: 'MariaDB', name: 'MariaDB' },
+      { key: 'PostgreSQL', name: 'PostgreSQL' },
+      { key: 'WordPress', name: 'WordPress' },
     ],
   },
   {
@@ -72,21 +72,22 @@ const categories = [
     color: '#2496ED',
     glow: 'rgba(36,150,237,0.15)',
     techs: [
-      { key: 'Ubuntu', name: 'Ubuntu Server', desc: 'Administración de servidores Linux' },
-      { key: 'Docker', name: 'Docker', desc: 'Contenedores, compose y entornos reproducibles' },
-      { key: 'Portainer', name: 'Portainer', desc: 'Gestor visual de stacks y contenedores' },
-      { key: 'Nginx', name: 'Nginx Proxy Manager', desc: 'Reverse proxy, gestión de certificados SSL/TLS' },
-      { key: 'Apache', name: 'Apache HTTP', desc: 'Configuración y hosting de servidores web' },
-      { key: 'AWS', name: 'AWS', desc: 'Infraestructura cloud, EC2, S3' },
-      { key: 'Cloudflare', name: 'Cloudflare', desc: 'Gestión DNS, WAF y caché (CDN)' },
-      { key: 'Git', name: 'Git', desc: 'Versionado de código y control de ramas' },
-      { key: 'GitHub', name: 'GitHub', desc: 'Colaboración, code reviews y almacenamiento' },
+      { key: 'Ubuntu', name: 'Ubuntu Server' },
+      { key: 'Docker', name: 'Docker' },
+      { key: 'Portainer', name: 'Portainer' },
+      { key: 'Nginx', name: 'Nginx Proxy Manager' },
+      { key: 'Apache', name: 'Apache HTTP' },
+      { key: 'AWS', name: 'AWS' },
+      { key: 'Cloudflare', name: 'Cloudflare' },
+      { key: 'Git', name: 'Git' },
+      { key: 'GitHub', name: 'GitHub' },
     ],
   },
 ]
 
 function TechCard({ tItem, color, glow }) {
   const [hovered, setHovered] = useState(false)
+  const { t } = useTranslation()
   const iconPath = icons[tItem.key]
 
   return (
@@ -128,7 +129,7 @@ function TechCard({ tItem, color, glow }) {
           fontSize: '0.72rem',
           color: 'var(--text-muted)',
           lineHeight: 1.5,
-        }}>{tItem.desc}</div>
+        }}>{t('techstack', `tech_${tItem.key}_desc`)}</div>
       </div>
     </div>
   )

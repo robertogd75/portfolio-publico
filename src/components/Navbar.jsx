@@ -112,7 +112,7 @@ export default function Navbar() {
 
         <ul style={{
           display: 'flex',
-          gap: '2rem',
+          gap: '1.25rem',
           listStyle: 'none',
           alignItems: 'center',
         }} className="nav-links-desktop">
@@ -140,23 +140,18 @@ export default function Navbar() {
             <button
               onClick={() => setLangMenuOpen(!langMenuOpen)}
               onBlur={() => setTimeout(() => setLangMenuOpen(false), 200)}
+              title={lang.toUpperCase()}
               style={{
                 background: 'var(--bg-input)',
                 border: '1px solid var(--border)',
                 borderRadius: 6,
-                padding: '0.4rem 0.6rem',
-                color: 'var(--text-primary)',
-                fontFamily: 'var(--font-mono)',
-                fontSize: '0.75rem',
+                padding: '0.35rem 0.45rem',
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '0.3rem',
-                textTransform: 'uppercase',
               }}
             >
-              <img src={flagIcons[lang]} alt={lang} style={{ width: 16, height: 16, borderRadius: '50%', objectFit: 'cover' }} />
-              {lang}
+              <img src={flagIcons[lang]} alt={lang} style={{ width: 18, height: 18, borderRadius: '50%', objectFit: 'cover', display: 'block' }} />
             </button>
             {langMenuOpen && (
               <div style={{
@@ -201,33 +196,48 @@ export default function Navbar() {
             )}
           </li>
 
-          <li>
+          <li style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
             <a
               href="https://github.com/robertogd75"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-outline"
-              style={{ padding: '0.45rem 1rem', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}
+              title="GitHub"
+              style={{
+                width: 34, height: 34, borderRadius: 8,
+                background: 'transparent',
+                border: '1px solid var(--border)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                color: 'var(--text-secondary)',
+                transition: 'all 0.2s ease',
+              }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--neon-cyan)'; e.currentTarget.style.color = 'var(--neon-cyan)' }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = 'var(--text-secondary)' }}
             >
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/>
               </svg>
-              GitHub
             </a>
-          </li>
-          <li>
             <a
               href="https://www.linkedin.com/in/roberto-garcia-delgado-626b9430a"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-primary"
-              style={{ padding: '0.5rem 1.25rem', fontSize: '0.8rem' }}
+              title="LinkedIn"
+              style={{
+                width: 34, height: 34, borderRadius: 8,
+                background: 'linear-gradient(135deg, var(--neon-cyan), var(--neon-purple))',
+                border: 'none',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                color: '#000',
+                transition: 'all 0.2s ease',
+                boxShadow: '0 0 16px rgba(0,240,255,0.2)',
+              }}
+              onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 0 28px rgba(0,240,255,0.45)'; e.currentTarget.style.transform = 'translateY(-1px)' }}
+              onMouseLeave={e => { e.currentTarget.style.boxShadow = '0 0 16px rgba(0,240,255,0.2)'; e.currentTarget.style.transform = 'translateY(0)' }}
             >
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/>
                 <circle cx="4" cy="4" r="2"/>
               </svg>
-              LinkedIn
             </a>
           </li>
           <li>

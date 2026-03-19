@@ -104,7 +104,7 @@ export default function Experience() {
               </div>
 
               {/* Content Card */}
-              <div className="timeline-content card" style={{ padding: '1.8rem', position: 'relative' }}>
+              <div className="timeline-content card" style={{ padding: '1.2rem 1.5rem', position: 'relative' }}>
                 <div style={{
                   position: 'absolute',
                   top: '-15px',
@@ -125,18 +125,18 @@ export default function Experience() {
 
                 <h3 style={{
                   color: 'var(--text-primary)',
-                  fontSize: '1.25rem',
-                  marginBottom: '0.25rem',
-                  marginTop: '0.5rem',
+                  fontSize: '1.1rem',
+                  marginBottom: '0.15rem',
+                  marginTop: '0.35rem',
                 }}>
                   {job.company}
                 </h3>
                 
                 <h4 style={{
                   color: job.color,
-                  fontSize: '0.95rem',
+                  fontSize: '0.875rem',
                   fontWeight: '600',
-                  marginBottom: '1rem',
+                  marginBottom: '0.5rem',
                   letterSpacing: '0.02em',
                 }}>
                   {job.role}
@@ -144,9 +144,9 @@ export default function Experience() {
                 
                 <p style={{
                   color: 'var(--text-secondary)',
-                  fontSize: '0.95rem',
-                  lineHeight: '1.65',
-                  marginBottom: '1.5rem',
+                  fontSize: '0.875rem',
+                  lineHeight: '1.55',
+                  marginBottom: '0.75rem',
                 }}>
                   {job.desc}
                 </p>
@@ -188,11 +188,11 @@ export default function Experience() {
         }
 
         .timeline-item {
-          padding: 10px 40px;
+          padding: 6px 40px;
           position: relative;
           background-color: inherit;
           width: 50%;
-          margin-bottom: 2rem;
+          margin-bottom: 0;
         }
 
         .timeline-item.left {
