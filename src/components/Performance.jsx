@@ -97,9 +97,9 @@ export default function Performance() {
           {t('performance', 'desc')}
         </p>
 
-        <div style={{
+        <div className="perf-grid" style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(320px, 100%), 1fr))',
           gap: '2rem',
           alignItems: 'start',
         }}>
@@ -131,7 +131,7 @@ export default function Performance() {
               </span>
             </div>
             {/* Lines */}
-            <div style={{ padding: '1.25rem' }}>
+            <div className="terminal-lines" style={{ padding: '1.25rem' }}>
               {terminalLines.map((l, i) => (
                 <div key={i} style={{
                   display: 'flex',

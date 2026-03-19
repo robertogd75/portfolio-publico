@@ -359,3 +359,75 @@ h1, h2, h3, h4 { font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; }
     --section-pad: 3rem 1rem;
   }
 }
+
+/* ============================================
+   RESPONSIVE — Mobile full support
+   ============================================ */
+
+/* Prevent any child from creating horizontal scroll */
+html {
+  overflow-x: hidden;
+}
+
+/* ---- Navbar ---- */
+/* On mobile: hide desktop links and show hamburger button */
+@media (max-width: 768px) {
+  .nav-links-desktop {
+    display: none !important;
+  }
+  .nav-hamburger {
+    display: flex !important;
+  }
+}
+
+/* ---- Performance terminal ---- */
+/* Allow long monospace lines to scroll inside the terminal widget */
+.terminal-lines {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 240, 255, 0.25) transparent;
+}
+.terminal-lines::-webkit-scrollbar {
+  height: 4px;
+}
+.terminal-lines::-webkit-scrollbar-thumb {
+  background: rgba(0, 240, 255, 0.25);
+  border-radius: 4px;
+}
+
+/* ---- About section: reduce excessive vertical gap on mobile ---- */
+@media (max-width: 768px) {
+  .about-grid {
+    gap: 2rem !important;
+  }
+}
+
+/* ---- Hero stats: tighten spacing on small screens ---- */
+@media (max-width: 480px) {
+  .hero-stats {
+    gap: 1.25rem !important;
+    margin-top: 2.5rem !important;
+  }
+}
+
+/* ---- Ensure inline-grid items can't blow out their track ---- */
+/* Applied to Performance and About grid wrappers */
+.perf-grid > *,
+.about-grid > * {
+  min-width: 0;
+}
+
+/* ---- Contact page form: full-width on mobile ---- */
+@media (max-width: 600px) {
+  .contact-form-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ---- Lab tool active card: reduce padding on small screens ---- */
+@media (max-width: 480px) {
+  .lab-active-card {
+    padding: 1rem !important;
+  }
+}

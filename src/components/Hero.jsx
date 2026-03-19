@@ -190,7 +190,7 @@ export default function Hero() {
         </div>
 
         {/* Bottom stats row */}
-        <div style={{
+        <div className="hero-stats" style={{
           display: 'flex',
           gap: '2.5rem',
           marginTop: '4rem',
