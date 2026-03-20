@@ -350,15 +350,15 @@ function ProjectCard({ project, lang, ui }) {
                   style={{
                     display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
                     fontFamily: 'var(--font-mono)', fontSize: '0.78rem',
-                    color: 'var(--text-secondary)',
-                    background: 'var(--bg-input)',
-                    border: '1px solid var(--border)',
+                    color: project.color,
+                    background: `${project.color}10`,
+                    border: `1px solid ${project.color}35`,
                     borderRadius: 8, padding: '0.4rem 1rem',
                     textDecoration: 'none', transition: 'all 0.2s',
                     flex: project.demo ? '0 0 auto' : 1, justifyContent: 'center',
                   }}
-                  onMouseEnter={e => { e.currentTarget.style.color = 'var(--neon-cyan)'; e.currentTarget.style.borderColor = 'var(--neon-cyan)44' }}
-                  onMouseLeave={e => { e.currentTarget.style.color = 'var(--text-secondary)'; e.currentTarget.style.borderColor = 'var(--border)' }}
+                  onMouseEnter={e => { e.currentTarget.style.background = `${project.color}22`; e.currentTarget.style.borderColor = `${project.color}65` }}
+                  onMouseLeave={e => { e.currentTarget.style.background = `${project.color}10`; e.currentTarget.style.borderColor = `${project.color}35` }}
                 >
                   {GITHUB_SVG}
                   {ui.viewGitHub}
@@ -373,13 +373,13 @@ function ProjectCard({ project, lang, ui }) {
                     display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
                     fontFamily: 'var(--font-mono)', fontSize: '0.78rem',
                     color: project.color,
-                    background: `${project.color}12`,
-                    border: `1px solid ${project.color}40`,
+                    background: `${project.color}10`,
+                    border: `1px solid ${project.color}35`,
                     borderRadius: 8, padding: '0.4rem 1rem',
                     textDecoration: 'none', transition: 'all 0.2s', flex: 1, justifyContent: 'center',
                   }}
-                  onMouseEnter={e => { e.currentTarget.style.background = `${project.color}22`; e.currentTarget.style.borderColor = `${project.color}70` }}
-                  onMouseLeave={e => { e.currentTarget.style.background = `${project.color}12`; e.currentTarget.style.borderColor = `${project.color}40` }}
+                  onMouseEnter={e => { e.currentTarget.style.background = `${project.color}22`; e.currentTarget.style.borderColor = `${project.color}65` }}
+                  onMouseLeave={e => { e.currentTarget.style.background = `${project.color}10`; e.currentTarget.style.borderColor = `${project.color}35` }}
                 >
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                     <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>

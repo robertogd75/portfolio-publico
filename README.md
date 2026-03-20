@@ -1,49 +1,136 @@
-# Portfolio & Lab — Roberto García Delgado
+<div align="center">
 
-Portfolio personal y laboratorio de herramientas, desplegado en [rgardel.es](https://rgardel.es).
+# ⚡ Portfolio & Lab
+
+### Roberto García Delgado
+
+**Portfolio personal · Laboratorio de herramientas · Self-hosted**
+
+[![Web](https://img.shields.io/badge/🌐_Web-rgardel.es-00f0ff?style=for-the-badge&logoColor=white)](https://rgardel.es)
+[![GitHub](https://img.shields.io/badge/GitHub-robertogd75-181717?style=for-the-badge&logo=github)](https://github.com/robertogd75)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Roberto_García-0A66C2?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/roberto-garcia-delgado-626b9430a)
+
+![React](https://img.shields.io/badge/React_19-20232A?style=flat&logo=react&logoColor=61DAFB)
+![Vite](https://img.shields.io/badge/Vite_7-646CFF?style=flat&logo=vite&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white)
+![Nginx](https://img.shields.io/badge/Nginx-009639?style=flat&logo=nginx&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat&logo=node.js&logoColor=white)
+
+</div>
 
 ---
 
-## Tecnologías
+## ¿Qué es esto?
 
-| Capa | Stack |
-|------|-------|
-| Frontend | React 19, Vite 7, framer-motion, lucide-react |
-| Estilos | CSS puro con design system en variables CSS (sin Tailwind) |
-| i18n | Sistema propio — español, inglés y alemán |
-| Mailer | Node.js (Express) + Nodemailer + Groq AI |
-| Despliegue | Docker, Nginx, Ubuntu Server self-hosted |
+Una SPA construida de cero en React 19 + Vite, desplegada en un servidor Ubuntu propio con Docker y Nginx. Incluye un sistema i18n multiidioma (ES / EN / DE), un laboratorio con 16 herramientas de desarrollo en el navegador, y un backend Node.js para el formulario de contacto y el chat IA.
 
 ---
 
-## Estructura del proyecto
+## 🏗️ Arquitectura del sistema
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                      INTERNET (HTTPS)                       │
+└──────────────────────────┬──────────────────────────────────┘
+                           │ :443
+                           ▼
+              ┌────────────────────────┐
+              │   Nginx Proxy Manager  │  SSL Termination
+              │      (Cloudflare)      │  + Reverse Proxy
+              └──────────┬─────────────┘
+                         │
+           ┌─────────────┴──────────────┐
+           │                            │
+           ▼ :8085                      ▼ (red interna)
+  ┌─────────────────┐         ┌──────────────────────┐
+  │   portfolio-    │  fetch  │   portfolio-mailer   │
+  │    publico      │ ──────► │  (Express :3001)     │
+  │  (Nginx + SPA)  │         │  Nodemailer + Groq   │
+  └─────────────────┘         └──────────────────────┘
+     React 19 / Vite                Node.js backend
+```
+
+> El contenedor `mailer` **no expone puertos al host**, solo es accesible desde la red Docker interna. Nginx actúa como proxy a `/api/`.
+
+---
+
+## 🗺️ Flujo de la aplicación
+
+```
+Usuario abre rgardel.es
+        │
+        ▼
+    Nginx sirve index.html (SPA)
+        │
+        ▼
+    React carga App.jsx
+        │
+        ├── I18nContext  ──► Detecta idioma del navegador (ES/EN/DE)
+        ├── ChatContext  ──► Estado global del chat IA
+        │
+        └── React Router ──► Renderiza la página correspondiente
+                │
+                ├── / ──────── HomePage  (Hero + secciones)
+                ├── /projects ─ ProjectsPage
+                ├── /stack ─── StackPage
+                ├── /experience ExperiencePage
+                ├── /lab ───── LabPage (16 herramientas)
+                └── /contact ─ ContactPage
+                                    │
+                                    ▼
+                             POST /api/contact
+                                    │
+                              portfolio-mailer
+                              (Nodemailer → Gmail)
+```
+
+---
+
+## 🛠️ Stack tecnológico
+
+| Capa | Tecnología | Notas |
+|------|-----------|-------|
+| **Frontend** | React 19 + Vite 7 | SPA, sin SSR |
+| **Animaciones** | framer-motion | Componentes animados |
+| **Iconos** | lucide-react | SVG tree-shakeable |
+| **Estilos** | CSS puro + variables CSS | Design system propio, sin Tailwind |
+| **i18n** | Sistema propio | `I18nContext` + `translations.js` |
+| **Mailer** | Express + Nodemailer | Gmail App Password |
+| **IA** | Groq API | Chat contextual del portfolio |
+| **Servidor web** | Nginx | SPA fallback + proxy a mailer |
+| **Contenedores** | Docker + Compose | Multi-stage build |
+| **Infraestructura** | Ubuntu Server self-hosted | Portainer, SSL, Cloudflare |
+
+---
+
+## 📁 Estructura del proyecto
 
 ```
 portfolio-publico/
-├── src/
-│   ├── App.jsx                  # Enrutamiento y layout principal
-│   ├── main.jsx
-│   ├── index.css                # Design system (variables CSS, reset)
-│   ├── components/
-│   │   ├── Navbar.jsx           # Navbar sticky con blur, idiomas y menú móvil
-│   │   ├── Hero.jsx             # Typewriter effect, stats, ConstellationBackground
-│   │   ├── TechStack.jsx        # 25+ tecnologías en 4 categorías
-│   │   ├── About.jsx            # 3 tarjetas de presentación
-│   │   ├── Experience.jsx       # Timeline de experiencia laboral
-│   │   ├── Performance.jsx      # Métricas del servidor self-hosted
-│   │   ├── Achievements.jsx     # 6 hitos técnicos
-│   │   ├── Contact.jsx          # CTA + footer con links sociales
-│   │   ├── AiChatSection.jsx    # Chat IA con Groq
-│   │   ├── ChatWidget.jsx       # Widget flotante de chat
-│   │   ├── ChatContext.jsx      # Contexto global del chat
-│   │   ├── ConstellationBackground.jsx
-│   │   └── lab/                 # 16 herramientas interactivas
-│   │       ├── ApiExplorer.jsx
-│   │       ├── Base64Tool.jsx
+│
+├── 📦 src/
+│   ├── App.jsx                      ← Enrutamiento + layout raíz
+│   ├── index.css                    ← Design system (variables CSS, reset)
+│   │
+│   ├── 🧩 components/
+│   │   ├── Navbar.jsx               ← Sticky, blur, lang switcher, menú móvil
+│   │   ├── Hero.jsx                 ← Typewriter + ConstellationBackground
+│   │   ├── TechStack.jsx            ← 25+ techs en 4 categorías
+│   │   ├── About.jsx                ← 3 tarjetas de presentación
+│   │   ├── Experience.jsx           ← Timeline laboral
+│   │   ├── Performance.jsx          ← Métricas del servidor en vivo
+│   │   ├── Achievements.jsx         ← 6 hitos técnicos
+│   │   ├── Contact.jsx              ← Footer + links sociales
+│   │   ├── AiChatSection.jsx        ← Chat IA (Groq)
+│   │   ├── ChatWidget.jsx           ← Widget flotante
+│   │   ├── ChatContext.jsx          ← Estado global del chat
+│   │   └── 🔬 lab/                  ← 16 herramientas de desarrollo
+│   │       ├── ApiExplorer.jsx      ← Cliente REST en el navegador
+│   │       ├── Base64Tool.jsx       ← Codificador / decodificador
 │   │       ├── ColorBlindSimulator.jsx
 │   │       ├── ColorPalette.jsx
 │   │       ├── CssConverter.jsx
-│   │       ├── HashGenerator.jsx
+│   │       ├── HashGenerator.jsx    ← MD5, SHA-1, SHA-256...
 │   │       ├── HtmlPreviewer.jsx
 │   │       ├── ImageStudio.jsx
 │   │       ├── JsonFormatter.jsx
@@ -54,113 +141,130 @@ portfolio-publico/
 │   │       ├── SvgEditor.jsx
 │   │       ├── TypingTest.jsx
 │   │       └── WordCounter.jsx
-│   ├── pages/
+│   │
+│   ├── 📄 pages/
 │   │   ├── HomePage.jsx
 │   │   ├── ProjectsPage.jsx
 │   │   ├── StackPage.jsx
 │   │   ├── ExperiencePage.jsx
 │   │   ├── LabPage.jsx
 │   │   └── ContactPage.jsx
-│   └── i18n/
-│       ├── I18nContext.jsx      # Context + hook useTranslation()
-│       └── translations.js     # Traducciones ES / EN / DE
-├── mailer/
-│   ├── index.js                # Servidor Express + Nodemailer + Groq AI
+│   │
+│   └── 🌍 i18n/
+│       ├── I18nContext.jsx          ← Context API + hook useTranslation()
+│       └── translations.js         ← Textos en ES / EN / DE
+│
+├── 📬 mailer/
+│   ├── index.js                    ← Express + Nodemailer + Groq AI
 │   ├── package.json
 │   └── Dockerfile
-├── public/
-│   └── api/v1/
-│       ├── cars.json           # API mock — coches
-│       └── brands.json         # API mock — marcas
-├── Dockerfile                  # Multi-stage build (Node build + Nginx serve)
-├── docker-compose.yml          # Orquestación portfolio + mailer
-├── nginx.conf                  # SPA fallback + proxy inverso al mailer
-├── vite.config.js
-├── eslint.config.js
+│
+├── 🌐 public/api/v1/
+│   ├── cars.json                   ← API mock para el ApiExplorer
+│   └── brands.json
+│
+├── Dockerfile                      ← Multi-stage: Node build → Nginx serve
+├── docker-compose.yml              ← Orquesta portfolio + mailer
+├── nginx.conf                      ← SPA fallback + proxy a /api/
 └── package.json
 ```
 
 ---
 
-## Secciones de la web
+## 🚀 Puesta en marcha
 
-- **Hero** — presentación con efecto typewriter y fondo de constelaciones animado
-- **Tech Stack** — 25+ tecnologías organizadas en 4 categorías
-- **About** — Problem Solving · Cambridge B2 · Battle-Tested
-- **Experience** — timeline de trabajos (Ayto. Marbella, Hospital Ochoa, Mercadona, Alcampo...)
-- **Performance** — métricas del servidor en producción (uptime, Docker, Portainer, SSL)
-- **Achievements** — 6 hitos técnicos destacados
-- **Projects** — tarjetas de proyectos reales con enlaces a GitHub y web
-- **Lab** — 16 herramientas de desarrollo en el navegador
-- **Contact** — formulario de contacto con backend de correo y chat IA
+### 1. Variables de entorno
 
----
+Crea un `.env` en la raíz a partir del ejemplo:
 
-## Variables de entorno
-
-Crea un archivo `.env` en la raíz con las siguientes variables (necesarias para el servicio mailer):
+```bash
+cp .env.example .env
+```
 
 ```env
 GMAIL_USER=tu_correo@gmail.com
-GMAIL_APP_PASS=tu_app_password
-GROQ_API_KEY=tu_api_key_groq
+GMAIL_APP_PASS=tu_app_password   # Google → Seguridad → Contraseñas de app
+GROQ_API_KEY=tu_api_key_groq     # console.groq.com
 ```
 
----
-
-## Puesta en marcha
-
-### Desarrollo local
+### 2. Desarrollo local
 
 ```bash
 npm install
 npm run dev
+# → http://localhost:5173
 ```
 
-La app estará disponible en `http://localhost:5173`.
-
-### Producción con Docker
+### 3. Producción con Docker
 
 ```bash
 docker compose up -d --build
 ```
 
-Esto levanta dos contenedores:
-- **portfolio-publico** — SPA servida por Nginx en el puerto `8085`
-- **portfolio-mailer** — API de correo/chat IA en el puerto `3001` (solo accesible dentro de la red Docker)
+| Contenedor | Puerto externo | Descripción |
+|-----------|---------------|-------------|
+| `portfolio-publico` | `8085` | SPA servida por Nginx |
+| `portfolio-mailer` | — (red interna) | API de contacto + chat IA |
 
-### Build estático
+### 4. Build estático
 
 ```bash
-npm run build
+npm run build   # genera dist/
+npm run preview # previsualiza en localhost:4173
 ```
 
-El resultado se genera en `dist/`.
+---
+
+## 🎨 Design system
+
+La paleta y tipografía se definen en `:root` dentro de `index.css`:
+
+```
+  ┌──────────────────────────────────────────────┐
+  │  Fondo base       #0a0a0f  ██████████████░░  │
+  │  Acento primario  #00f0ff  ░░░░░░░░░░████░░  │ ← Neon Cyan
+  │  Acento secundario #a855f7 ░░░░░░░░░░████░░  │ ← Neon Purple
+  │  Texto primario   #f1f5f9                    │
+  │  Texto secundario #94a3b8                    │
+  └──────────────────────────────────────────────┘
+```
 
 ---
 
-## Paleta de colores (design system)
+## 📋 Scripts disponibles
 
-| Variable | Valor | Uso |
-|----------|-------|-----|
-| `--bg-base` | `#0a0a0f` | Fondo principal |
-| `--neon-cyan` | `#00f0ff` | Acento primario |
-| `--neon-purple` | `#a855f7` | Acento secundario |
-
----
-
-## Scripts disponibles
-
-| Comando | Descripción |
-|---------|-------------|
-| `npm run dev` | Servidor de desarrollo con HMR |
-| `npm run build` | Build optimizado para producción |
-| `npm run preview` | Previsualiza el build local |
-| `npm run lint` | Análisis de código con ESLint |
+```bash
+npm run dev      # Servidor de desarrollo con HMR  → :5173
+npm run build    # Build optimizado para producción → dist/
+npm run preview  # Previsualiza el build local      → :4173
+npm run lint     # Análisis estático con ESLint
+```
 
 ---
 
-## Autor
+## 📦 Dependencias principales
 
-**Roberto García Delgado** — DAW · Málaga  
-[rgardel.es](https://rgardel.es) · [GitHub](https://github.com/robertogd75) · [LinkedIn](https://linkedin.com/in/roberto-garcia-delgado-626b9430a)
+```
+dependencies
+├── react@19              → UI
+├── react-dom@19          → DOM renderer
+├── react-router-dom@7    → Enrutamiento SPA
+├── framer-motion@12      → Animaciones
+├── lucide-react          → Iconos SVG
+└── qrcode                → Generación de QR (Lab)
+
+devDependencies
+├── vite@7                → Bundler + dev server
+├── @vitejs/plugin-react  → Fast Refresh
+└── eslint@9              → Linting
+```
+
+---
+
+<div align="center">
+
+**Hecho con ☕ y muchas horas de terminal por Roberto García Delgado**
+
+[![rgardel.es](https://img.shields.io/badge/🌐-rgardel.es-00f0ff?style=flat-square)](https://rgardel.es)
+
+</div>
