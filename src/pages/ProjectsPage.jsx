@@ -11,7 +11,7 @@ const UI = {
     wip:            'En desarrollo',
     soon:           'Próximamente',
     viewGitHub:     'GitHub',
-    viewDemo:       'Ver demo',
+    viewDemo:       'Visitar web',
     private:        'Privado',
     privateRepo:    'Repositorio privado',
     commitsLabel:   '// actividad.github',
@@ -32,7 +32,7 @@ const UI = {
     wip:            'In progress',
     soon:           'Coming soon',
     viewGitHub:     'GitHub',
-    viewDemo:       'View demo',
+    viewDemo:       'Visit website',
     private:        'Private',
     privateRepo:    'Private repository',
     commitsLabel:   '// github.activity',
@@ -53,7 +53,7 @@ const UI = {
     wip:            'In Entwicklung',
     soon:           'Demnächst',
     viewGitHub:     'GitHub',
-    viewDemo:       'Demo ansehen',
+    viewDemo:       'Website besuchen',
     private:        'Privat',
     privateRepo:    'Privates Repository',
     commitsLabel:   '// github.aktivität',
@@ -81,8 +81,8 @@ const PROJECTS = [
     tags: ['Laravel 10', 'React', 'Inertia.js', 'MySQL', 'SaaS'],
     status: 'live',
     isPrivate: false,
-    github: null, // TODO: añadir enlace del repo del compañero
-    demo: null,
+    github: 'https://github.com/fmargarrobertogd75/proyecto-marbella-facil',
+    demo: 'https://marbellafacil.rgardel.es/',
     title: { es: 'Marbella Fácil', en: 'Marbella Fácil', de: 'Marbella Fácil' },
     desc: {
       es: 'Plataforma SaaS integral orientada al turismo inteligente. Backend robusto en Laravel 10 con arquitectura SPA mediante React e Inertia.js. Incluye gestión dinámica de suscripciones, sistema transaccional de reservas en tiempo real y monitorización meteorológica.',
@@ -121,7 +121,7 @@ const PROJECTS = [
     tags: ['React 19', 'Vite', 'Docker', 'Nginx', 'Node.js'],
     status: 'live',
     isPrivate: false,
-    github: 'https://github.com/robertogd75', // TODO: reemplazar con el repo exacto del portfolio
+    github: 'https://github.com/robertogd75/portfolio-publico',
     demo: 'https://rgardel.es',
     title: { es: 'Portfolio & Lab', en: 'Portfolio & Lab', de: 'Portfolio & Lab' },
     desc: {
