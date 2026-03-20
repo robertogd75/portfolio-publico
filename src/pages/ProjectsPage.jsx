@@ -72,7 +72,25 @@ const GITHUB_USER = 'robertogd75'
 const PROJECTS = [
   {
     id: 'marbella-facil',
-    icon: '🏙️',
+    icon: (
+      <svg width="80" height="70" viewBox="0 0 80 70" fill="none">
+        <circle cx="60" cy="18" r="9" fill="#f59e0b"/>
+        <line x1="60" y1="5" x2="60" y2="2" stroke="#f59e0b" strokeWidth="2.5" strokeLinecap="round"/>
+        <line x1="60" y1="31" x2="60" y2="34" stroke="#f59e0b" strokeWidth="2.5" strokeLinecap="round"/>
+        <line x1="47" y1="18" x2="44" y2="18" stroke="#f59e0b" strokeWidth="2.5" strokeLinecap="round"/>
+        <line x1="73" y1="18" x2="76" y2="18" stroke="#f59e0b" strokeWidth="2.5" strokeLinecap="round"/>
+        <line x1="51" y1="9" x2="48.9" y2="6.9" stroke="#f59e0b" strokeWidth="2.5" strokeLinecap="round"/>
+        <line x1="69" y1="27" x2="71.1" y2="29.1" stroke="#f59e0b" strokeWidth="2.5" strokeLinecap="round"/>
+        <line x1="51" y1="27" x2="48.9" y2="29.1" stroke="#f59e0b" strokeWidth="2.5" strokeLinecap="round"/>
+        <line x1="69" y1="9" x2="71.1" y2="6.9" stroke="#f59e0b" strokeWidth="2.5" strokeLinecap="round"/>
+        <path d="M25 68 C24 54 25 42 27 35 C29 28 29 24 25 21" stroke="#f59e0b" strokeWidth="3" strokeLinecap="round" fill="none"/>
+        <path d="M25 21 C16 13 6 16 3 23 C12 20 20 22 25 21Z" fill="#f59e0b" opacity="0.8"/>
+        <path d="M25 21 C32 12 42 12 45 20 C37 16 29 19 25 21Z" fill="#f59e0b" opacity="0.8"/>
+        <path d="M25 21 C22 12 24 3 29 1 C27 12 26 18 25 21Z" fill="#f59e0b" opacity="0.65"/>
+        <path d="M3 56 Q11 51 19 56 Q27 61 35 56 Q43 51 51 56 Q59 61 67 56 Q73 53 77 56" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" fill="none" opacity="0.5"/>
+        <path d="M3 64 Q11 59 19 64 Q27 69 35 64 Q43 59 51 64 Q59 69 67 64" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" fill="none" opacity="0.3"/>
+      </svg>
+    ),
     category: { es: 'PLATAFORMA SAAS', en: 'SAAS PLATFORM', de: 'SAAS-PLATTFORM' },
     bannerGradient: 'linear-gradient(145deg, #5c2d0a 0%, #a0521a 55%, #c47c2b 100%)',
     bannerGlow: 'rgba(196,124,43,0.35)',
@@ -92,7 +110,22 @@ const PROJECTS = [
   },
   {
     id: 'sistema-vados',
-    icon: '🏛️',
+    icon: (
+      <svg width="80" height="70" viewBox="0 0 80 70" fill="none">
+        <line x1="5" y1="57" x2="60" y2="57" stroke="#00f0ff" strokeWidth="1.5" strokeLinecap="round" opacity="0.25"/>
+        <rect x="6" y="36" width="46" height="17" rx="4" fill="none" stroke="#00f0ff" strokeWidth="2"/>
+        <path d="M14 36 C16 26 22 22 28 22 C36 22 42 26 44 36" fill="none" stroke="#00f0ff" strokeWidth="2"/>
+        <circle cx="17" cy="53" r="5.5" fill="none" stroke="#00f0ff" strokeWidth="2"/>
+        <circle cx="17" cy="53" r="2" fill="#00f0ff" opacity="0.5"/>
+        <circle cx="41" cy="53" r="5.5" fill="none" stroke="#00f0ff" strokeWidth="2"/>
+        <circle cx="41" cy="53" r="2" fill="#00f0ff" opacity="0.5"/>
+        <rect x="20" y="27" width="9" height="8" rx="1.5" fill="#00f0ff" opacity="0.18" stroke="#00f0ff" strokeWidth="1.5"/>
+        <rect x="31" y="27" width="9" height="8" rx="1.5" fill="#00f0ff" opacity="0.18" stroke="#00f0ff" strokeWidth="1.5"/>
+        <rect x="50" y="39" width="4" height="3" rx="1" fill="#00f0ff" opacity="0.55"/>
+        <circle cx="66" cy="28" r="13" fill="#00f0ff" opacity="0.05" stroke="#00f0ff" strokeWidth="2"/>
+        <text x="66" y="34" textAnchor="middle" fill="#00f0ff" fontSize="16" fontWeight="bold" fontFamily="monospace">P</text>
+      </svg>
+    ),
     category: { es: 'APP EMPRESARIAL', en: 'ENTERPRISE APP', de: 'UNTERNEHMENS-APP' },
     bannerGradient: 'linear-gradient(145deg, #052e2e 0%, #0d5e5e 55%, #1a7a7a 100%)',
     bannerGlow: 'rgba(13,94,94,0.4)',
@@ -112,7 +145,21 @@ const PROJECTS = [
   },
   {
     id: 'portfolio',
-    icon: '⚡',
+    icon: (
+      <svg width="80" height="70" viewBox="0 0 80 70" fill="none">
+        <rect x="5" y="7" width="70" height="50" rx="6" fill="none" stroke="#a855f7" strokeWidth="2"/>
+        <rect x="9" y="13" width="62" height="40" rx="3" fill="#a855f7" opacity="0.07"/>
+        <line x1="5" y1="20" x2="75" y2="20" stroke="#a855f7" strokeWidth="1.5" opacity="0.35"/>
+        <circle cx="15" cy="14" r="2.5" fill="#a855f7" opacity="0.6"/>
+        <circle cx="23" cy="14" r="2.5" fill="#a855f7" opacity="0.4"/>
+        <circle cx="31" cy="14" r="2.5" fill="#a855f7" opacity="0.25"/>
+        <path d="M23 29 L15 39 L23 49" stroke="#a855f7" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+        <line x1="45" y1="49" x2="35" y2="29" stroke="#a855f7" strokeWidth="2" strokeLinecap="round" opacity="0.65"/>
+        <path d="M57 29 L65 39 L57 49" stroke="#a855f7" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+        <rect x="28" y="57" width="14" height="5" rx="1.5" fill="none" stroke="#a855f7" strokeWidth="1.5" opacity="0.45"/>
+        <rect x="21" y="62" width="28" height="3" rx="1.5" fill="none" stroke="#a855f7" strokeWidth="1.5" opacity="0.45"/>
+      </svg>
+    ),
     category: { es: 'PORTFOLIO & LAB', en: 'PORTFOLIO & LAB', de: 'PORTFOLIO & LAB' },
     bannerGradient: 'linear-gradient(145deg, #2d0a5c 0%, #6d28d9 55%, #9333ea 100%)',
     bannerGlow: 'rgba(109,40,217,0.4)',
@@ -331,6 +378,8 @@ function ProjectCard({ project, lang, ui }) {
                     borderRadius: 8, padding: '0.4rem 1rem',
                     textDecoration: 'none', transition: 'all 0.2s', flex: 1, justifyContent: 'center',
                   }}
+                  onMouseEnter={e => { e.currentTarget.style.background = `${project.color}22`; e.currentTarget.style.borderColor = `${project.color}70` }}
+                  onMouseLeave={e => { e.currentTarget.style.background = `${project.color}12`; e.currentTarget.style.borderColor = `${project.color}40` }}
                 >
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                     <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
