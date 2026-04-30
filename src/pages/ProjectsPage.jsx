@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useTranslation } from '../i18n/I18nContext.jsx'
-import { Github, Lock, ExternalLink } from 'lucide-react'
+import { Github, Lock, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
 
 const UI = {
   es: {
@@ -176,6 +177,62 @@ const PROJECTS = [
       es: 'Mi portafolio personal y laboratorio de herramientas. SPA en React 19 + Vite, desplegado en servidor propio con Docker y Nginx. Incluye i18n (ES/EN/DE), 16 herramientas de laboratorio y formulario de contacto con backend Node.js.',
       en: 'My personal portfolio and tools laboratory. React 19 + Vite SPA, self-hosted with Docker and Nginx. Includes i18n (ES/EN/DE), 16 lab tools and a contact form with Node.js backend.',
       de: 'Mein persönliches Portfolio und Werkzeuglabor. React 19 + Vite SPA, Self-Hosted mit Docker und Nginx. Enthält i18n (ES/EN/DE), 16 Lab-Tools und Kontaktformular mit Node.js.',
+    },
+  },
+  {
+    id: 'cuadro-digital',
+    icon: (
+      <svg width="80" height="70" viewBox="0 0 80 70" fill="none">
+        <circle cx="40" cy="40" r="28" stroke="#39ff14" strokeWidth="2" strokeDasharray="120 60" />
+        <path d="M40 40 L60 25" stroke="#39ff14" strokeWidth="3" strokeLinecap="round" />
+        <circle cx="40" cy="40" r="4" fill="#39ff14" />
+        <text x="40" y="62" textAnchor="middle" fill="#39ff14" fontSize="10" fontWeight="bold" fontFamily="monospace">RPM x1000</text>
+        <path d="M15 45 Q20 35 40 35 Q60 35 65 45" stroke="#39ff14" strokeWidth="1.5" opacity="0.3" fill="none" />
+      </svg>
+    ),
+    category: { es: 'TELEMETRÍA OBD-II', en: 'OBD-II TELEMETRY', de: 'OBD-II TELEMETRIE' },
+    bannerGradient: 'linear-gradient(145deg, #0a2e0a 0%, #1a5e1a 55%, #2db42d 100%)',
+    bannerGlow: 'rgba(57,255,20,0.35)',
+    color: '#39ff14',
+    glow: 'rgba(57,255,20,0.15)',
+    tags: ['Python', 'Kivy', 'OBD-II', 'Raspberry Pi'],
+    status: 'live',
+    isPrivate: false,
+    github: 'https://github.com/robertogd75/Cuadro-Digital-OBD',
+    demo: null,
+    title: { es: 'Cuadro Digital OBD', en: 'OBD Digital Dash', de: 'Digitales OBD-Display' },
+    desc: {
+      es: 'Central de instrumentación profesional para vehículos. Visualiza telemetría en tiempo real (CV, Nm, Turbo) optimizada para motores 1.6 HDI. Incluye cronómetro 0-100 km/h y diagnóstico DTC.',
+      en: 'Professional vehicle instrumentation hub. Visualizes real-time telemetry (HP, Nm, Turbo) optimized for 1.6 HDI engines. Includes 0-100 km/h timer and DTC diagnostics.',
+      de: 'Professionelles Fahrzeuginstrumenten-Hub. Visualisiert Echtzeit-Telemetrie (PS, Nm, Turbo), optimiert für 1.6 HDI Motoren. Inklusive 0-100 km/h Timer und DTC-Diagnose.',
+    },
+  },
+  {
+    id: 'pixelshare',
+    icon: (
+      <svg width="80" height="70" viewBox="0 0 80 70" fill="none">
+        <rect x="10" y="10" width="60" height="45" rx="4" stroke="#00f0ff" strokeWidth="2" />
+        <path d="M20 25 L35 40 L50 20 L60 35" stroke="#00f0ff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+        <circle cx="60" cy="45" r="8" fill="#00f0ff" opacity="0.2" stroke="#00f0ff" strokeWidth="1.5" />
+        <path d="M56 45 L64 45 M60 41 L60 49" stroke="#00f0ff" strokeWidth="2" />
+        <line x1="10" y1="50" x2="70" y2="50" stroke="#00f0ff" strokeWidth="1.5" opacity="0.3" />
+      </svg>
+    ),
+    category: { es: 'COLLABORATIVE APP', en: 'COLLABORATIVE APP', de: 'KOLLABORATIVE APP' },
+    bannerGradient: 'linear-gradient(145deg, #052e2e 0%, #0d5e5e 55%, #1a7a7a 100%)',
+    bannerGlow: 'rgba(0,240,255,0.35)',
+    color: '#00f0ff',
+    glow: 'rgba(0,240,255,0.15)',
+    tags: ['Spring Boot 3', 'Angular 18', 'WebSockets', 'Docker'],
+    status: 'live',
+    isPrivate: false,
+    github: 'https://github.com/robertogd75/Proyecto-PixelShare',
+    demo: 'https://pixelshare.rgardel.es',
+    title: { es: 'PixelShare', en: 'PixelShare', de: 'PixelShare' },
+    desc: {
+      es: 'Pizarra colaborativa en tiempo real de alto rendimiento. Permite crear salas privadas para dibujar y compartir ideas simultáneamente con baja latencia y gestión de persistencia.',
+      en: 'High-performance real-time collaborative whiteboard. Create private rooms to draw and share ideas simultaneously with low latency and persistence management.',
+      de: 'Hochleistungs-Echtzeit-Whiteboard für die Zusammenarbeit. Erstellen Sie private Räume, um Ideen gleichzeitig mit geringer Latenz und Persistenzmanagement zu teilen.',
     },
   },
 ]
@@ -544,6 +601,36 @@ function CommitCard({ commit, lang }) {
 export default function ProjectsPage() {
   const { lang } = useTranslation()
   const ui = UI[lang] ?? UI.es
+  const [index, setIndex] = useState(0)
+  const [direction, setDirection] = useState(0)
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true)
+
+  // Visible projects logic (circular)
+  const getVisibleProjects = () => {
+    const visible = []
+    for (let i = 0; i < 3; i++) {
+      visible.push(PROJECTS[(index + i) % PROJECTS.length])
+    }
+    return visible
+  }
+
+  const paginate = useCallback((newDirection) => {
+    setDirection(newDirection)
+    setIndex((prevIndex) => {
+      let nextIndex = prevIndex + newDirection
+      if (nextIndex < 0) nextIndex = PROJECTS.length - 1
+      if (nextIndex >= PROJECTS.length) nextIndex = 0
+      return nextIndex
+    })
+  }, [])
+
+  useEffect(() => {
+    if (!isAutoPlaying) return
+    const timer = setInterval(() => {
+      paginate(1)
+    }, 5000)
+    return () => clearInterval(timer)
+  }, [isAutoPlaying, paginate])
 
   return (
     <main style={{ paddingTop: '68px', minHeight: '100vh', position: 'relative', overflow: 'hidden' }}>
@@ -581,20 +668,116 @@ export default function ProjectsPage() {
           </p>
         </div>
 
-        {/* Projects grid */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-          gap: '1.5rem',
-        }}>
-          {PROJECTS.map(p => (
-            <ProjectCard key={p.id} project={p} lang={lang} ui={ui} />
-          ))}
+        {/* Carousel Container */}
+        <div 
+          style={{ position: 'relative', padding: '0 3rem' }}
+          onMouseEnter={() => setIsAutoPlaying(false)}
+          onMouseLeave={() => setIsAutoPlaying(true)}
+        >
+          {/* Controls */}
+          <button
+            onClick={() => paginate(-1)}
+            style={{
+              position: 'absolute', left: 0, top: '50%', transform: 'translateY(-50%)',
+              width: 44, height: 44, borderRadius: '50%', border: '1px solid var(--border)',
+              background: 'var(--bg-glass)', color: 'var(--text-primary)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              cursor: 'pointer', zIndex: 10, transition: 'all 0.2s',
+            }}
+            onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--neon-cyan)'; e.currentTarget.style.color = 'var(--neon-cyan)' }}
+            onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = 'var(--text-primary)' }}
+          >
+            <ChevronLeft size={24} />
+          </button>
+
+          <button
+            onClick={() => paginate(1)}
+            style={{
+              position: 'absolute', right: 0, top: '50%', transform: 'translateY(-50%)',
+              width: 44, height: 44, borderRadius: '50%', border: '1px solid var(--border)',
+              background: 'var(--bg-glass)', color: 'var(--text-primary)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              cursor: 'pointer', zIndex: 10, transition: 'all 0.2s',
+            }}
+            onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--neon-cyan)'; e.currentTarget.style.color = 'var(--neon-cyan)' }}
+            onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = 'var(--text-primary)' }}
+          >
+            <ChevronRight size={24} />
+          </button>
+
+          {/* Projects Wrapper */}
+          <div style={{ overflow: 'hidden', position: 'relative', minHeight: 480 }}>
+            <AnimatePresence mode="wait">
+              <motion.div 
+                key={index}
+                initial={{ x: direction > 0 ? 50 : -50, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                exit={{ x: direction > 0 ? -50 : 100, opacity: 0 }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(3, 1fr)',
+                  gap: '1.5rem',
+                }}
+              >
+                {getVisibleProjects().map((p, i) => (
+                  <div 
+                    key={`${p.id}-${i}`}
+                    style={{ display: 'block' }}
+                  >
+                    <ProjectCard project={p} lang={lang} ui={ui} />
+                  </div>
+                ))}
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Indicators */}
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', marginTop: '2rem' }}>
+            {PROJECTS.map((_, i) => (
+              <div
+                key={i}
+                onClick={() => { setDirection(i > index ? 1 : -1); setIndex(i) }}
+                style={{
+                  width: i === index ? 24 : 8,
+                  height: 8,
+                  borderRadius: 4,
+                  background: i === index ? 'var(--neon-cyan)' : 'var(--border)',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease',
+                }}
+              />
+            ))}
+          </div>
         </div>
 
         {/* Latest commits */}
         <CommitsSection ui={ui} lang={lang} />
       </div>
+
+      <style dangerouslySetInnerHTML={{ __html: `
+        @media (max-width: 1024px) {
+          .container { padding: 4rem 1rem !important; }
+          div[style*="grid-template-columns: repeat(3, 1fr)"] {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+          div[style*="grid-template-columns: repeat(3, 1fr)"] > div:last-child {
+            display: none !important;
+          }
+        }
+        @media (max-width: 640px) {
+          div[style*="grid-template-columns: repeat(3, 1fr)"] {
+            grid-template-columns: 1fr !important;
+          }
+          div[style*="grid-template-columns: repeat(3, 1fr)"] > div:nth-child(n+2) {
+            display: none !important;
+          }
+          button[style*="position: absolute"] {
+            width: 36px !important;
+            height: 36px !important;
+          }
+        }
+      `}} />
     </main>
   )
 }
