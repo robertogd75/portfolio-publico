@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from 'react'
 import { useTranslation } from '../i18n/I18nContext'
+import { Activity, Container, Rocket, ShieldCheck } from 'lucide-react'
 
 export default function Performance() {
   const [copied, setCopied] = useState(false)
@@ -37,28 +38,28 @@ export default function Performance() {
 
   const metrics = useMemo(() => [
     {
-      icon: '🟢',
+      icon: <Activity size={24} />,
       label: t('performance', 'metric1_label'),
       value: '99.9%',
       sub: t('performance', 'metric1_sub'),
       color: 'var(--neon-green)',
     },
     {
-      icon: '🐳',
+      icon: <Container size={24} />,
       label: t('performance', 'metric2_label'),
       value: '8+',
       sub: t('performance', 'metric2_sub'),
       color: '#2496ED',
     },
     {
-      icon: '🚀',
+      icon: <Rocket size={24} />,
       label: t('performance', 'metric3_label'),
       value: 'Docker',
       sub: t('performance', 'metric3_sub'),
       color: 'var(--neon-cyan)',
     },
     {
-      icon: '🔒',
+      icon: <ShieldCheck size={24} />,
       label: t('performance', 'metric4_label'),
       value: 'Proxy',
       sub: t('performance', 'metric4_sub'),

@@ -1,25 +1,26 @@
 import { useTranslation } from '../i18n/I18nContext'
+import { Brain, Globe, Zap } from 'lucide-react'
 
 export default function About() {
   const { t } = useTranslation()
 
   const highlights = [
     {
-      icon: '🧠',
+      icon: <Brain size={24} />,
       title: t('about', 'card1_title'),
       color: '#00f0ff',
       glow: 'rgba(0,240,255,0.1)',
       body: t('about', 'card1_body'),
     },
     {
-      icon: '🌍',
+      icon: <Globe size={24} />,
       title: t('about', 'card2_title'),
       color: '#a855f7',
       glow: 'rgba(168,85,247,0.1)',
       body: t('about', 'card2_body'),
     },
     {
-      icon: '⚡',
+      icon: <Zap size={24} />,
       title: t('about', 'card3_title'),
       color: '#39ff14',
       glow: 'rgba(57,255,20,0.1)',
@@ -97,9 +98,12 @@ export default function About() {
               >
                 <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}>
                   <span style={{
-                    fontSize: '1.6rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
                     flexShrink: 0,
-                    filter: 'drop-shadow(0 0 8px currentColor)',
+                    color: h.color,
+                    filter: `drop-shadow(0 0 8px ${h.color}88)`,
                   }}>{h.icon}</span>
                   <div>
                     <div style={{

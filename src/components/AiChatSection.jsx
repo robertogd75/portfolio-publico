@@ -1,6 +1,7 @@
-﻿import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useTranslation } from '../i18n/I18nContext.jsx'
 import { useChat } from './ChatContext.jsx'
+import { Sparkles, Send, SquarePen } from 'lucide-react'
 
 const UI = {
   es: {
@@ -66,7 +67,8 @@ function Bubble({ role, content, isLoading }) {
           background: 'linear-gradient(135deg, var(--neon-cyan), var(--neon-purple))',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           fontSize: '0.7rem', marginRight: '0.4rem', marginTop: 2,
-        }}>✦</div>
+          color: '#fff',
+        }}><Sparkles size={14} /></div>
       )}
       <div
         className={isUser ? undefined : 'chat-msg-assistant'}
@@ -149,8 +151,8 @@ export default function AiChatSection() {
             <div style={{
               width: 32, height: 32, borderRadius: '50%',
               background: 'linear-gradient(135deg, var(--neon-cyan), #7c3aed)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.85rem',
-            }}>✦</div>
+              display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff',
+            }}><Sparkles size={16} /></div>
             <div>
               <div style={{ fontWeight: 700, fontSize: '0.88rem', color: 'var(--text-primary)' }}>Roberto AI</div>
               <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>{ui.desc}</div>
@@ -171,10 +173,7 @@ export default function AiChatSection() {
                   onMouseEnter={e => { e.currentTarget.style.background = 'rgba(0,240,255,0.1)'; e.currentTarget.style.borderColor = 'rgba(0,240,255,0.5)' }}
                   onMouseLeave={e => { e.currentTarget.style.background = 'none'; e.currentTarget.style.borderColor = 'rgba(0,240,255,0.2)' }}
                 >
-                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                    <path d="M12 5H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5"/>
-                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-                  </svg>
+                  <SquarePen size={11} />
                   {ui.newChat}
                 </button>
               )}
@@ -259,12 +258,10 @@ export default function AiChatSection() {
                 transition: 'all 0.2s',
               }}
             >
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
-                stroke={(!input.trim() || loading) ? 'rgba(0,240,255,0.35)' : 'white'}
-                strokeWidth="2.5">
-                <line x1="22" y1="2" x2="11" y2="13"/>
-                <polygon points="22 2 15 22 11 13 2 9 22 2"/>
-              </svg>
+              <Send 
+                size={16} 
+                color={(!input.trim() || loading) ? 'rgba(0,240,255,0.35)' : 'white'} 
+              />
             </button>
           </div>
         </div>

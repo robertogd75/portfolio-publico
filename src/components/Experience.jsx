@@ -1,4 +1,5 @@
 import { useTranslation } from '../i18n/I18nContext'
+import { Laptop, Hospital, Coffee, ShoppingCart, Tag } from 'lucide-react'
 
 export default function Experience() {
   const { t, lang } = useTranslation()
@@ -25,7 +26,7 @@ export default function Experience() {
   const jobs = [
     {
       id: 'ayto',
-      icon: '💻',
+      icon: <Laptop size={18} />,
       color: 'var(--neon-cyan)',
       period: t('experience', 'ayto_period'),
       role: t('experience', 'ayto_role'),
@@ -35,7 +36,7 @@ export default function Experience() {
     },
     {
       id: 'ochoa',
-      icon: '🏥',
+      icon: <Hospital size={18} />,
       color: 'var(--neon-cyan)',
       period: t('experience', 'ochoa_period'),
       role: t('experience', 'ochoa_role'),
@@ -45,7 +46,7 @@ export default function Experience() {
     },
     {
       id: 'hosteleria',
-      icon: '☕',
+      icon: <Coffee size={18} />,
       color: 'var(--neon-purple)',
       period: t('experience', 'hosteleria_period'),
       role: t('experience', 'hosteleria_role'),
@@ -55,7 +56,7 @@ export default function Experience() {
     },
     {
       id: 'mercadona',
-      icon: '🛒',
+      icon: <ShoppingCart size={18} />,
       color: 'var(--neon-green)',
       period: t('experience', 'mercadona_period'),
       role: t('experience', 'mercadona_role'),
@@ -65,7 +66,7 @@ export default function Experience() {
     },
     {
       id: 'alcampo',
-      icon: '🏷️',
+      icon: <Tag size={18} />,
       color: 'var(--neon-green)',
       period: t('experience', 'alcampo_period'),
       role: t('experience', 'alcampo_role'),

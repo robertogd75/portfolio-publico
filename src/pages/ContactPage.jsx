@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useTranslation } from '../i18n/I18nContext.jsx'
 import AiChatSection from '../components/AiChatSection.jsx'
+import { Mail, Lock, Copy, Check, MapPin, Globe } from 'lucide-react'
 
 // Recipient is only used inside encodeURIComponent for a mailto: href.
 // No data ever reaches a third-party server — the message is composed
@@ -21,7 +22,7 @@ const UI = {
     subjectPlaceholder:'¿En qué puedo ayudarte?',
     msgLabel:         'Mensaje',
     msgPlaceholder:   'Cuéntame tu proyecto, idea o consulta...',
-    send:             '✉ Abrir cliente de correo',
+    send:             'Abrir cliente de correo',
     privacy:          'Tu mensaje se envía directamente desde tu propio cliente de correo. Sin servidores intermedios, sin registro de datos.',
     directLabel:      'O escríbeme directamente',
     copyTip:          'Copiar',
@@ -53,7 +54,7 @@ const UI = {
     subjectPlaceholder:'How can I help you?',
     msgLabel:         'Message',
     msgPlaceholder:   'Tell me about your project, idea or question...',
-    send:             '✉ Open email client',
+    send:             'Open email client',
     privacy:          'Your message is sent directly from your own email client. No intermediate servers, no data logging.',
     directLabel:      'Or write to me directly',
     copyTip:          'Copy',
@@ -84,7 +85,7 @@ const UI = {
     subjectPlaceholder:'Wie kann ich helfen?',
     msgLabel:         'Nachricht',
     msgPlaceholder:   'Erzähl mir von deinem Projekt, deiner Idee oder Frage...',
-    send:             '✉ E-Mail-Client öffnen',
+    send:             'E-Mail-Client öffnen',
     privacy:          'Deine Nachricht wird direkt von deinem eigenen E-Mail-Client gesendet. Keine Zwischenserver, keine Datenspeicherung.',
     directLabel:      'Oder schreib mir direkt',
     copyTip:          'Kopieren',
@@ -326,7 +327,14 @@ export default function ContactPage() {
                 transition: 'all 0.2s',
               }}
             >
-              {status === 'sending' ? ui.sending : ui.send}
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem' }}>
+                {status === 'sending' ? (
+                  <span className="spinner" style={{ width: 14, height: 14, border: '2px solid currentColor', borderTopColor: 'transparent', borderRadius: '50%', animation: 'spin 0.8s linear infinite' }} />
+                ) : (
+                  <Mail size={18} />
+                )}
+                {status === 'sending' ? ui.sending : ui.send}
+              </div>
             </button>
 
             {/* Success message */}
@@ -337,7 +345,7 @@ export default function ContactPage() {
                 fontFamily: 'var(--font-mono)', fontSize: '0.85rem',
                 display: 'flex', gap: '0.5rem', alignItems: 'flex-start',
               }}>
-                <span style={{ color: '#4ade80', flexShrink: 0 }}>✓</span>
+                <span style={{ color: '#4ade80', flexShrink: 0 }}><Check size={16} /></span>
                 <div>
                   <div style={{ color: '#4ade80', fontWeight: 700, marginBottom: '0.2rem' }}>{ui.sent}</div>
                   <div style={{ color: 'var(--text-secondary)' }}>{ui.sentDesc}</div>
@@ -379,7 +387,7 @@ export default function ContactPage() {
               gap: '0.4rem',
               alignItems: 'flex-start',
             }}>
-              <span style={{ color: '#4ade80', flexShrink: 0 }}>🔒</span>
+              <span style={{ color: '#4ade80', flexShrink: 0 }}><Lock size={14} /></span>
               {ui.privacy}
             </p>
           </form>
@@ -420,8 +428,12 @@ export default function ContactPage() {
                     transition: 'all 0.2s',
                     whiteSpace: 'nowrap',
                     flexShrink: 0,
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.35rem',
                   }}
                 >
+                  {copied ? <Check size={12} /> : <Copy size={12} />}
                   {copied ? ui.copiedTip : ui.copyTip}
                 </button>
               </div>

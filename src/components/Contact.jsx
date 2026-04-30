@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useTranslation } from '../i18n/I18nContext'
+import { MapPin, Globe } from 'lucide-react'
 
 export default function Contact() {
   const [hovered, setHovered] = useState(false)
@@ -138,8 +139,8 @@ export default function Contact() {
           borderTop: '1px solid var(--border)',
         }}>
           {[
-            { id: 'loc', icon: '📍', text: t('contact', 'location') },
-            { id: 'web', icon: '🌐', text: 'rgardel.es' },
+            { id: 'loc', icon: <MapPin size={16} />, text: t('contact', 'location') },
+            { id: 'web', icon: <Globe size={16} />, text: 'rgardel.es' },
             { 
               id: 'cert', 
               icon: <img src="/SVG/uk.svg" alt="UK" style={{ width: 16, height: 11, borderRadius: 2 }} />, 
