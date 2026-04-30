@@ -603,17 +603,25 @@ function CommitCard({ commit, lang }) {
 export default function ProjectsPage() {
   const { lang } = useTranslation()
   const ui = UI[lang] ?? UI.es
-  const [index, setIndex] = useState(0)
+  // Infinite Loop Logic
+  const loopItems = [...PROJECTS, ...PROJECTS, ...PROJECTS]
+  const [index, setIndex] = useState(PROJECTS.length)
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
 
   const paginate = useCallback((newDirection) => {
-    setIndex((prevIndex) => {
-      let nextIndex = prevIndex + newDirection
-      if (nextIndex < 0) nextIndex = PROJECTS.length - 1
-      if (nextIndex >= PROJECTS.length) nextIndex = 0
-      return nextIndex
-    })
+    setIndex((prev) => prev + newDirection)
   }, [])
+
+  // Handle the "instant jump" for infinite effect
+  const handleAnimationComplete = () => {
+    if (index >= PROJECTS.length * 2) {
+      // Jump back to the first set
+      setIndex(index - PROJECTS.length)
+    } else if (index < PROJECTS.length) {
+      // Jump forward to the second set
+      setIndex(index + PROJECTS.length)
+    }
+  }
 
   useEffect(() => {
     if (!isAutoPlaying) return
@@ -715,30 +723,20 @@ export default function ProjectsPage() {
           <div style={{ overflow: 'hidden', padding: '1.5rem 0' }}>
             <motion.div 
               animate={{ x: `-${index * (100 / itemsToShow)}%` }}
-              transition={{ duration: 0.8, ease: [0.32, 0.72, 0, 1] }}
+              onAnimationComplete={handleAnimationComplete}
+              transition={{ 
+                duration: 0.8, 
+                ease: [0.32, 0.72, 0, 1],
+                // When jumping, we use duration 0 to make it instant
+                x: { duration: (index >= PROJECTS.length * 2 || index < PROJECTS.length) ? 0 : 0.8 }
+              }}
               style={{
                 display: 'flex',
               }}
             >
-              {PROJECTS.map((p) => (
+              {loopItems.map((p, i) => (
                 <div 
-                  key={p.id}
-                  style={{
-                    flex: `0 0 ${100 / itemsToShow}%`,
-                    display: 'flex',
-                    padding: '0 0.75rem', // Creates the gap without breaking the calculation
-                  }}
-                >
-                  <div style={{ flex: 1, display: 'flex' }}>
-                    <ProjectCard project={p} lang={lang} ui={ui} />
-                  </div>
-                </div>
-              ))}
-              
-              {/* Duplicate projects for infinite loop logic */}
-              {PROJECTS.slice(0, itemsToShow).map((p) => (
-                <div 
-                  key={`${p.id}-dup`}
+                  key={`${p.id}-${i}`}
                   style={{
                     flex: `0 0 ${100 / itemsToShow}%`,
                     display: 'flex',
@@ -758,15 +756,15 @@ export default function ProjectsPage() {
             {PROJECTS.map((_, i) => (
               <div
                 key={i}
-                onClick={() => setIndex(i)}
+                onClick={() => setIndex(i + PROJECTS.length)}
                 style={{
-                  width: i === index ? 30 : 10,
+                  width: (index % PROJECTS.length) === i ? 30 : 10,
                   height: 6,
                   borderRadius: 3,
-                  background: i === index ? 'var(--neon-cyan)' : 'var(--border)',
+                  background: (index % PROJECTS.length) === i ? 'var(--neon-cyan)' : 'var(--border)',
                   cursor: 'pointer',
                   transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
-                  boxShadow: i === index ? '0 0 10px var(--neon-cyan)66' : 'none',
+                  boxShadow: (index % PROJECTS.length) === i ? '0 0 10px var(--neon-cyan)66' : 'none',
                 }}
               />
             ))}
