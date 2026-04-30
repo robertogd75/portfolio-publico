@@ -674,59 +674,60 @@ export default function ProjectsPage() {
 
         {/* Carousel Container */}
         <div 
-          style={{ position: 'relative', padding: '0 1rem' }}
+          style={{ position: 'relative', padding: '0 4rem' }}
           onMouseEnter={() => setIsAutoPlaying(false)}
           onMouseLeave={() => setIsAutoPlaying(true)}
         >
-          {/* Controls - Outer */}
+          {/* Controls - Further Out */}
           <button
             onClick={() => paginate(-1)}
             style={{
-              position: 'absolute', left: -20, top: '50%', transform: 'translateY(-50%)',
-              width: 44, height: 44, borderRadius: '50%', border: '1px solid var(--border)',
+              position: 'absolute', left: -10, top: '50%', transform: 'translateY(-50%)',
+              width: 48, height: 48, borderRadius: '50%', border: '1px solid var(--border)',
               background: 'var(--bg-glass)', color: 'var(--text-primary)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              cursor: 'pointer', zIndex: 10, transition: 'all 0.2s',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
+              cursor: 'pointer', zIndex: 10, transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+              boxShadow: '0 8px 32px rgba(0,0,0,0.3)',
             }}
-            onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--neon-cyan)'; e.currentTarget.style.color = 'var(--neon-cyan)'; e.currentTarget.style.transform = 'translateY(-50%) scale(1.1)' }}
-            onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = 'var(--text-primary)'; e.currentTarget.style.transform = 'translateY(-50%) scale(1)' }}
+            onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--neon-cyan)'; e.currentTarget.style.color = 'var(--neon-cyan)'; e.currentTarget.style.transform = 'translateY(-50%) scale(1.1)'; e.currentTarget.style.boxShadow = '0 0 20px var(--neon-cyan)44' }}
+            onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = 'var(--text-primary)'; e.currentTarget.style.transform = 'translateY(-50%) scale(1)'; e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.3)' }}
           >
-            <ChevronLeft size={24} />
+            <ChevronLeft size={26} />
           </button>
 
           <button
             onClick={() => paginate(1)}
             style={{
-              position: 'absolute', right: -20, top: '50%', transform: 'translateY(-50%)',
-              width: 44, height: 44, borderRadius: '50%', border: '1px solid var(--border)',
+              position: 'absolute', right: -10, top: '50%', transform: 'translateY(-50%)',
+              width: 48, height: 48, borderRadius: '50%', border: '1px solid var(--border)',
               background: 'var(--bg-glass)', color: 'var(--text-primary)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              cursor: 'pointer', zIndex: 10, transition: 'all 0.2s',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
+              cursor: 'pointer', zIndex: 10, transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+              boxShadow: '0 8px 32px rgba(0,0,0,0.3)',
             }}
-            onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--neon-cyan)'; e.currentTarget.style.color = 'var(--neon-cyan)'; e.currentTarget.style.transform = 'translateY(-50%) scale(1.1)' }}
-            onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = 'var(--text-primary)'; e.currentTarget.style.transform = 'translateY(-50%) scale(1)' }}
+            onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--neon-cyan)'; e.currentTarget.style.color = 'var(--neon-cyan)'; e.currentTarget.style.transform = 'translateY(-50%) scale(1.1)'; e.currentTarget.style.boxShadow = '0 0 20px var(--neon-cyan)44' }}
+            onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = 'var(--text-primary)'; e.currentTarget.style.transform = 'translateY(-50%) scale(1)'; e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.3)' }}
           >
-            <ChevronRight size={24} />
+            <ChevronRight size={26} />
           </button>
 
           {/* Viewport */}
-          <div style={{ overflow: 'hidden', padding: '1rem 0' }}>
+          <div style={{ overflow: 'hidden', padding: '1.5rem 0.5rem' }}>
             <motion.div 
               animate={{ x: `-${index * (100 / itemsToShow)}%` }}
-              transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
+              transition={{ duration: 0.8, ease: [0.32, 0.72, 0, 1] }}
               style={{
                 display: 'flex',
-                gap: '1.5rem',
+                gap: '2rem', // Increased gap for better breathing
               }}
             >
               {PROJECTS.map((p) => (
                 <div 
                   key={p.id}
                   style={{
-                    flex: `0 0 calc(${100 / itemsToShow}% - ${(1.5 * (itemsToShow - 1)) / itemsToShow}rem)`,
+                    flex: `0 0 calc(${100 / itemsToShow}% - ${(2 * (itemsToShow - 1)) / itemsToShow}rem)`,
                     display: 'flex',
+                    transition: 'transform 0.3s ease',
                   }}
                 >
                   <div style={{ flex: 1, display: 'flex' }}>
@@ -735,14 +736,12 @@ export default function ProjectsPage() {
                 </div>
               ))}
               
-              {/* Duplicate projects for infinite effect if needed, 
-                  but for 5 projects showing 3, simple sliding is okay.
-                  To avoid empty space at end, we can append first items */}
+              {/* Duplicate projects for infinite loop logic */}
               {PROJECTS.slice(0, itemsToShow).map((p) => (
                 <div 
                   key={`${p.id}-dup`}
                   style={{
-                    flex: `0 0 calc(${100 / itemsToShow}% - ${(1.5 * (itemsToShow - 1)) / itemsToShow}rem)`,
+                    flex: `0 0 calc(${100 / itemsToShow}% - ${(2 * (itemsToShow - 1)) / itemsToShow}rem)`,
                     display: 'flex',
                   }}
                 >
@@ -777,6 +776,16 @@ export default function ProjectsPage() {
         {/* Latest commits */}
         <CommitsSection ui={ui} lang={lang} />
       </div>
+      <style dangerouslySetInnerHTML={{ __html: `
+        @media (max-width: 768px) {
+          div[style*="padding: 0 4rem"] {
+            padding: 0 1rem !important;
+          }
+          button[style*="width: 48px"] {
+            display: none !important; /* Hide side arrows on small mobile, dots suffice */
+          }
+        }
+      `}} />
     </main>
   )
 }
