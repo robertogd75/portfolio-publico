@@ -674,15 +674,15 @@ export default function ProjectsPage() {
 
         {/* Carousel Container */}
         <div 
-          style={{ position: 'relative', padding: '0 4rem' }}
+          style={{ position: 'relative', margin: '0 3.5rem' }}
           onMouseEnter={() => setIsAutoPlaying(false)}
           onMouseLeave={() => setIsAutoPlaying(true)}
         >
-          {/* Controls - Further Out */}
+          {/* Controls - Outer */}
           <button
             onClick={() => paginate(-1)}
             style={{
-              position: 'absolute', left: -10, top: '50%', transform: 'translateY(-50%)',
+              position: 'absolute', left: -55, top: '50%', transform: 'translateY(-50%)',
               width: 48, height: 48, borderRadius: '50%', border: '1px solid var(--border)',
               background: 'var(--bg-glass)', color: 'var(--text-primary)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -698,7 +698,7 @@ export default function ProjectsPage() {
           <button
             onClick={() => paginate(1)}
             style={{
-              position: 'absolute', right: -10, top: '50%', transform: 'translateY(-50%)',
+              position: 'absolute', right: -55, top: '50%', transform: 'translateY(-50%)',
               width: 48, height: 48, borderRadius: '50%', border: '1px solid var(--border)',
               background: 'var(--bg-glass)', color: 'var(--text-primary)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -712,22 +712,21 @@ export default function ProjectsPage() {
           </button>
 
           {/* Viewport */}
-          <div style={{ overflow: 'hidden', padding: '1.5rem 0.5rem' }}>
+          <div style={{ overflow: 'hidden', padding: '1.5rem 0' }}>
             <motion.div 
               animate={{ x: `-${index * (100 / itemsToShow)}%` }}
               transition={{ duration: 0.8, ease: [0.32, 0.72, 0, 1] }}
               style={{
                 display: 'flex',
-                gap: '2rem', // Increased gap for better breathing
               }}
             >
               {PROJECTS.map((p) => (
                 <div 
                   key={p.id}
                   style={{
-                    flex: `0 0 calc(${100 / itemsToShow}% - ${(2 * (itemsToShow - 1)) / itemsToShow}rem)`,
+                    flex: `0 0 ${100 / itemsToShow}%`,
                     display: 'flex',
-                    transition: 'transform 0.3s ease',
+                    padding: '0 0.75rem', // Creates the gap without breaking the calculation
                   }}
                 >
                   <div style={{ flex: 1, display: 'flex' }}>
@@ -741,8 +740,9 @@ export default function ProjectsPage() {
                 <div 
                   key={`${p.id}-dup`}
                   style={{
-                    flex: `0 0 calc(${100 / itemsToShow}% - ${(2 * (itemsToShow - 1)) / itemsToShow}rem)`,
+                    flex: `0 0 ${100 / itemsToShow}%`,
                     display: 'flex',
+                    padding: '0 0.75rem',
                   }}
                 >
                   <div style={{ flex: 1, display: 'flex' }}>
@@ -777,12 +777,23 @@ export default function ProjectsPage() {
         <CommitsSection ui={ui} lang={lang} />
       </div>
       <style dangerouslySetInnerHTML={{ __html: `
-        @media (max-width: 768px) {
-          div[style*="padding: 0 4rem"] {
-            padding: 0 1rem !important;
+        @media (max-width: 1024px) {
+          div[style*="margin: 0 3.5rem"] {
+            margin: 0 1rem !important;
           }
           button[style*="width: 48px"] {
-            display: none !important; /* Hide side arrows on small mobile, dots suffice */
+            width: 40px !important;
+            height: 40px !important;
+          }
+          button[style*="left: -55px"] { left: -15px !important; }
+          button[style*="right: -55px"] { right: -15px !important; }
+        }
+        @media (max-width: 768px) {
+          button[style*="width: 48px"] {
+            display: none !important;
+          }
+          div[style*="margin: 0 3.5rem"] {
+            margin: 0 !important;
           }
         }
       `}} />
