@@ -289,6 +289,8 @@ function ProjectCard({ project, lang, ui }) {
         transition: 'all 0.28s ease',
         transform: hovered ? 'translateY(-6px)' : 'translateY(0)',
         boxShadow: hovered ? `0 16px 48px ${project.glow}` : 'none',
+        height: '100%',
+        width: '100%',
       }}
     >
       {/* ── Banner ── */}
@@ -602,20 +604,9 @@ export default function ProjectsPage() {
   const { lang } = useTranslation()
   const ui = UI[lang] ?? UI.es
   const [index, setIndex] = useState(0)
-  const [direction, setDirection] = useState(0)
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
 
-  // Visible projects logic (circular)
-  const getVisibleProjects = () => {
-    const visible = []
-    for (let i = 0; i < 3; i++) {
-      visible.push(PROJECTS[(index + i) % PROJECTS.length])
-    }
-    return visible
-  }
-
   const paginate = useCallback((newDirection) => {
-    setDirection(newDirection)
     setIndex((prevIndex) => {
       let nextIndex = prevIndex + newDirection
       if (nextIndex < 0) nextIndex = PROJECTS.length - 1
@@ -631,6 +622,19 @@ export default function ProjectsPage() {
     }, 5000)
     return () => clearInterval(timer)
   }, [isAutoPlaying, paginate])
+
+  // Responsive items to show
+  const [itemsToShow, setItemsToShow] = useState(3)
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 640) setItemsToShow(1)
+      else if (window.innerWidth <= 1024) setItemsToShow(2)
+      else setItemsToShow(3)
+    }
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   return (
     <main style={{ paddingTop: '68px', minHeight: '100vh', position: 'relative', overflow: 'hidden' }}>
@@ -670,22 +674,23 @@ export default function ProjectsPage() {
 
         {/* Carousel Container */}
         <div 
-          style={{ position: 'relative', padding: '0 3rem' }}
+          style={{ position: 'relative', padding: '0 1rem' }}
           onMouseEnter={() => setIsAutoPlaying(false)}
           onMouseLeave={() => setIsAutoPlaying(true)}
         >
-          {/* Controls */}
+          {/* Controls - Outer */}
           <button
             onClick={() => paginate(-1)}
             style={{
-              position: 'absolute', left: 0, top: '50%', transform: 'translateY(-50%)',
+              position: 'absolute', left: -20, top: '50%', transform: 'translateY(-50%)',
               width: 44, height: 44, borderRadius: '50%', border: '1px solid var(--border)',
               background: 'var(--bg-glass)', color: 'var(--text-primary)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               cursor: 'pointer', zIndex: 10, transition: 'all 0.2s',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
             }}
-            onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--neon-cyan)'; e.currentTarget.style.color = 'var(--neon-cyan)' }}
-            onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = 'var(--text-primary)' }}
+            onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--neon-cyan)'; e.currentTarget.style.color = 'var(--neon-cyan)'; e.currentTarget.style.transform = 'translateY(-50%) scale(1.1)' }}
+            onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = 'var(--text-primary)'; e.currentTarget.style.transform = 'translateY(-50%) scale(1)' }}
           >
             <ChevronLeft size={24} />
           </button>
@@ -693,58 +698,76 @@ export default function ProjectsPage() {
           <button
             onClick={() => paginate(1)}
             style={{
-              position: 'absolute', right: 0, top: '50%', transform: 'translateY(-50%)',
+              position: 'absolute', right: -20, top: '50%', transform: 'translateY(-50%)',
               width: 44, height: 44, borderRadius: '50%', border: '1px solid var(--border)',
               background: 'var(--bg-glass)', color: 'var(--text-primary)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               cursor: 'pointer', zIndex: 10, transition: 'all 0.2s',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
             }}
-            onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--neon-cyan)'; e.currentTarget.style.color = 'var(--neon-cyan)' }}
-            onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = 'var(--text-primary)' }}
+            onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--neon-cyan)'; e.currentTarget.style.color = 'var(--neon-cyan)'; e.currentTarget.style.transform = 'translateY(-50%) scale(1.1)' }}
+            onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = 'var(--text-primary)'; e.currentTarget.style.transform = 'translateY(-50%) scale(1)' }}
           >
             <ChevronRight size={24} />
           </button>
 
-          {/* Projects Wrapper */}
-          <div style={{ overflow: 'hidden', position: 'relative', minHeight: 480 }}>
-            <AnimatePresence mode="wait">
-              <motion.div 
-                key={index}
-                initial={{ x: direction > 0 ? 50 : -50, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                exit={{ x: direction > 0 ? -50 : 100, opacity: 0 }}
-                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(3, 1fr)',
-                  gap: '1.5rem',
-                }}
-              >
-                {getVisibleProjects().map((p, i) => (
-                  <div 
-                    key={`${p.id}-${i}`}
-                    style={{ display: 'block' }}
-                  >
+          {/* Viewport */}
+          <div style={{ overflow: 'hidden', padding: '1rem 0' }}>
+            <motion.div 
+              animate={{ x: `-${index * (100 / itemsToShow)}%` }}
+              transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
+              style={{
+                display: 'flex',
+                gap: '1.5rem',
+              }}
+            >
+              {PROJECTS.map((p) => (
+                <div 
+                  key={p.id}
+                  style={{
+                    flex: `0 0 calc(${100 / itemsToShow}% - ${(1.5 * (itemsToShow - 1)) / itemsToShow}rem)`,
+                    display: 'flex',
+                  }}
+                >
+                  <div style={{ flex: 1, display: 'flex' }}>
                     <ProjectCard project={p} lang={lang} ui={ui} />
                   </div>
-                ))}
-              </motion.div>
-            </AnimatePresence>
+                </div>
+              ))}
+              
+              {/* Duplicate projects for infinite effect if needed, 
+                  but for 5 projects showing 3, simple sliding is okay.
+                  To avoid empty space at end, we can append first items */}
+              {PROJECTS.slice(0, itemsToShow).map((p) => (
+                <div 
+                  key={`${p.id}-dup`}
+                  style={{
+                    flex: `0 0 calc(${100 / itemsToShow}% - ${(1.5 * (itemsToShow - 1)) / itemsToShow}rem)`,
+                    display: 'flex',
+                  }}
+                >
+                  <div style={{ flex: 1, display: 'flex' }}>
+                    <ProjectCard project={p} lang={lang} ui={ui} />
+                  </div>
+                </div>
+              ))}
+            </motion.div>
           </div>
 
           {/* Indicators */}
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', marginTop: '2rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '0.6rem', marginTop: '1.5rem' }}>
             {PROJECTS.map((_, i) => (
               <div
                 key={i}
-                onClick={() => { setDirection(i > index ? 1 : -1); setIndex(i) }}
+                onClick={() => setIndex(i)}
                 style={{
-                  width: i === index ? 24 : 8,
-                  height: 8,
-                  borderRadius: 4,
+                  width: i === index ? 30 : 10,
+                  height: 6,
+                  borderRadius: 3,
                   background: i === index ? 'var(--neon-cyan)' : 'var(--border)',
                   cursor: 'pointer',
-                  transition: 'all 0.3s ease',
+                  transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+                  boxShadow: i === index ? '0 0 10px var(--neon-cyan)66' : 'none',
                 }}
               />
             ))}
@@ -754,30 +777,6 @@ export default function ProjectsPage() {
         {/* Latest commits */}
         <CommitsSection ui={ui} lang={lang} />
       </div>
-
-      <style dangerouslySetInnerHTML={{ __html: `
-        @media (max-width: 1024px) {
-          .container { padding: 4rem 1rem !important; }
-          div[style*="grid-template-columns: repeat(3, 1fr)"] {
-            grid-template-columns: repeat(2, 1fr) !important;
-          }
-          div[style*="grid-template-columns: repeat(3, 1fr)"] > div:last-child {
-            display: none !important;
-          }
-        }
-        @media (max-width: 640px) {
-          div[style*="grid-template-columns: repeat(3, 1fr)"] {
-            grid-template-columns: 1fr !important;
-          }
-          div[style*="grid-template-columns: repeat(3, 1fr)"] > div:nth-child(n+2) {
-            display: none !important;
-          }
-          button[style*="position: absolute"] {
-            width: 36px !important;
-            height: 36px !important;
-          }
-        }
-      `}} />
     </main>
   )
 }
