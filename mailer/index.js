@@ -114,6 +114,13 @@ app.post('/api/contact', limiter, async (req, res) => {
     return res.status(400).json({ error: 'All fields are required.' })
   }
 
+  // Honeypot check: if 'fax' is filled, it's likely a bot.
+  // We return 200 OK to trick the bot into thinking it succeeded.
+  if (req.body?.fax) {
+    console.warn('[mailer] Honeypot triggered by IP:', req.ip)
+    return res.json({ ok: true })
+  }
+
   // Basic email format validation
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return res.status(400).json({ error: 'Invalid email address.' })

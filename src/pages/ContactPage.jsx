@@ -142,7 +142,7 @@ export default function ContactPage() {
   const { lang } = useTranslation()
   const ui = UI[lang] ?? UI.es
 
-  const [form, setForm]       = useState({ name: '', email: '', subject: '', message: '' })
+  const [form, setForm]       = useState({ name: '', email: '', subject: '', message: '', _fax: '' })
   const [focused, setFocused] = useState('')
   const [copied, setCopied]   = useState(false)
   const [status, setStatus]   = useState('idle') // idle | sending | sent | error
@@ -162,12 +162,13 @@ export default function ContactPage() {
           email:   form.email.trim(),
           subject: form.subject.trim(),
           message: form.message.trim(),
+          fax:     form._fax, // Honeypot
         }),
       })
       const data = await res.json().catch(() => ({}))
       if (res.ok && data.ok) {
         setStatus('sent')
-        setForm({ name: '', email: '', subject: '', message: '' })
+        setForm({ name: '', email: '', subject: '', message: '', _fax: '' })
       } else {
         setStatus('error')
       }
@@ -240,6 +241,18 @@ export default function ContactPage() {
             flexDirection: 'column',
             gap: '1.25rem',
           }}>
+            {/* Honeypot field (hidden from humans) */}
+            <div style={{ display: 'none' }} aria-hidden="true">
+              <input 
+                type="text" 
+                name="fax" 
+                tabIndex="-1" 
+                autoComplete="off" 
+                value={form._fax} 
+                onChange={set('_fax')} 
+              />
+            </div>
+
             <Field label={ui.nameLabel}>
               <input
                 type="text"
